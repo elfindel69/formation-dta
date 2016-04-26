@@ -7,39 +7,15 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 		int menu1 = 0;
 		Scanner sc = new Scanner(System.in);
-		Object[][] pizzas = new Object[8][];
-		pizzas[0] = new Object[3];
-		pizzas[0][0] = "PEP";
-		pizzas[0][1] = "Pépéroni";
-		pizzas[0][2] = 12.50;
-		pizzas[1] = new Object[3];
-		pizzas[1][0] = "MAR";
-		pizzas[1][1] = "Margherita";
-		pizzas[1][2] = 14.00;
-		pizzas[2] = new Object[3];
-		pizzas[2][0] = "REI";
-		pizzas[2][1] = "Reine";
-		pizzas[2][2] = 11.50;
-		pizzas[3] = new Object[3];
-		pizzas[3][0] = "FRO";
-		pizzas[3][1] = "La 4 fromages";
-		pizzas[3][2] = 12.00;
-		pizzas[4] = new Object[3];
-		pizzas[4][0] = "CAN";
-		pizzas[4][1] = "La cannibale";
-		pizzas[4][2] = 12.50;
-		pizzas[5] = new Object[3];
-		pizzas[5][0] = "SAV";
-		pizzas[5][1] = "La savoyarde";
-		pizzas[5][2] = 13.00;
-		pizzas[6] = new Object[3];
-		pizzas[6][0] = "ORI";
-		pizzas[6][1] = "L'orientale";
-		pizzas[6][2] = 13.50;
-		pizzas[7] = new Object[3];
-		pizzas[7][0] = "IND";
-		pizzas[7][1] = "L'indienne";
-		pizzas[7][2] = 14.00;
+		Object[][] pizzas = new Object[100][3];
+		pizzas[0] = new Object[]{"PEP","Pépéroni",12.50};
+		pizzas[1] = new Object[]{"MAR","Margherita",14.00};
+		pizzas[2] = new Object[]{"REI","Reine",11.50};
+		pizzas[3] = new Object[]{"FRO","La 4 fromages",12.00};
+		pizzas[4] = new Object[]{"CAN","La cannibale",12.50};
+		pizzas[5] = new Object[]{"SAV","La savoyarde",13.00};
+		pizzas[6] = new Object[]{"ORI","L'orientale",13.50};
+		pizzas[7] = new Object[]{"IND","L'indienne",14.00};
 		
 		do{ 
 			System.out.println("***** Pizzeria Administration *****");
@@ -52,18 +28,65 @@ public class PizzeriaAdminConsoleApp {
 			switch(menu1){
 				case 1 : //Liste
 					System.out.println("Liste des pizzas");
-					for(Object[] item : pizzas){
-						System.out.println(item[0]+" -> "+item[1]+"("+item[2]+"€)");
+					for(int i=0;i<pizzas.length;i++){
+						if(pizzas[i][0] != null){
+							System.out.println(pizzas[i][0]+" -> "+pizzas[i][1]+"("+pizzas[i][2]+"€)");
+						}
 					}
 					break; 
 				case 2 :
-					System.out.println("Ajout d'une nouvelle pizza");
+					System.out.println("Ajout d'une nouvelle pizza");//ajout
+					int pizzToAdd = -1;
+					for(int i=0;i<pizzas.length;i++){
+						if(pizzas[i][0] == null){
+							pizzToAdd = i;
+							break;
+						}
+					}
+					System.out.println("Veuillez saisir le code...");
+					String code = sc.next();
+					 System.out.println("Veuillez saisir le nom (sans espace)...");
+					 String nom = sc.next();
+					 System.out.println("Veuillez saisir le prix...");
+					 Double prix = sc.nextDouble();
+					 pizzas[pizzToAdd]=new Object[]{code,nom,prix};
+					
 					break;
 				case 3 :
 					System.out.println("Mise à jour d'une pizza");
+					System.out.println("Liste des pizzas");
+					for(int i=0;i<pizzas.length;i++){
+						if(pizzas[i][0] != null){
+							System.out.println(pizzas[i][0]+" -> "+pizzas[i][1]+"("+pizzas[i][2]+"€)");
+						}
+					}
+					System.out.println("Veuillez choisir la pizza à modifier");
+					System.out.println("99 pour abandonner");
+					int index = sc.nextInt();
+					if (index != 99){
+						System.out.println("Veuillez saisir le code...");
+						String code1 = sc.next();
+						 System.out.println("Veuillez saisir le nom (sans espace)...");
+						 String nom1 = sc.next();
+						 System.out.println("Veuillez saisir le prix...");
+						 Double prix1 = sc.nextDouble();
+						 pizzas[index]=new Object[]{code1,nom1,prix1};
+					}
 					break;
 				case 4 :
 					System.out.println("Supprimer une pizza");
+					System.out.println("Liste des pizzas");
+					for(int i=0;i<pizzas.length;i++){
+						if(pizzas[i][0] != null){
+							System.out.println(pizzas[i][0]+" -> "+pizzas[i][1]+"("+pizzas[i][2]+"€)");
+						}
+					}
+					System.out.println("Veuillez choisir la pizza à supprimer");
+					System.out.println("99 pour abandonner");
+					int index2 = sc.nextInt();
+					if (index2 != 99){
+						 pizzas[index2]=new Object[3];
+					}
 					break;
 				default:
 					System.out.println("Aurevoir :(");
