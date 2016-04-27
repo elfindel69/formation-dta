@@ -2,7 +2,7 @@ package fr.pizzeria.console;
 
 /**
  * Classe Pizza - gère une pizza
- * @author ETY
+ * @author Valentin
  *
  */
 public class Pizza {
@@ -11,6 +11,8 @@ public class Pizza {
 	public String nom;
 	public double prix;
 	public static int nbPizzas;
+	
+	
 	
 	
 }

@@ -72,17 +72,19 @@ public class PizzeriaAdminConsoleApp {
 	/**
 	 * Saisie de MAJ pizza
 	 * @param sc interface de saisie
+	 * @param pizza à MAJ 
 	 * @return Pizza pizza créée
 	 */
-	public static Pizza MAJPizza(Scanner sc){
-		Pizza pizza = new Pizza();
+	public static Pizza MAJPizza(Scanner sc, Pizza pizza){
+		Pizza newPizza = new Pizza();
 		System.out.println("Veuillez saisir le code...");
-		pizza.code = sc.next();
+		newPizza.code = sc.next();
 		System.out.println("Veuillez saisir le nom (sans espace)...");
-		pizza.nom = sc.next();
+		newPizza.nom = sc.next();
 		System.out.println("Veuillez saisir le prix...");
-		pizza.prix = sc.nextDouble();
-		return pizza;
+		newPizza.prix = sc.nextDouble();
+		newPizza.id = pizza.id;
+		return newPizza;
 	}
 	
 	/**
@@ -149,7 +151,7 @@ public class PizzeriaAdminConsoleApp {
 				if (code2 != "99") {
 					int index= rechercheIndexByCode(code2,pizzas);
 					if(index != -1){
-						pizzas[index] = MAJPizza(sc);
+						pizzas[index] = MAJPizza(sc,pizzas[index]);
 					}else{
 						System.out.println("erreur, cette pizza n'existe pas");
 					}
