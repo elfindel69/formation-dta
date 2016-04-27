@@ -106,13 +106,20 @@ public class PizzeriaAdminConsoleApp {
 			case 2:// ajout
 				System.out.println("Ajout d'une nouvelle pizza");
 				int pizzToAdd = -1;
+				boolean placeTrouvee = false;
 				for (int i = 0; i < pizzas.length; i++) {
 					if (pizzas[i] == null) {
 						pizzToAdd = i;
+						placeTrouvee = true;
 						break;
 					}
 				}
-				pizzas[pizzToAdd] = ajoutPizza(sc);
+				if(placeTrouvee){
+					pizzas[pizzToAdd] = ajoutPizza(sc);
+				}
+				else{
+					System.out.println("Erreur, plus de place possible");
+				}
 
 				break;
 			case 3:// MAJ
