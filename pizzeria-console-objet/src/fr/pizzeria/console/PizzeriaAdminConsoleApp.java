@@ -2,7 +2,19 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
+/**
+ * Classe principale - administration de la pizzeria
+ * @author ETY
+ *
+ */
 public class PizzeriaAdminConsoleApp {
+	/**
+	 * Création d'une pizza
+	 * @param code code ('AAA') de la pizza
+	 * @param nom nom de la pizza
+	 * @param prix prix de la pizza
+	 * @return Pizza pizza créée 
+	 */
 	public static Pizza creerPizza(String code,String nom,double prix){
 		Pizza pizza = new Pizza();
 		pizza.id = Pizza.nbPizzas;
@@ -13,6 +25,10 @@ public class PizzeriaAdminConsoleApp {
 		return pizza;
 	}
 	
+	/**
+	 * affiche la liste des pizzas
+	 * @param pizzas liste à afficher
+	 */
 	public static void afficherListePizza(Pizza[] pizzas){
 		for (int i = 0; i < pizzas.length; i++) {
 			if (pizzas[i] != null) {
@@ -21,6 +37,12 @@ public class PizzeriaAdminConsoleApp {
 		}
 	}
 	
+	/**
+	 * Recherche l'index de la Pizza à partir de son code
+	 * @param code code à rechercher
+	 * @param pizzas liste cible
+	 * @return int index de la pizza, -1 si erreur
+	 */
 	public static int rechercheIndexByCode(String code, Pizza[] pizzas){
 		int index = -1;
 		for (int i = 0; i<pizzas.length; i++) {
@@ -32,6 +54,11 @@ public class PizzeriaAdminConsoleApp {
 		return index;
 	}
 	
+	/**
+	 * Saisie de création / MAJ pizza
+	 * @param sc interface de saisie
+	 * @return Pizza pizza créée
+	 */
 	public static Pizza ajoutPizza(Scanner sc){
 		System.out.println("Veuillez saisir le code...");
 		String code = sc.next();
@@ -42,9 +69,16 @@ public class PizzeriaAdminConsoleApp {
 		return creerPizza(code,nom,prix);
 	}
 	
+	/**
+	 * main - Gestion des pizzas
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		//choix du menu
 		int menu1 = 0;
+		//scanner
 		Scanner sc = new Scanner(System.in);
+		//liste des pizzas
 		Pizza[] pizzas = new Pizza[100];
 		pizzas[0] = creerPizza ( "PEP", "Pépéroni", 12.50 );
 		pizzas[1] = creerPizza ( "MAR", "Margherita", 14.00 );

@@ -1,5 +1,10 @@
 package fr.pizzeria.console;
 
+/**
+ * Classe Pizza - gère une pizza
+ * @author ETY
+ *
+ */
 public class Pizza {
 	public int id;
 	public String code;
