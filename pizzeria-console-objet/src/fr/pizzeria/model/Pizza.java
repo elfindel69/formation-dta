@@ -27,6 +27,17 @@ public class Pizza {
 		this.prix = prix;
 	}
 	
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(code);
+		sb.append(" -> ");
+		sb.append(nom);
+		sb.append("(" );
+		sb.append(prix);
+		sb.append("€)");
+		return sb.toString();
+	}
 	
 	/**
 	 * Constructeur par défaut

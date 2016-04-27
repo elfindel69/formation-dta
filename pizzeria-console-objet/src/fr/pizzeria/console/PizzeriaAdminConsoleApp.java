@@ -19,7 +19,7 @@ public class PizzeriaAdminConsoleApp {
 	public static void afficherListePizza(Pizza[] pizzas){
 		for (int i = 0; i < pizzas.length; i++) {
 			if (pizzas[i] != null) {
-				System.out.println(pizzas[i].getCode() + " -> " + pizzas[i].getNom() + "(" + pizzas[i].getPrix() + "€)");
+				System.out.println(pizzas[i]);
 			}
 		}
 	}
