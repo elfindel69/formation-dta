@@ -2,28 +2,15 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
+import fr.pizzeria.model.Pizza;
+
 /**
  * Classe principale - administration de la pizzeria
  * @author Valentin
  *
  */
 public class PizzeriaAdminConsoleApp {
-	/**
-	 * Création d'une pizza
-	 * @param code code ('AAA') de la pizza
-	 * @param nom nom de la pizza
-	 * @param prix prix de la pizza
-	 * @return Pizza pizza créée 
-	 */
-	public static Pizza creerPizza(String code,String nom,double prix){
-		Pizza pizza = new Pizza();
-		pizza.id = Pizza.nbPizzas;
-		Pizza.nbPizzas++;
-		pizza.code = code;
-		pizza.nom = nom;
-		pizza.prix = prix;
-		return pizza;
-	}
+	
 	
 	/**
 	 * affiche la liste des pizzas
@@ -32,7 +19,7 @@ public class PizzeriaAdminConsoleApp {
 	public static void afficherListePizza(Pizza[] pizzas){
 		for (int i = 0; i < pizzas.length; i++) {
 			if (pizzas[i] != null) {
-				System.out.println(pizzas[i].code + " -> " + pizzas[i].nom + "(" + pizzas[i].prix + "€)");
+				System.out.println(pizzas[i].getCode() + " -> " + pizzas[i].getNom() + "(" + pizzas[i].getPrix() + "€)");
 			}
 		}
 	}
@@ -46,7 +33,7 @@ public class PizzeriaAdminConsoleApp {
 	public static int rechercheIndexByCode(String code, Pizza[] pizzas){
 		int index = -1;
 		for (int i = 0; i<pizzas.length; i++) {
-			if (pizzas[i]!= null&&pizzas[i].code.equals(code)) {
+			if (pizzas[i]!= null&&pizzas[i].getCode().equals(code)) {
 				index = i;
 				break;
 			}
@@ -66,7 +53,7 @@ public class PizzeriaAdminConsoleApp {
 		String nom = sc.next();
 		System.out.println("Veuillez saisir le prix...");
 		Double prix = sc.nextDouble();
-		return creerPizza(code,nom,prix);
+		return new Pizza(code,nom,prix);
 	}
 	
 	/**
@@ -78,12 +65,12 @@ public class PizzeriaAdminConsoleApp {
 	public static Pizza MAJPizza(Scanner sc, Pizza pizza){
 		Pizza newPizza = new Pizza();
 		System.out.println("Veuillez saisir le code...");
-		newPizza.code = sc.next();
+		newPizza.setCode(sc.next());
 		System.out.println("Veuillez saisir le nom (sans espace)...");
-		newPizza.nom = sc.next();
+		newPizza.setNom(sc.next());
 		System.out.println("Veuillez saisir le prix...");
-		newPizza.prix = sc.nextDouble();
-		newPizza.id = pizza.id;
+		newPizza.setPrix(sc.nextDouble());
+		newPizza.setId(pizza.getId());
 		return newPizza;
 	}
 	
@@ -98,14 +85,14 @@ public class PizzeriaAdminConsoleApp {
 		Scanner sc = new Scanner(System.in);
 		//liste des pizzas
 		Pizza[] pizzas = new Pizza[100];
-		pizzas[0] = creerPizza ( "PEP", "Pépéroni", 12.50 );
-		pizzas[1] = creerPizza ( "MAR", "Margherita", 14.00 );
-		pizzas[2] = creerPizza ( "REI", "Reine", 11.50 );
-		pizzas[3] = creerPizza ( "FRO", "La 4 fromages", 12.00 );
-		pizzas[4] = creerPizza ( "CAN", "La cannibale", 12.50 );
-		pizzas[5] = creerPizza ( "SAV", "La savoyarde", 13.00 );
-		pizzas[6] = creerPizza ( "ORI", "L'orientale", 13.50 );
-		pizzas[7] = creerPizza ( "IND", "L'indienne", 14.00 );
+		pizzas[0] = new Pizza ( "PEP", "Pépéroni", 12.50 );
+		pizzas[1] = new Pizza ( "MAR", "Margherita", 14.00 );
+		pizzas[2] = new Pizza ( "REI", "Reine", 11.50 );
+		pizzas[3] = new Pizza ( "FRO", "La 4 fromages", 12.00 );
+		pizzas[4] = new Pizza ( "CAN", "La cannibale", 12.50 );
+		pizzas[5] = new Pizza ( "SAV", "La savoyarde", 13.00 );
+		pizzas[6] = new Pizza ( "ORI", "L'orientale", 13.50 );
+		pizzas[7] = new Pizza ( "IND", "L'indienne", 14.00 );
 
 		do {
 			System.out.println("***** Pizzeria Administration *****");
