@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Classe principale - administration de la pizzeria
- * @author ETY
+ * @author Valentin
  *
  */
 public class PizzeriaAdminConsoleApp {
@@ -55,7 +55,7 @@ public class PizzeriaAdminConsoleApp {
 	}
 	
 	/**
-	 * Saisie de création / MAJ pizza
+	 * Saisie de création pizza
 	 * @param sc interface de saisie
 	 * @return Pizza pizza créée
 	 */
@@ -67,6 +67,22 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("Veuillez saisir le prix...");
 		Double prix = sc.nextDouble();
 		return creerPizza(code,nom,prix);
+	}
+	
+	/**
+	 * Saisie de MAJ pizza
+	 * @param sc interface de saisie
+	 * @return Pizza pizza créée
+	 */
+	public static Pizza MAJPizza(Scanner sc){
+		Pizza pizza = new Pizza();
+		System.out.println("Veuillez saisir le code...");
+		pizza.code = sc.next();
+		System.out.println("Veuillez saisir le nom (sans espace)...");
+		pizza.nom = sc.next();
+		System.out.println("Veuillez saisir le prix...");
+		pizza.prix = sc.nextDouble();
+		return pizza;
 	}
 	
 	/**
@@ -133,7 +149,7 @@ public class PizzeriaAdminConsoleApp {
 				if (code2 != "99") {
 					int index= rechercheIndexByCode(code2,pizzas);
 					if(index != -1){
-						pizzas[index] = ajoutPizza(sc);
+						pizzas[index] = MAJPizza(sc);
 					}else{
 						System.out.println("erreur, cette pizza n'existe pas");
 					}
