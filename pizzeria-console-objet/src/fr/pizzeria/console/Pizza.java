@@ -7,11 +7,5 @@ public class Pizza {
 	public double prix;
 	public static int nbPizzas;
 	
-	public Pizza(String code,String nom,double prix){
-		id = nbPizzas;
-		nbPizzas++;
-		this.code = code;
-		this.nom = nom;
-		this.prix = prix;
-	}
+	
 }
