@@ -34,8 +34,8 @@ public class PizzeriaAdminConsoleApp {
 						}
 					}
 					break; 
-				case 2 :
-					System.out.println("Ajout d'une nouvelle pizza");//ajout
+				case 2 ://ajout
+					System.out.println("Ajout d'une nouvelle pizza");
 					int pizzToAdd = -1;
 					for(int i=0;i<pizzas.length;i++){
 						if(pizzas[i][0] == null){
@@ -52,7 +52,7 @@ public class PizzeriaAdminConsoleApp {
 					 pizzas[pizzToAdd]=new Object[]{code,nom,prix};
 					
 					break;
-				case 3 :
+				case 3 ://MAJ
 					System.out.println("Mise à jour d'une pizza");
 					System.out.println("Liste des pizzas");
 					for(int i=0;i<pizzas.length;i++){
@@ -60,10 +60,18 @@ public class PizzeriaAdminConsoleApp {
 							System.out.println(pizzas[i][0]+" -> "+pizzas[i][1]+"("+pizzas[i][2]+"€)");
 						}
 					}
-					System.out.println("Veuillez choisir la pizza à modifier");
+					System.out.println("Veuillez choisir la pizza à modifier (code)");
 					System.out.println("99 pour abandonner");
-					int index = sc.nextInt();
-					if (index != 99){
+					String code2 = sc.next();
+			
+					if (code2 != "99"){
+						int index = -1;
+						for(int i=0;i<pizzas.length;i++){
+							if(pizzas[i][0].equals(code2)){
+								index = i;
+								break;
+							}
+						}
 						System.out.println("Veuillez saisir le code...");
 						String code1 = sc.next();
 						 System.out.println("Veuillez saisir le nom (sans espace)...");
@@ -73,7 +81,7 @@ public class PizzeriaAdminConsoleApp {
 						 pizzas[index]=new Object[]{code1,nom1,prix1};
 					}
 					break;
-				case 4 :
+				case 4 ://suppr
 					System.out.println("Supprimer une pizza");
 					System.out.println("Liste des pizzas");
 					for(int i=0;i<pizzas.length;i++){
@@ -81,11 +89,18 @@ public class PizzeriaAdminConsoleApp {
 							System.out.println(pizzas[i][0]+" -> "+pizzas[i][1]+"("+pizzas[i][2]+"€)");
 						}
 					}
-					System.out.println("Veuillez choisir la pizza à supprimer");
+					System.out.println("Veuillez choisir la pizza à modifier (code)");
 					System.out.println("99 pour abandonner");
-					int index2 = sc.nextInt();
-					if (index2 != 99){
-						 pizzas[index2]=new Object[3];
+					String code3 = sc.next();
+					if (code3 != "99"){
+						int index = -1;
+						for(int i=0;i<pizzas.length;i++){
+							if(pizzas[i][0].equals(code3)){
+								index = i;
+								break;
+							}
+						}
+						 pizzas[index]=new Object[3];
 					}
 					break;
 				default:
