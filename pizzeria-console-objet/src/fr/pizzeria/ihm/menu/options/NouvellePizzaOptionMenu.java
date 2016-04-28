@@ -1,8 +1,10 @@
 package fr.pizzeria.ihm.menu.options;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exceptions.SavePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -12,7 +14,6 @@ import fr.pizzeria.model.Pizza;
  */
 public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String AJOUTER_PIZZA_MSG_ERREUR = "Erreur, plus de place possible";
 	private static final String AJOUTER_PIZZA_MSG_OK = "Pizza ajoutée ^^";
 	private static final String AJOUTER_MSG = "Ajout d'une nouvelle pizza";
 	private static final String AJOUTER_LIBELLE_MENU = "Ajouter une nouvelle pizza";
@@ -33,15 +34,23 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 	 */
 	@Override
 	public boolean execute() {
+		boolean savePizza = false;
 		System.out.println(AJOUTER_MSG);
-		Pizza newPizza = saisiePizza(sc);
-		boolean savePizza = pizzaDao.savePizza(newPizza);
-		if(savePizza){
+		try{
+			Pizza newPizza = saisiePizza(sc);
+			pizzaDao.savePizza(newPizza);
 			System.out.println(AJOUTER_PIZZA_MSG_OK);
+			savePizza = true;
 		}
-		else{
-			System.out.println(AJOUTER_PIZZA_MSG_ERREUR);
+		catch(SavePizzaException e){
+			System.out.println(e.getMessage());
+			savePizza = false;
+		}catch(InputMismatchException e){
+			System.out.println("Erreur de saisie, veuillez entrer un nombre");
+			sc.close();
+			savePizza = false;
 		}
+		
 		return savePizza;
 	}
 

@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exceptions.DeletePizzaException;
+import fr.pizzeria.exceptions.SavePizzaException;
+import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -17,22 +20,20 @@ public interface IPizzaDao {
 	/**
 	 * Ajout d'une pizza
 	 * @param newPizza pizza à ajouter
-	 * @return boolean flag d'ajout
+	 * 
 	 */
-	boolean savePizza(Pizza newPizza);
+	void savePizza(Pizza newPizza) throws SavePizzaException;
 	
 	/**
 	 * MAJ d'une pizza
 	 * @param codePizza code de la Pizza à MAJ
 	 * @param updatePizza pizza modifiée
-	 * @return boolean flag de modification
 	 */
-	boolean updatePizza(String codePizza, Pizza updatePizza);
+	void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException;
 	
 	/**
 	 * Suppression d'une pizza
 	 * @param codePizza code de la Pizza à supprimer
-	 * @return boolean flag de suppression
 	 */
-	boolean deletePizza(String codePizza);
+	void deletePizza(String codePizza) throws DeletePizzaException;
 }

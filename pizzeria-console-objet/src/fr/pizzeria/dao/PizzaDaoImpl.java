@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exceptions.DeletePizzaException;
+import fr.pizzeria.exceptions.SavePizzaException;
+import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -38,10 +41,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 	/**
 	 * Ajout d'une pizza
 	 * @param newPizza pizza à ajouter
-	 * @return boolean flag d'ajout
+	 * @throws SavePizzaException 
 	 */
 	@Override
-	public boolean savePizza(Pizza newPizza) {
+	public void savePizza(Pizza newPizza) throws SavePizzaException {
 		int pizzToAdd = -1;
 		boolean placeTrouvee = false;
 		for (int i = 0; i < pizzas.length; i++) {
@@ -53,8 +56,9 @@ public class PizzaDaoImpl implements IPizzaDao {
 		}
 		if (placeTrouvee) {
 			pizzas[pizzToAdd] = newPizza;
+		}else{
+			throw new SavePizzaException("Erreur d'ajout, plus de place disponible");
 		}
-		return placeTrouvee;
 	}
 
 	/**
@@ -62,36 +66,37 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @param codePizza code de la Pizza à MAJ
 	 * @param updatePizza pizza modifiée
 	 * @return boolean flag de modification
+	 * @throws UpdatePizzaException 
 	 */
 	@Override
-	public boolean updatePizza(String codePizza, Pizza updatePizza) {
-		boolean result = false;
-		if (codePizza != "99") {
-			int index = rechercheIndexByCode(codePizza, pizzas);
-			if (index != -1) {
-				pizzas[index] = updatePizza;
-				result = true;
-			}
+	public void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException {
+		
+		
+		int index = rechercheIndexByCode(codePizza, pizzas);
+		if (index != -1) {
+			pizzas[index] = updatePizza;
+		}else{
+			throw new UpdatePizzaException("Erreur de mise à jour, la pizza "+codePizza+" n'existe pas");
 		}
-		return result;
+		
+		
 	}
 
 	/**
 	 * Suppression d'une pizza
 	 * @param codePizza code de la Pizza à supprimer
-	 * @return boolean flag de suppression
+	 * @throws DeletePizzaException 
 	 */
 	@Override
-	public boolean deletePizza(String codePizza) {
-		boolean result = false;
-
+	public void deletePizza(String codePizza) throws DeletePizzaException {
 		int index = rechercheIndexByCode(codePizza, pizzas);
 		if (index != -1) {
 			pizzas[index] = null;
 			--Pizza.nbPizzas;
-			result = true;
+		}else{
+			throw new DeletePizzaException("Erreur de suppression, la pizza "+codePizza+" n'existe pas");
 		}
-		return result;
+		
 
 	}
 
