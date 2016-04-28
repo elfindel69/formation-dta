@@ -47,7 +47,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 				System.out.println(SUPPR_PIZZA_MSG_OK);
 				
 			} catch (DeletePizzaException e) {
-				System.out.println(e.getMessage());
+				System.err.println(e.getMessage());
 				
 			}
 		} 

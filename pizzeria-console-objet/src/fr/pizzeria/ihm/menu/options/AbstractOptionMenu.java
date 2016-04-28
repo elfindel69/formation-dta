@@ -1,6 +1,5 @@
 package fr.pizzeria.ihm.menu.options;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -8,6 +7,7 @@ import fr.pizzeria.model.Pizza;
 
 /**
  * Classe Abstraite - options des menus
+ * 
  * @author Valentin
  *
  */
@@ -21,30 +21,39 @@ public abstract class AbstractOptionMenu {
 	protected Scanner sc;
 	protected Pizza[] tabPizza;
 	protected IPizzaDao pizzaDao;
-	
+
 	/**
 	 * Constructeur par défault
-	 * @param libelle - libellé du menu
+	 * 
+	 * @param libelle
+	 *            - libellé du menu
 	 */
 	public AbstractOptionMenu(String libelle) {
 		this.libelle = libelle;
 	}
-	
+
 	/**
 	 * Constructeur par défault
-	 * @param libelle - libellé du menu
-	 * @param pizzaDao - lien vers la DAO
+	 * 
+	 * @param libelle
+	 *            - libellé du menu
+	 * @param pizzaDao
+	 *            - lien vers la DAO
 	 */
-	public AbstractOptionMenu(String libelle,IPizzaDao pizzaDao) {
+	public AbstractOptionMenu(String libelle, IPizzaDao pizzaDao) {
 		this.libelle = libelle;
 		this.pizzaDao = pizzaDao;
 	}
-	
+
 	/**
 	 * Constructeur complet
-	 * @param libelle - libellé du menu
-	 * @param scanner - scanner du menu
-	 * @param pizzaDao - lien vers la DAO
+	 * 
+	 * @param libelle
+	 *            - libellé du menu
+	 * @param scanner
+	 *            - scanner du menu
+	 * @param pizzaDao
+	 *            - lien vers la DAO
 	 */
 	public AbstractOptionMenu(String libelle, Scanner scanner, IPizzaDao pizzaDao) {
 		this.libelle = libelle;
@@ -54,35 +63,33 @@ public abstract class AbstractOptionMenu {
 
 	/**
 	 * execution du menu
+	 * 
 	 * @return flag d'execution
 	 */
 	public abstract boolean execute();
-	
+
 	/**
 	 * Saisie d'une nouvelle pizza
-	 * @param sc - Scanner de saisie
+	 * 
+	 * @param sc
+	 *            - Scanner de saisie
 	 * @return Pizza - pizza créée
 	 */
-	Pizza saisiePizza(Scanner sc){
+	Pizza saisiePizza(Scanner sc) {
 		Pizza newPizza = new Pizza();
 		System.out.println(MENU_MSG_SAISIE_CODE);
 		newPizza.setCode(sc.next());
 		System.out.println(MENU_MSG_SAISIE_NOM);
 		newPizza.setNom(sc.next());
-		try{
 		System.out.println(MENU_MSG_SAISIE_PRIX);
 		newPizza.setPrix(sc.nextDouble());
-		}
-		catch(InputMismatchException e){
-			throw e;
-		}
 		return newPizza;
 	}
-	
+
 	/**
 	 * Affichage de la liste
 	 */
-	void affichageListe(){
+	void affichageListe() {
 		Pizza[] pizzas = pizzaDao.findAllPizzas();
 		for (Pizza p : pizzas) {
 			if (p != null) {
@@ -90,13 +97,15 @@ public abstract class AbstractOptionMenu {
 			}
 		}
 	}
+
 	/**
-	 *  Getter libellé
+	 * Getter libellé
+	 * 
 	 * @return String libellé
 	 */
-	public String getLibelle(){
+	public String getLibelle() {
 		return this.libelle;
-		
+
 	}
-	
+
 }

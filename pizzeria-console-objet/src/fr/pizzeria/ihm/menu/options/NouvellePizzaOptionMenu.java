@@ -43,10 +43,10 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 		
 		}
 		catch(SavePizzaException e){
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 			
 		}catch(InputMismatchException e){
-			System.out.println("Erreur de saisie, veuillez entrer un nombre");	
+			System.err.println("erreur "+sc.next()+" n'est pas un nombre");
 		}
 		
 		return true;
