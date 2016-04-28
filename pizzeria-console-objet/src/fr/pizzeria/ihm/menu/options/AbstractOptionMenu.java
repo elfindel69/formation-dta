@@ -11,6 +11,12 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public abstract class AbstractOptionMenu {
+	private static final String MENU_MSG_SAISIE_PRIX = "Veuillez saisir le prix...";
+	private static final String MENU_MSG_SAISIE_NOM = "Veuillez saisir le nom (sans espace)...";
+	private static final String MENU_MSG_SAISIE_CODE = "Veuillez saisir le code...";
+	protected static final String MENU_MSG_ERREUR_CODE = "Erreur, ce code n'existe pas";
+	protected static final String MENU_CODE_ABANDON = "99";
+	protected static final String MENU_MSG_CODE_ABANDON = "99 pour abandonner";
 	protected final String libelle;
 	protected Scanner sc;
 	protected Pizza[] tabPizza;
@@ -52,7 +58,33 @@ public abstract class AbstractOptionMenu {
 	 */
 	public abstract boolean execute();
 	
-
+	/**
+	 * Saisie d'une nouvelle pizza
+	 * @param sc - Scanner de saisie
+	 * @return Pizza - pizza créée
+	 */
+	Pizza saisiePizza(Scanner sc){
+		Pizza newPizza = new Pizza();
+		System.out.println(MENU_MSG_SAISIE_CODE);
+		newPizza.setCode(sc.next());
+		System.out.println(MENU_MSG_SAISIE_NOM);
+		newPizza.setNom(sc.next());
+		System.out.println(MENU_MSG_SAISIE_PRIX);
+		newPizza.setPrix(sc.nextDouble());
+		return newPizza;
+	}
+	
+	/**
+	 * Affichage de la liste
+	 */
+	void affichageListe(){
+		Pizza[] pizzas = pizzaDao.findAllPizzas();
+		for (Pizza p : pizzas) {
+			if (p != null) {
+				System.out.println(p);
+			}
+		}
+	}
 	/**
 	 *  Getter libellé
 	 * @return String libellé

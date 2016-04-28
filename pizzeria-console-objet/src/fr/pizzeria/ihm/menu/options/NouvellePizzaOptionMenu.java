@@ -12,6 +12,8 @@ import fr.pizzeria.model.Pizza;
  */
 public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 
+	private static final String AJOUTER_PIZZA_MSG_ERREUR = "Erreur, plus de place possible";
+	private static final String AJOUTER_PIZZA_MSG_OK = "Pizza ajoutée ^^";
 	private static final String AJOUTER_MSG = "Ajout d'une nouvelle pizza";
 	private static final String AJOUTER_LIBELLE_MENU = "Ajouter une nouvelle pizza";
 
@@ -32,18 +34,13 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean execute() {
 		System.out.println(AJOUTER_MSG);
-		System.out.println("Veuillez saisir le code...");
-		String code = sc.next();
-		System.out.println("Veuillez saisir le nom (sans espace)...");
-		String nom = sc.next();
-		System.out.println("Veuillez saisir le prix...");
-		Double prix = sc.nextDouble();
-		boolean savePizza = pizzaDao.savePizza(new Pizza(code,nom,prix));
+		Pizza newPizza = saisiePizza(sc);
+		boolean savePizza = pizzaDao.savePizza(newPizza);
 		if(savePizza){
-			System.out.println("Pizza ajoutée ^^");
+			System.out.println(AJOUTER_PIZZA_MSG_OK);
 		}
 		else{
-			System.out.println("Erreur, plus de place possible");
+			System.out.println(AJOUTER_PIZZA_MSG_ERREUR);
 		}
 		return savePizza;
 	}

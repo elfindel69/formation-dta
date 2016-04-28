@@ -11,6 +11,10 @@ import fr.pizzeria.model.Pizza;
  */
 public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 
+	
+	private static final String MAJ_PIZZA_MSG_ERREUR = "Erreur, modification impossible";
+	private static final String MAJ_PIZZA_MSG_OK = "Pizza modifiée ^^";
+	private static final String MAJ_PIZZA_MSG_SAISIE_CODE = "Veuillez choisir la pizza à modifier (code)";
 	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre à jour une pizza";
 	private static final String MAJ_PIZZA_MSG = "Mise à jour d'une pizza";
 
@@ -31,34 +35,23 @@ public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean execute() {
 		System.out.println(MAJ_PIZZA_MSG);
-		Pizza[] pizzas = pizzaDao.findAllPizzas();
-		for (Pizza p : pizzas) {
-			if (p != null) {
-				System.out.println(p);
-			}
-		}
-		System.out.println("Veuillez choisir la pizza à modifier (code)");
-		System.out.println("99 pour abandonner");
+		affichageListe();
+		System.out.println(MAJ_PIZZA_MSG_SAISIE_CODE);
+		System.out.println(MENU_MSG_CODE_ABANDON);
 		String code = sc.next();
 		boolean updatePizza = false;
-		if (code != "99") {
-			Pizza newPizza = new Pizza();
-			System.out.println("Veuillez saisir le code...");
-			newPizza.setCode(sc.next());
-			System.out.println("Veuillez saisir le nom (sans espace)...");
-			newPizza.setNom(sc.next());
-			System.out.println("Veuillez saisir le prix...");
-			newPizza.setPrix(sc.nextDouble());
+		if (code != MENU_CODE_ABANDON) {
+			Pizza newPizza = saisiePizza(sc);
 			updatePizza = pizzaDao.updatePizza(code, newPizza);
 			if(updatePizza){
-				System.out.println("Pizza modifiée ^^");
+				System.out.println(MAJ_PIZZA_MSG_OK);
 			}
 			else{
-				System.out.println("Erreur, modification impossible");
+				System.out.println(MAJ_PIZZA_MSG_ERREUR);
 			}
 		}
 		else{
-			System.out.println("Erreur, ce code n'existe pas");
+			System.out.println(MENU_MSG_ERREUR_CODE);
 		}
 		
 		return updatePizza;

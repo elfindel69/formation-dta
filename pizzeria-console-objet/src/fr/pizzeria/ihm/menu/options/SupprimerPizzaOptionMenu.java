@@ -3,56 +3,56 @@ package fr.pizzeria.ihm.menu.options;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.model.Pizza;
 
 /**
  * Menu de suppression d'une pizza
+ * 
  * @author Valentin
  *
  */
 public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
-	
+
+	private static final String SUPPRIMER_PIZZA_MSG_ERREUR = "erreur, suppression impossible";
+	private static final String SUPPR_PIZZA_MSG_OK = "Pizza Supprimée ^^";
 	private static final String SUPPRIMER_PIZZA_LIBELLE_MENU = "Supprimer une pizza";
 
 	/**
 	 * Constructeur
-	 * @param sc - scanner
-	 * @param dao - lien vers la DAO
+	 * 
+	 * @param sc
+	 *            - scanner
+	 * @param dao
+	 *            - lien vers la DAO
 	 */
 	public SupprimerPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
-		super(SUPPRIMER_PIZZA_LIBELLE_MENU,sc,pizzaDao);
+		super(SUPPRIMER_PIZZA_LIBELLE_MENU, sc, pizzaDao);
 	}
 
-	
 	/**
 	 * execution du menu
+	 * 
 	 * @return flag d'execution - supression effectuee
 	 */
 	@Override
 	public boolean execute() {
 		boolean result = false;
 		System.out.println("Supprimer une pizza");
-		Pizza[] pizzas = pizzaDao.findAllPizzas();
-		for (Pizza p : pizzas) {
-			if (p != null) {
-				System.out.println(p);
-			}
-		}
+		affichageListe();
 		System.out.println("Veuillez choisir la pizza à supprimer (code)");
-		System.out.println("99 pour abandonner");
+		System.out.println(MENU_MSG_CODE_ABANDON);
 		String codePizza = sc.next();
-		if (codePizza != "99") {
+		if (codePizza != MENU_CODE_ABANDON) {
 			result = pizzaDao.deletePizza(codePizza);
-			if (result){
-				System.out.println("Pizza Supprimée ^^");
-			}else{
-				System.out.println("erreur, suppression impossible");
+			if (result) {
+				System.out.println(SUPPR_PIZZA_MSG_OK);
+			} else {
+				System.out.println(SUPPRIMER_PIZZA_MSG_ERREUR);
 			}
-		}else{
-			System.out.println("erreur, cette pizza n'existe pas");
+		} else {
+			System.out.println(MENU_MSG_ERREUR_CODE);
 		}
 		return result;
-		
+
 	}
 
 }

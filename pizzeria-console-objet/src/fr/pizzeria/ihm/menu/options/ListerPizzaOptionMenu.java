@@ -10,6 +10,7 @@ import fr.pizzeria.model.Pizza;
  */
 public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 
+	private static final String LISTER_PIZZA_MSG_NB_PIZZAS = " pizzas créées depuis l’initialisation du programme";
 	private static final String LISTER_PIZZA_MSG = "Liste des Pizzas";
 	private static final String LISTER_PIZZA_LIBELLE_MENU = "Lister pizzas";
 	
@@ -28,13 +29,8 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean execute() {
 		System.out.println(LISTER_PIZZA_MSG);
-		Pizza[] pizzas = pizzaDao.findAllPizzas();
-		for (Pizza p : pizzas) {
-			if (p != null) {
-				System.out.println(p);
-			}
-		}
-		System.out.println("-------" + Pizza.nbPizzas + " pizzas créées depuis l’initialisation du programme");
+		affichageListe();
+		System.out.println("-------" + Pizza.nbPizzas + LISTER_PIZZA_MSG_NB_PIZZAS);
 		return true;
 	}
 
