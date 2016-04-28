@@ -4,17 +4,30 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
-
+/**
+ * Menu de MAJ d'une pizza
+ * @author Valentin
+ *
+ */
 public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 
 	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre à jour une pizza";
 	private static final String MAJ_PIZZA_MSG = "Mise à jour d'une pizza";
 
+	/**
+	 * Constructeur
+	 * @param sc - scanner
+	 * @param dao - lien vers la DAO
+	 */
 	public MAJPizzaOptionMenu(Scanner sc,IPizzaDao dao) {
 		super(MAJ_PIZZA_LIBELLE_MENU,sc,dao);
 		
 	}
 
+	/**
+	 * execution du menu
+	 * @return flag d'execution - MAJ effectuee
+	 */
 	@Override
 	public boolean execute() {
 		System.out.println(MAJ_PIZZA_MSG);

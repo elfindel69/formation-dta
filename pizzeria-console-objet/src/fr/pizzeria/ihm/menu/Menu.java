@@ -10,17 +10,32 @@ import fr.pizzeria.ihm.menu.options.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.options.SupprimerPizzaOptionMenu;
 
+/**
+ * Menu de l'application
+ * @author ETY
+ *
+ */
 public class Menu {
 	private static final String MENU_LIBELLE = "Pizzeria Administration";
 	private AbstractOptionMenu[] listeMenus;
 	private Scanner sc;
 	
+	/**
+	 * Constructeur 
+	 * @param sc - scanner
+	 * @param pizzaDao - lien vers la DAO
+	 */
 	public Menu(Scanner sc,IPizzaDao pizzaDao) {
 		super();
 		initialiserOptions(sc,pizzaDao);
 		this.sc = sc;
 	}
 	
+	/**
+	 *  initialisation du menu
+	 * @param scanner - scanner
+	 * @param pizzaDao - lien vers la DAO
+	 */
 	private void initialiserOptions(Scanner scanner,IPizzaDao pizzaDao) {
 		listeMenus = new AbstractOptionMenu[]{
 			new ListerPizzaOptionMenu(pizzaDao),
@@ -32,6 +47,9 @@ public class Menu {
 		
 	}
 
+	/**
+	 * affichage du menu
+	 */
 	public void afficher(){
 		System.out.println("*****"+MENU_LIBELLE+"*****");
 		
