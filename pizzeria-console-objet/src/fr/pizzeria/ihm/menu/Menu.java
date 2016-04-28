@@ -8,6 +8,7 @@ import fr.pizzeria.ihm.menu.options.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.MAJPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.QuitterOptionMenu;
+import fr.pizzeria.ihm.menu.options.SupprimerPizzaOptionMenu;
 
 public class Menu {
 	private static final String MENU_LIBELLE = "Pizzeria Administration";

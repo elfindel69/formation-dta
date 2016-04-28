@@ -1,9 +1,8 @@
-package fr.pizzeria.ihm.menu;
+package fr.pizzeria.ihm.menu.options;
 
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
 import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
