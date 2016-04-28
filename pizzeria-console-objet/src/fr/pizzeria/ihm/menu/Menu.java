@@ -24,8 +24,8 @@ public class Menu {
 		listeMenus = new AbstractOptionMenu[]{
 			new ListerPizzaOptionMenu(pizzaDao),
 			new NouvellePizzaOptionMenu(scanner,pizzaDao),
-			new MAJPizzaOptionMenu(scanner),
-			new SupprimerPizzaOptionMenu(scanner),
+			new MAJPizzaOptionMenu(scanner,pizzaDao),
+			new SupprimerPizzaOptionMenu(scanner,pizzaDao),
 			new QuitterOptionMenu()
 		};
 		

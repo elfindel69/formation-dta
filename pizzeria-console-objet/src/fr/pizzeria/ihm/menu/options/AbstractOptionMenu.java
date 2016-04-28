@@ -5,6 +5,11 @@ import java.util.Scanner;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
+/**
+ * 
+ * @author ETY
+ *
+ */
 public abstract class AbstractOptionMenu {
 	protected final String libelle;
 	protected Scanner sc;
