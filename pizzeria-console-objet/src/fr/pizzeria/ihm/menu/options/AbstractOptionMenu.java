@@ -20,6 +20,12 @@ public abstract class AbstractOptionMenu {
 		this.pizzaDao = pizzaDao;
 	}
 	
+	public AbstractOptionMenu(String libelle, Scanner scanner, IPizzaDao pizzaDao) {
+		this.libelle = libelle;
+		this.pizzaDao = pizzaDao;
+		this.sc = scanner;
+	}
+
 	public abstract boolean execute();
 	
 

@@ -23,7 +23,7 @@ public class Menu {
 	private void initialiserOptions(Scanner scanner,IPizzaDao pizzaDao) {
 		listeMenus = new AbstractOptionMenu[]{
 			new ListerPizzaOptionMenu(pizzaDao),
-			new NouvellePizzaOptionMenu(scanner),
+			new NouvellePizzaOptionMenu(scanner,pizzaDao),
 			new MAJPizzaOptionMenu(scanner),
 			new SupprimerPizzaOptionMenu(scanner),
 			new QuitterOptionMenu()
