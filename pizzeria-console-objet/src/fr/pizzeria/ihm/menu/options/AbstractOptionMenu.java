@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.options;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -69,8 +70,13 @@ public abstract class AbstractOptionMenu {
 		newPizza.setCode(sc.next());
 		System.out.println(MENU_MSG_SAISIE_NOM);
 		newPizza.setNom(sc.next());
+		try{
 		System.out.println(MENU_MSG_SAISIE_PRIX);
 		newPizza.setPrix(sc.nextDouble());
+		}
+		catch(InputMismatchException e){
+			throw e;
+		}
 		return newPizza;
 	}
 	

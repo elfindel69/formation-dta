@@ -41,8 +41,8 @@ public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 		String code = sc.next();
 		boolean updatePizza = false;
 		if (code != MENU_CODE_ABANDON) {
-			Pizza newPizza = saisiePizza(sc);
 			try{
+				Pizza newPizza = saisiePizza(sc);
 				pizzaDao.updatePizza(code, newPizza);
 				System.out.println(MAJ_PIZZA_MSG_OK);
 				updatePizza = true;
