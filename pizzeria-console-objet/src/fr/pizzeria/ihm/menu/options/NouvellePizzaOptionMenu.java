@@ -8,7 +8,7 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 	private static final String AJOUTER_LIBELLE_MENU = "Ajouter une nouvelle pizza";
 
 	public NouvellePizzaOptionMenu(Scanner sc) {
-		super(AJOUTER_LIBELLE_MENU,sc);
+		super(AJOUTER_LIBELLE_MENU);
 	}
 
 	@Override
@@ -39,3 +39,6 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 }
+
+
+

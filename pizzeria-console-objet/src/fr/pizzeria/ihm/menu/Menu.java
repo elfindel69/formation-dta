@@ -2,8 +2,10 @@ package fr.pizzeria.ihm.menu;
 
 import java.util.Scanner;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.options.ListerPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.options.MAJPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.QuitterOptionMenu;
 
@@ -12,17 +14,19 @@ public class Menu {
 	private AbstractOptionMenu[] listeMenus;
 	private Scanner sc;
 	
-	public Menu(Scanner sc) {
+	public Menu(Scanner sc,IPizzaDao pizzaDao) {
 		super();
-		initialiserOptions(sc);
+		initialiserOptions(sc,pizzaDao);
 		this.sc = sc;
 	}
 	
-	private void initialiserOptions(Scanner scanner) {
+	private void initialiserOptions(Scanner scanner,IPizzaDao pizzaDao) {
 		listeMenus = new AbstractOptionMenu[]{
-			new ListerPizzaOptionMenu(scanner),
+			new ListerPizzaOptionMenu(pizzaDao),
 			new NouvellePizzaOptionMenu(scanner),
-			new QuitterOptionMenu(scanner)
+			new MAJPizzaOptionMenu(scanner),
+			new SupprimerPizzaOptionMenu(scanner),
+			new QuitterOptionMenu()
 		};
 		
 	}
