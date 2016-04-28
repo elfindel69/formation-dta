@@ -30,28 +30,26 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 	
 	/**
 	 * execution du menu
-	 * @return flag d'execution - création effectuee
+	 * @return true
 	 */
 	@Override
 	public boolean execute() {
-		boolean savePizza = false;
+		
 		System.out.println(AJOUTER_MSG);
 		try{
 			Pizza newPizza = saisiePizza(sc);
 			pizzaDao.savePizza(newPizza);
 			System.out.println(AJOUTER_PIZZA_MSG_OK);
-			savePizza = true;
+		
 		}
 		catch(SavePizzaException e){
 			System.out.println(e.getMessage());
-			savePizza = false;
+			
 		}catch(InputMismatchException e){
-			System.out.println("Erreur de saisie, veuillez entrer un nombre");
-			sc.close();
-			savePizza = false;
+			System.out.println("Erreur de saisie, veuillez entrer un nombre");	
 		}
 		
-		return savePizza;
+		return true;
 	}
 
 }

@@ -30,7 +30,7 @@ public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 
 	/**
 	 * execution du menu
-	 * @return flag d'execution - MAJ effectuee
+	 * @return true
 	 */
 	@Override
 	public boolean execute() {
@@ -39,29 +39,24 @@ public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 		System.out.println(MAJ_PIZZA_MSG_SAISIE_CODE);
 		System.out.println(MENU_MSG_CODE_ABANDON);
 		String code = sc.next();
-		boolean updatePizza = false;
-		if (code != MENU_CODE_ABANDON) {
+		
+		if (!code.equals(MENU_CODE_ABANDON)) {
 			try{
 				Pizza newPizza = saisiePizza(sc);
 				pizzaDao.updatePizza(code, newPizza);
 				System.out.println(MAJ_PIZZA_MSG_OK);
-				updatePizza = true;
+				
 			}
 			catch (UpdatePizzaException e){
 				System.out.println(e.getMessage());
-				updatePizza = false;
+				
 			}catch(InputMismatchException e){
 				System.out.println("Erreur de saisie, veuillez entrer un nombre");
-				sc.close();
-				updatePizza = false;
+			
 			}
 			
 		}
-		else{
-			System.out.println(MENU_MSG_ERREUR_CODE);
-		}
-		
-		return updatePizza;
+		return true;
 	}
 
 }

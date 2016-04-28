@@ -15,7 +15,6 @@ public abstract class AbstractOptionMenu {
 	private static final String MENU_MSG_SAISIE_PRIX = "Veuillez saisir le prix...";
 	private static final String MENU_MSG_SAISIE_NOM = "Veuillez saisir le nom (sans espace)...";
 	private static final String MENU_MSG_SAISIE_CODE = "Veuillez saisir le code...";
-	protected static final String MENU_MSG_ERREUR_CODE = "Erreur, ce code n'existe pas";
 	protected static final String MENU_CODE_ABANDON = "99";
 	protected static final String MENU_MSG_CODE_ABANDON = "99 pour abandonner";
 	protected final String libelle;

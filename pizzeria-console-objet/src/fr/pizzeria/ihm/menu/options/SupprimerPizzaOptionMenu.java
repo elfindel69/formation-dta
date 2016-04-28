@@ -35,25 +35,23 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	 */
 	@Override
 	public boolean execute() {
-		boolean result = false;
+		
 		System.out.println("Supprimer une pizza");
 		affichageListe();
 		System.out.println("Veuillez choisir la pizza à supprimer (code)");
 		System.out.println(MENU_MSG_CODE_ABANDON);
 		String codePizza = sc.next();
-		if (codePizza != MENU_CODE_ABANDON) {
+		if (!codePizza.equals(MENU_CODE_ABANDON)) {
 			try {
 				pizzaDao.deletePizza(codePizza);
 				System.out.println(SUPPR_PIZZA_MSG_OK);
-				result = true;
+				
 			} catch (DeletePizzaException e) {
 				System.out.println(e.getMessage());
-				result = false;
+				
 			}
-		} else {
-			System.out.println(MENU_MSG_ERREUR_CODE);
-		}
-		return result;
+		} 
+		return true;
 
 	}
 
