@@ -3,7 +3,7 @@ package fr.pizzeria.ihm.menu.options;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exceptions.DeletePizzaException;
+import fr.pizzeria.exceptions.DaoException;
 
 /**
  * Menu de suppression d'une pizza
@@ -46,7 +46,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 				pizzaDao.deletePizza(codePizza);
 				System.out.println(SUPPR_PIZZA_MSG_OK);
 				
-			} catch (DeletePizzaException e) {
+			} catch (DaoException e) {
 				System.err.println(e.getMessage());
 				
 			}

@@ -5,7 +5,7 @@ package fr.pizzeria.model;
  * @author Valentin
  *
  */
-public class Pizza {
+public class Pizza implements Comparable<Pizza>{
 	private int id;
 	private String code;
 	private String nom;
@@ -107,6 +107,16 @@ public class Pizza {
 	 */
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	@Override
+	public int compareTo(Pizza pizza) {
+		int result =  this.code.compareTo(pizza.code);
+		if (result == 0){
+			result =  this.nom.compareTo(pizza.nom);
+		}
+		
+		return result;
 	}
 	
 	

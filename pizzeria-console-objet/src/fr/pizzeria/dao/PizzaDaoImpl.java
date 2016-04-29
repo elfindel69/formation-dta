@@ -1,122 +1,99 @@
 package fr.pizzeria.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.DeletePizzaException;
 import fr.pizzeria.exceptions.SavePizzaException;
 import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
- * Manipulation d'une Pizza 
+ * Manipulation d'une Pizza
+ * 
  * @author Valentin
  *
  */
 public class PizzaDaoImpl implements IPizzaDao {
-	Pizza[] pizzas = new Pizza[100];
+	Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
 	/**
 	 * Constructeur initialise le tableau
 	 */
 	public PizzaDaoImpl() {
-		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.50);
-		pizzas[1] = new Pizza("MAR", "Margherita", 14.00);
-		pizzas[2] = new Pizza("REI", "Reine", 11.50);
-		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12.00);
-		pizzas[4] = new Pizza("CAN", "La cannibale", 12.50);
-		pizzas[5] = new Pizza("SAV", "La savoyarde", 13.00);
-		pizzas[6] = new Pizza("ORI", "L'orientale", 13.50);
-		pizzas[7] = new Pizza("IND", "L'indienne", 14.00);
+		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", 12.50));
+		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00));
+		pizzas.put("REI", new Pizza("REI", "Reine", 11.50));
+		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", 12.00));
+		pizzas.put("CAN", new Pizza("CAN", "La cannibale", 12.50));
+		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", 13.00));
+		pizzas.put("ORI", new Pizza("ORI", "L'orientale", 13.50));
+		pizzas.put("IND", new Pizza("IND", "L'indienne", 14.00));
 	}
 
 	/**
-	 * Liste des pizzas 
+	 * Liste des pizzas
+	 * 
 	 * @return liste des pizzas
 	 */
 	@Override
-	public Pizza[] findAllPizzas() {
-		Pizza[] result = new Pizza[100];
-		System.arraycopy(pizzas, 0, result, 0, result.length);
-		return result;
+	public List<Pizza> findAllPizzas() {
+
+		return new ArrayList<Pizza>(pizzas.values());
 	}
 
 	/**
 	 * Ajout d'une pizza
-	 * @param newPizza pizza à ajouter
-	 * @throws SavePizzaException 
+	 * 
+	 * @param newPizza
+	 *            pizza à ajouter
+	 * @throws SavePizzaException
 	 */
 	@Override
-	public void savePizza(Pizza newPizza) throws SavePizzaException {
-		int pizzToAdd = -1;
-		boolean placeTrouvee = false;
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] == null) {
-				pizzToAdd = i;
-				placeTrouvee = true;
-				break;
-			}
+	public void savePizza(Pizza newPizza) throws DaoException {
+		if (pizzas.containsKey(newPizza.getCode())) {
+			throw new SavePizzaException("code existant!");
 		}
-		if (placeTrouvee) {
-			pizzas[pizzToAdd] = newPizza;
-		}else{
-			throw new SavePizzaException("Erreur d'ajout, plus de place disponible");
-		}
+		pizzas.put(newPizza.getCode(), newPizza);
 	}
 
 	/**
 	 * MAJ d'une pizza
-	 * @param codePizza code de la Pizza à MAJ
-	 * @param updatePizza pizza modifiée
+	 * 
+	 * @param codePizza
+	 *            code de la Pizza à MAJ
+	 * @param updatePizza
+	 *            pizza modifiée
 	 * @return boolean flag de modification
-	 * @throws UpdatePizzaException 
+	 * @throws UpdatePizzaException
 	 */
 	@Override
-	public void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException {
-		
-		
-		int index = rechercheIndexByCode(codePizza, pizzas);
-		if (index != -1) {
-			pizzas[index] = updatePizza;
-		}else{
-			throw new UpdatePizzaException("Erreur de mise à jour, la pizza "+codePizza+" n'existe pas");
+	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
+		if (!pizzas.containsKey(codePizza)) {
+			throw new UpdatePizzaException("code non trouvé!");
 		}
-		
-		
+		pizzas.put(codePizza, updatePizza);
+
 	}
 
 	/**
 	 * Suppression d'une pizza
-	 * @param codePizza code de la Pizza à supprimer
-	 * @throws DeletePizzaException 
+	 * 
+	 * @param codePizza
+	 *            code de la Pizza à supprimer
+	 * @throws DeletePizzaException
 	 */
 	@Override
-	public void deletePizza(String codePizza) throws DeletePizzaException {
-		int index = rechercheIndexByCode(codePizza, pizzas);
-		if (index != -1) {
-			pizzas[index] = null;
-			--Pizza.nbPizzas;
-		}else{
-			throw new DeletePizzaException("Erreur de suppression, la pizza "+codePizza+" n'existe pas");
+	public void deletePizza(String codePizza) throws DaoException {
+		if (!pizzas.containsKey(codePizza)) {
+			throw new DeletePizzaException("code non trouvé!");
 		}
-		
+		pizzas.remove(codePizza);
+		--Pizza.nbPizzas;
 
 	}
 
-	/**
-	 * Recherche l'index de la Pizza à partir de son code
-	 * 
-	 * @param code
-	 *            code à rechercher
-	 * @param pizzas
-	 *            liste cible
-	 * @return int index de la pizza, -1 si erreur
-	 */
-	private int rechercheIndexByCode(String code, Pizza[] pizzas) {
-		int index = -1;
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null && pizzas[i].getCode().equals(code)) {
-				index = i;
-				break;
-			}
-		}
-		return index;
-	}
 }

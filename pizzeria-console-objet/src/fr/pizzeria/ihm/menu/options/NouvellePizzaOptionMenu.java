@@ -4,11 +4,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exceptions.SavePizzaException;
+import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
 /**
  * Menu de création d'une Pizza
+ * 
  * @author Valentin
  *
  */
@@ -20,39 +21,38 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 
 	/**
 	 * Constructeur
-	 * @param sc - scanner
-	 * @param dao - lien vers la DAO
+	 * 
+	 * @param sc
+	 *            - scanner
+	 * @param dao
+	 *            - lien vers la DAO
 	 */
-	public NouvellePizzaOptionMenu(Scanner sc,IPizzaDao dao) {
-		super(AJOUTER_LIBELLE_MENU,sc,dao);
+	public NouvellePizzaOptionMenu(Scanner sc, IPizzaDao dao) {
+		super(AJOUTER_LIBELLE_MENU, sc, dao);
 	}
 
-	
 	/**
 	 * execution du menu
+	 * 
 	 * @return true
 	 */
 	@Override
 	public boolean execute() {
-		
+
 		System.out.println(AJOUTER_MSG);
-		try{
+		try {
 			Pizza newPizza = saisiePizza(sc);
 			pizzaDao.savePizza(newPizza);
 			System.out.println(AJOUTER_PIZZA_MSG_OK);
-		
-		}
-		catch(SavePizzaException e){
+
+		} catch (DaoException e) {
 			System.err.println(e.getMessage());
-			
-		}catch(InputMismatchException e){
-			System.err.println("erreur "+sc.next()+" n'est pas un nombre");
+
+		} catch (InputMismatchException e) {
+			System.err.println("erreur " + sc.next() + " n'est pas un nombre");
 		}
-		
+
 		return true;
 	}
 
 }
-
-
-

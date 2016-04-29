@@ -1,39 +1,48 @@
 package fr.pizzeria.dao;
 
-import fr.pizzeria.exceptions.DeletePizzaException;
-import fr.pizzeria.exceptions.SavePizzaException;
-import fr.pizzeria.exceptions.UpdatePizzaException;
+import java.util.List;
+
+import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
 /**
  * interface de manipulation des Pizzas
+ * 
  * @author Valentin
  *
  */
 public interface IPizzaDao {
 	/**
-	 * Liste des pizzas 
+	 * Liste des pizzas
+	 * 
 	 * @return liste des pizzas
 	 */
-	Pizza[] findAllPizzas();
-	
+	List<Pizza> findAllPizzas();
+
 	/**
 	 * Ajout d'une pizza
-	 * @param newPizza pizza à ajouter
+	 * 
+	 * @param newPizza
+	 *            pizza à ajouter
 	 * 
 	 */
-	void savePizza(Pizza newPizza) throws SavePizzaException;
-	
+	void savePizza(Pizza newPizza) throws DaoException;
+
 	/**
 	 * MAJ d'une pizza
-	 * @param codePizza code de la Pizza à MAJ
-	 * @param updatePizza pizza modifiée
+	 * 
+	 * @param codePizza
+	 *            code de la Pizza à MAJ
+	 * @param updatePizza
+	 *            pizza modifiée
 	 */
-	void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException;
-	
+	void updatePizza(String codePizza, Pizza updatePizza) throws DaoException;
+
 	/**
 	 * Suppression d'une pizza
-	 * @param codePizza code de la Pizza à supprimer
+	 * 
+	 * @param codePizza
+	 *            code de la Pizza à supprimer
 	 */
-	void deletePizza(String codePizza) throws DeletePizzaException;
+	void deletePizza(String codePizza) throws DaoException;
 }

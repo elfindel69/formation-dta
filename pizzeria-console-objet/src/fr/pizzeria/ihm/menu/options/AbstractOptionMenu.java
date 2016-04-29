@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.options;
 
+import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -90,11 +91,9 @@ public abstract class AbstractOptionMenu {
 	 * Affichage de la liste
 	 */
 	void affichageListe() {
-		Pizza[] pizzas = pizzaDao.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		for (Pizza p : pizzas) {
-			if (p != null) {
-				System.out.println(p);
-			}
+			System.out.println(p);
 		}
 	}
 
