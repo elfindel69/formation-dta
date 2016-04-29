@@ -42,6 +42,7 @@ public class Menu {
 			for (Entry<Integer,AbstractOptionMenu> menuEntry: mapMenus.entrySet()) {
 				System.out.println(menuEntry.getKey() + ". " + menuEntry.getValue().getLibelle());
 			}
+			
 			saisie = sc.nextInt();
 			continuer = mapMenus.get(saisie).execute();
 		}

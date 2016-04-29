@@ -1,9 +1,11 @@
 package fr.pizzeria.ihm.menu.options;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -18,6 +20,7 @@ public abstract class AbstractOptionMenu {
 	private static final String MENU_MSG_SAISIE_CODE = "Veuillez saisir le code...";
 	protected static final String MENU_CODE_ABANDON = "99";
 	protected static final String MENU_MSG_CODE_ABANDON = "99 pour abandonner";
+	private static final String MENU_MSG_SAISIE_CATEGORIE = "Veuillez choisir la catégorie...";
 	protected final String libelle;
 	protected Scanner sc;
 	protected Pizza[] tabPizza;
@@ -84,6 +87,13 @@ public abstract class AbstractOptionMenu {
 		newPizza.setNom(sc.next());
 		System.out.println(MENU_MSG_SAISIE_PRIX);
 		newPizza.setPrix(sc.nextDouble());
+		CategoriePizza[] cat = CategoriePizza.values();
+		System.out.println(MENU_MSG_SAISIE_CATEGORIE);
+		for (CategoriePizza el : cat) {
+			System.out.println(el.ordinal() + " -> " + el.getLibelle());
+		}
+		int index = sc.nextInt();
+		newPizza.setCat(cat[index]);
 		return newPizza;
 	}
 
@@ -92,6 +102,7 @@ public abstract class AbstractOptionMenu {
 	 */
 	void affichageListe() {
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		Collections.sort(pizzas, ((o1, o2) -> o1.getCode().compareTo(o2.getCode())));
 		for (Pizza p : pizzas) {
 			System.out.println(p);
 		}

@@ -5,11 +5,12 @@ package fr.pizzeria.model;
  * @author Valentin
  *
  */
-public class Pizza implements Comparable<Pizza>{
+public class Pizza{
 	private int id;
 	private String code;
 	private String nom;
 	private double prix;
+	private CategoriePizza cat;
 	public static int nbPizzas;
 	
 	/**
@@ -18,15 +19,19 @@ public class Pizza implements Comparable<Pizza>{
 	 * @param nom nom de la pizza
 	 * @param prix prix de la pizza
 	 */
-	public Pizza(String code, String nom, double prix) {
+	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
 		
 		this.id = Pizza.nbPizzas;
 		++Pizza.nbPizzas;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+		this.cat = cat;
 	}
 	
+	/**
+	 * affichage
+	 */
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
@@ -36,6 +41,7 @@ public class Pizza implements Comparable<Pizza>{
 		sb.append("(" );
 		sb.append(prix);
 		sb.append("€)");
+		sb.append(" "+cat);
 		return sb.toString();
 	}
 	
@@ -109,15 +115,23 @@ public class Pizza implements Comparable<Pizza>{
 		this.prix = prix;
 	}
 
-	@Override
-	public int compareTo(Pizza pizza) {
-		int result =  this.code.compareTo(pizza.code);
-		if (result == 0){
-			result =  this.nom.compareTo(pizza.nom);
-		}
-		
-		return result;
+	/**
+	 * Getter catégorie
+	 * @return CatégoriePizza categorie de la pizza
+	 */
+	public CategoriePizza getCat() {
+		return cat;
 	}
+
+	/**
+	 * Setter catégorie
+	 * @param cat catégorie à modifier
+	 */
+	public void setCat(CategoriePizza cat) {
+		this.cat = cat;
+	}
+
+	
 	
 	
 	
