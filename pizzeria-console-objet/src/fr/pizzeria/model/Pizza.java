@@ -48,7 +48,15 @@ public class Pizza{
 				try {
 					boolean uppercase = annotation.toUpperCase();
 					Object valeurDuChamp = f.get(this);
-					sb += uppercase?valeurDuChamp.toString().toUpperCase():valeurDuChamp.toString() + " ";
+					if(f.getName().equals("code")){
+						sb += uppercase?valeurDuChamp.toString().toUpperCase():valeurDuChamp.toString() + " -> ";
+					}
+					else if(f.getName().equals("prix")){
+						sb += "("+ valeurDuChamp.toString() + "€) ";
+					}else{
+						sb += uppercase?valeurDuChamp.toString().toUpperCase():valeurDuChamp.toString() + " ";
+					}
+					
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
