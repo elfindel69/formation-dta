@@ -12,6 +12,7 @@ import fr.pizzeria.ihm.menu.options.MAJPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.options.SupprimerPizzaOptionMenu;
+import fr.pizzeria.model.DesactiverOptionMenu;
 
 public class Menu {
 	private static final String MENU_LIBELLE = "Pizzeria Administration";
@@ -40,7 +41,18 @@ public class Menu {
 		while (continuer) {
 			System.out.println("*****" + MENU_LIBELLE + "*****");
 			for (Entry<Integer,AbstractOptionMenu> menuEntry: mapMenus.entrySet()) {
-				System.out.println(menuEntry.getKey() + ". " + menuEntry.getValue().getLibelle());
+				
+				AbstractOptionMenu opt = menuEntry.getValue();
+				DesactiverOptionMenu annotation = opt.getClass().getAnnotation(DesactiverOptionMenu.class);
+				
+				if(annotation == null){
+					System.out.println(menuEntry.getKey() + ". " + menuEntry.getValue().getLibelle());
+				}else{
+					System.out.println(annotation.libelleOption()
+							
+							);
+				}
+				
 			}
 			
 			saisie = sc.nextInt();

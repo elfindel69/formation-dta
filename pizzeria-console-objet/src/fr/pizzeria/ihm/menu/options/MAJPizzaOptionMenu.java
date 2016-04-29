@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
+import fr.pizzeria.model.DesactiverOptionMenu;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -13,6 +14,7 @@ import fr.pizzeria.model.Pizza;
  * @author Valentin
  *
  */
+@DesactiverOptionMenu(libelleOption = "MAJ caché")
 public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 
 	private static final String MAJ_PIZZA_MSG_OK = "Pizza modifiée ^^";
@@ -28,6 +30,7 @@ public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 	 * @param dao
 	 *            - lien vers la DAO
 	 */
+	
 	public MAJPizzaOptionMenu(Scanner sc, IPizzaDao dao) {
 		super(MAJ_PIZZA_LIBELLE_MENU, sc, dao);
 

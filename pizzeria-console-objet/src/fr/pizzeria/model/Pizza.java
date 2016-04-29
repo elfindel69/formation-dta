@@ -1,15 +1,22 @@
 package fr.pizzeria.model;
 
+import java.lang.reflect.Field;
+
 /**
  * Classe Pizza - gère une pizza
  * @author Valentin
  *
  */
 public class Pizza{
+	
 	private int id;
+	@ToString
 	private String code;
+	@ToString
 	private String nom;
+	@ToString
 	private double prix;
+	@ToString(toUpperCase = true)
 	private CategoriePizza cat;
 	public static int nbPizzas;
 	
@@ -34,14 +41,23 @@ public class Pizza{
 	 */
 	@Override
 	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(code);
-		sb.append(" -> ");
-		sb.append(nom);
-		sb.append("(" );
-		sb.append(prix);
-		sb.append("€)");
-		sb.append(" "+cat);
+		String sb = "";
+		for(Field f : this.getClass().getDeclaredFields()){
+			ToString annotation = f.getAnnotation(ToString.class);
+			if(annotation != null){
+				try {
+					boolean uppercase = annotation.toUpperCase();
+					Object valeurDuChamp = f.get(this);
+					sb += uppercase?valeurDuChamp.toString().toUpperCase():valeurDuChamp.toString() + " ";
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		return sb.toString();
 	}
 	
