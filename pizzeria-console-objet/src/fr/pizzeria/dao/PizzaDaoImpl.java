@@ -57,6 +57,8 @@ public class PizzaDaoImpl implements IPizzaDao {
 		if (pizzas.containsKey(newPizza.getCode())) {
 			throw new SavePizzaException("code existant!");
 		}
+		newPizza.setId(Pizza.nbPizzas);
+		++Pizza.nbPizzas;
 		pizzas.put(newPizza.getCode(), newPizza);
 	}
 
@@ -92,7 +94,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 			throw new DeletePizzaException("code non trouvé!");
 		}
 		pizzas.remove(codePizza);
-		--Pizza.nbPizzas;
+		Pizza.nbPizzas--;
 
 	}
 

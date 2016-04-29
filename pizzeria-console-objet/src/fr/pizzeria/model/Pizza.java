@@ -21,7 +21,7 @@ public class Pizza implements Comparable<Pizza>{
 	public Pizza(String code, String nom, double prix) {
 		
 		this.id = Pizza.nbPizzas;
-		Pizza.nbPizzas++;
+		++Pizza.nbPizzas;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
