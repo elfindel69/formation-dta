@@ -25,6 +25,7 @@ public final class CompteEpargne extends Compte {
         super(id, libelle, solde);
         this.tauxInteret = tauxInteret;
         this.plafond = plafond;
+        this.type = TypeCompte.COMPTE_EPARGNE;
         nombreComptesEpargnes++;
     }
 

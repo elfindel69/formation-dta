@@ -10,6 +10,7 @@ public abstract class Compte implements CompteStat {
 	private String libelle;
 	private int identifiant;
 	protected float solde;
+	protected TypeCompte type;
 
 	Compte() { }
 	Compte(int id, String libelle, float solde) {

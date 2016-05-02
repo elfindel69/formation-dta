@@ -16,6 +16,7 @@ public final class CompteCourant extends Compte {
         super(id, libelle, solde);
 
         this.decouvertAutorise = decouvertAutorise;
+        this.type = TypeCompte.COMPTE_COURANT;
         nombreComptesCourants++;
     }
 
