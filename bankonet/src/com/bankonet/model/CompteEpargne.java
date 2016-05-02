@@ -1,5 +1,8 @@
 package com.bankonet.model;
 
+import com.bankonet.exceptions.CompteException;
+import com.bankonet.exceptions.CreditException;
+import com.bankonet.exceptions.DebitException;
 
 /**
  * @author fguibert
@@ -29,19 +32,19 @@ public final class CompteEpargne extends Compte {
      * Le montant ne doit pas etre superieur au plafond de credit autorise
      * en une fois
      */
-    public boolean creditAutorise(float montant) throws BankonetException {
+    public boolean creditAutorise(float montant) throws CompteException {
         if (montant+getSolde() < getPlafond()) {
             return true;
         } else {
-            throw new BankonetException("Le compte epargne "+ this.getIdentifiant() + " a pour plafond de credit : " + this.getPlafond());
+            throw new CreditException("Le compte epargne "+ this.getIdentifiant() + " a pour plafond de credit : " + this.getPlafond());
         }
     }
 
-    public boolean debitAutorise(float montant) throws BankonetException {
+    public boolean debitAutorise(float montant) throws CompteException {
         if (getSolde() - montant >= 0) {
             return true;
         } else {
-            throw new BankonetException("Montant trop eleve : le solde du compte epargne "+ this.getIdentifiant() + " ne peut etre negatif" );
+            throw new DebitException("Montant trop eleve : le solde du compte epargne "+ this.getIdentifiant() + " ne peut etre negatif" );
         }
     }
 

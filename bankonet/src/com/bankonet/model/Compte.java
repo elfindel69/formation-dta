@@ -1,5 +1,7 @@
 package com.bankonet.model;
 
+import com.bankonet.exceptions.CompteException;
+import com.bankonet.exceptions.DebitException;
 
 /**
  * @author fguibert
@@ -26,8 +28,13 @@ public abstract class Compte implements CompteStat {
 		this.setSolde( this.getSolde() + montant);
 	}
 	
-	public void debiter(float montant) {
+	public void debiter(float montant) throws DebitException {
 		this.setSolde( this.getSolde() - montant);
+	}
+	
+	public void effectuerVirement(Compte compte,float montant) throws CompteException{
+		this.debiter(montant);
+		compte.crediter(montant);
 	}
 	
 	
@@ -45,10 +52,9 @@ public abstract class Compte implements CompteStat {
 	
 	
 	
-	
-	public abstract boolean creditAutorise(float montant) throws BankonetException;
+	public abstract boolean creditAutorise(float montant) throws CompteException;
 
-	public abstract boolean debitAutorise(float montant) throws BankonetException;
+	public abstract boolean debitAutorise(float montant) throws CompteException;
 
 	
 	

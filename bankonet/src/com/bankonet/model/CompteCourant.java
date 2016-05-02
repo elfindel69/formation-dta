@@ -1,5 +1,8 @@
 package com.bankonet.model;
 
+import com.bankonet.exceptions.CompteException;
+import com.bankonet.exceptions.DebitException;
+
 /**
  * @author fguibert
  */
@@ -19,17 +22,15 @@ public final class CompteCourant extends Compte {
     /**
      * Le credit d'un compte courant est toujours autorise
      */
-    public boolean creditAutorise(float montant) throws BankonetException {
-    	//super.crediter(montant);
+    public boolean creditAutorise(float montant) throws CompteException {
         return true;
     }
 
-    public boolean debitAutorise(float montant) throws BankonetException {
+    public boolean debitAutorise(float montant) throws CompteException {
         if (this.getSolde() + this.getDecouvertAutorise() >= montant) {
-        	//debiter(montant);
             return true;
         } else {
-            throw new BankonetException("Montant trop eleve : le solde du compte courant "+ this.getIdentifiant() + " ne peut descendre en dessous du decouvert autorise" );
+            throw new DebitException("Montant trop eleve : le solde du compte courant "+ this.getIdentifiant() + " ne peut descendre en dessous du decouvert autorise" );
         }
     }
 
@@ -38,12 +39,12 @@ public final class CompteCourant extends Compte {
     
     
     @Override
-    public void debiter(float montant) {
+    public void debiter(float montant) throws DebitException {
     	try {
 			if (debitAutorise(montant)) {
 				super.debiter(montant);
 			}
-		} catch (BankonetException e) {
+		} catch (CompteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -55,7 +56,7 @@ public final class CompteCourant extends Compte {
 			if (creditAutorise(montant)) {
 				super.crediter(montant);
 			}
-		} catch (BankonetException e) {
+		} catch (CompteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

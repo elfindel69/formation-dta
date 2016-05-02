@@ -1,9 +1,12 @@
 package com.bankonet.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import com.bankonet.exceptions.CompteNonTrouveException;
 
 /**
  * Modelise un client de bankonet.
@@ -22,9 +25,8 @@ public class Client {
 	private int identifiant;
 	private String nom;
 	private String prenom;
-	private List<?> compteCourantList;
-	private List<?> compteEpargneList;
 	
+	private Collection<Compte> comptes;
 	/**
 	 * @param nom
 	 * @param prenom
@@ -37,14 +39,12 @@ public class Client {
 		this.identifiant = identifiant;
 	}
 	
-	public Client(int identifiant, String nom, String prenom, List<?> ccList, List<?> ceList) {
+	public Client(int identifiant, String nom, String prenom, Collection<Compte> comptes) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.identifiant = identifiant;
-		this.compteCourantList = ccList;
-		this.compteEpargneList = ceList;
-		
+		this.comptes = comptes;
 	}
 	
 	public String toString() {
@@ -55,7 +55,34 @@ public class Client {
 		
 	}
 	
+	public void creerCompte(Compte compte){
+		comptes.add(compte);
+	}
 	
+	public void supprimerCompte(Compte compte){
+		comptes.remove(compte);
+	}
+	
+	public void supprimerCompte(String numero) throws CompteNonTrouveException{
+		Compte compte = retournerCompte(numero);
+		comptes.remove(compte);
+	}
+	
+	public Compte retournerCompte(String numero) throws CompteNonTrouveException{
+		Compte compte = null;
+		boolean trouve = false;
+		for (Compte c: comptes){
+			if(c.getIdentifiant() == Integer.parseInt(numero)){
+				compte = c;
+				trouve = true;
+				break;
+			}
+		}
+		if(!trouve){
+			throw new CompteNonTrouveException("Erreur ce compte n'existe pas");
+		}
+		return compte;
+	}
 	public float calculerAvoirGLobal()
 	{
 		
@@ -68,53 +95,17 @@ public class Client {
 		return soldeTotal;
 		
 	}
-	/**
-	 * @param compteCourantList The compteCourantList to set.
-	 */
-	public void setCompteCourantList(List<?> compteCourantList) {
-		this.compteCourantList = compteCourantList;
-	}
-	/**
-	 * @param compteEpargneList The compteEpargneList to set.
-	 */
-	public void setCompteEpargneList(List<?> compteEpargneList) {
-		this.compteEpargneList = compteEpargneList;
-	}
 	
-
-
-
-
-
-	/**
-	 * Retourne la liste des comptes courants du client (de taille 0 si pas de comptes courants).
-	 * 
-	 *
-	 * @return List
-	 */
-	public List<?> getComptesCourants() {
-		return Collections.unmodifiableList(compteCourantList);
-	}
-	/**
-	 * Retourne la liste des comptes d'epargne du client sous forme d'une ArrayList (de taille 0 si pas de compte epargne).
-	 * 
-	 * @return List
-	 */
-	public List<?> getComptesEpargne() {
-		return Collections.unmodifiableList(compteEpargneList);
-	}
-	
-	public List<Object> getComptes() {
-	    ArrayList<Object> compteList = new ArrayList<>();
-	    compteList.addAll(compteCourantList);
-	    compteList.addAll(compteEpargneList);
+	public List<Compte> getComptes() {
+	    ArrayList<Compte> compteList = new ArrayList<>();
+	    compteList.addAll(comptes);
 	    return Collections.unmodifiableList(compteList);
 
 	}
 
 	public Compte getCompte(int compteId) {
-	    List<Object> compteList = this.getComptes();
-	    Iterator<Object> compteIte = compteList.iterator();
+	    List<Compte> compteList = this.getComptes();
+	    Iterator<Compte> compteIte = compteList.iterator();
 	    while (compteIte.hasNext()) {
             Compte compte = (Compte) compteIte.next();
             if (compteId == compte.getIdentifiant())
@@ -142,4 +133,5 @@ public class Client {
 	public String getPrenom() {
 		return prenom;
 	}
+
 }
