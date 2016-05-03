@@ -6,8 +6,14 @@ public class CountFolderWindows implements ICountFolders {
 
 	@Override
 	public int countFolders(String path) {
-		System.out.println("Je suis le Count Linux.");
-        return 0;
+		int cpt=0;
+		for(char c : path.toCharArray()){
+			if (c == '\\'){
+				cpt++;
+			}
+					
+		}
+        return cpt;
 	}
 
 }
