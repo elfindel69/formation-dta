@@ -1,4 +1,6 @@
-package facto;
+package facto.windows;
+
+import facto.interfaces.IFileNameParser;
 
 public class ParseFileNameWindows implements IFileNameParser {
 

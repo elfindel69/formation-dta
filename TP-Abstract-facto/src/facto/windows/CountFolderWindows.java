@@ -1,4 +1,6 @@
-package facto;
+package facto.windows;
+
+import facto.interfaces.ICountFolders;
 
 public class CountFolderWindows implements ICountFolders {
 

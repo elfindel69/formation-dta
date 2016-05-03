@@ -1,4 +1,6 @@
-package facto;
+package facto.linux;
+
+import facto.interfaces.IFileNameParser;
 
 public class ParseFileNameLinux implements IFileNameParser {
 

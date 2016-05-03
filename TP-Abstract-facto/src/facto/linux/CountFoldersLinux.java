@@ -1,4 +1,6 @@
-package facto;
+package facto.linux;
+
+import facto.interfaces.ICountFolders;
 
 public class CountFoldersLinux implements ICountFolders {
 

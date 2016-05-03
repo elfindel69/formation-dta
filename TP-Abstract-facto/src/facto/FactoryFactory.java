@@ -1,14 +1,18 @@
 package facto;
 
+import facto.interfaces.IFactory;
+import facto.linux.LinuxFactory;
+import facto.windows.WindowsFactory;
+
 public class FactoryFactory {
-	public IFactory buildFactory(int factorytype)
+	public static IFactory buildFactory(TypesOS os)
     {
-        switch(factorytype)
+        switch(os)
         {        
-            case(0):
+            case WINDOWS:
                 return new WindowsFactory();
             
-            case(1):
+            case LINUX:
                 return new LinuxFactory();
             
             default:
