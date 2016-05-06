@@ -1,12 +1,12 @@
 package fr.pizzeria.ihm.menu;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
+import fr.pizzeria.ihm.menu.options.GrouperPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.MAJPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.NouvellePizzaOptionMenu;
@@ -31,6 +31,7 @@ public class Menu {
 		mapMenus.put(2, new NouvellePizzaOptionMenu(scanner, pizzaDao));
 		mapMenus.put(3, new MAJPizzaOptionMenu(scanner, pizzaDao));
 		mapMenus.put(4, new SupprimerPizzaOptionMenu(scanner, pizzaDao));
+		mapMenus.put(5, new GrouperPizzaOptionMenu(pizzaDao));
 		mapMenus.put(99, new QuitterOptionMenu());
 	}
 
@@ -40,21 +41,16 @@ public class Menu {
 		int saisie;
 		while (continuer) {
 			System.out.println("*****" + MENU_LIBELLE + "*****");
-			for (Entry<Integer,AbstractOptionMenu> menuEntry: mapMenus.entrySet()) {
-				
-				AbstractOptionMenu opt = menuEntry.getValue();
-				DesactiverOptionMenu annotation = opt.getClass().getAnnotation(DesactiverOptionMenu.class);
-				
-				if(annotation == null){
-					System.out.println(menuEntry.getKey() + ". " + menuEntry.getValue().getLibelle());
-				}else{
-					System.out.println(annotation.libelleOption()
-							
-							);
+			mapMenus.forEach((key,value) -> {
+				DesactiverOptionMenu annotation = value.getClass().getAnnotation(DesactiverOptionMenu.class);
+
+				if (annotation == null) {
+					System.out.println(key + ". " + value.getLibelle());
+				} else {
+					System.out.println(annotation.libelleOption());
 				}
-				
-			}
-			
+			});
+
 			saisie = sc.nextInt();
 			continuer = mapMenus.get(saisie).execute();
 		}

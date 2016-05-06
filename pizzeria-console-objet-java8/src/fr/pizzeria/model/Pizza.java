@@ -1,14 +1,16 @@
 package fr.pizzeria.model;
 
-import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Classe Pizza - gère une pizza
+ * 
  * @author Valentin
  *
  */
-public class Pizza{
-	
+public class Pizza {
+
 	private int id;
 	@ToString
 	private String code;
@@ -19,15 +21,19 @@ public class Pizza{
 	@ToString(toUpperCase = true)
 	private CategoriePizza cat;
 	public static int nbPizzas;
-	
+
 	/**
-	 *  Constructeur crée une Pizza
-	 * @param code code ('AAA') de la pizza
-	 * @param nom nom de la pizza
-	 * @param prix prix de la pizza
+	 * Constructeur crée une Pizza
+	 * 
+	 * @param code
+	 *            code ('AAA') de la pizza
+	 * @param nom
+	 *            nom de la pizza
+	 * @param prix
+	 *            prix de la pizza
 	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
-		
+
 		this.id = Pizza.nbPizzas;
 		++Pizza.nbPizzas;
 		this.code = code;
@@ -35,40 +41,33 @@ public class Pizza{
 		this.prix = prix;
 		this.cat = cat;
 	}
-	
+
 	/**
 	 * affichage
 	 */
 	@Override
-	public String toString(){
-		String sb = "";
-		for(Field f : this.getClass().getDeclaredFields()){
-			ToString annotation = f.getAnnotation(ToString.class);
-			if(annotation != null){
-				try {
-					boolean uppercase = annotation.toUpperCase();
-					Object valeurDuChamp = f.get(this);
-					if(f.getName().equals("code")){
-						sb += uppercase?valeurDuChamp.toString().toUpperCase():valeurDuChamp.toString() + " -> ";
+	public String toString() {
+
+		return Arrays.asList(this.getClass().getDeclaredFields()).stream()
+				.filter(field -> field.getAnnotation(ToString.class) != null).map(field -> {
+					String sb = null;
+					try {
+						sb = field.getAnnotation(ToString.class).toUpperCase() ? field.get(this).toString().toUpperCase() : field.get(this).toString();
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						sb = "";
+						e.printStackTrace();
 					}
-					else if(f.getName().equals("prix")){
-						sb += "("+ valeurDuChamp.toString() + "€) ";
-					}else{
-						sb += uppercase?valeurDuChamp.toString().toUpperCase():valeurDuChamp.toString() + " ";
+
+					if (field.getName().equals("code")) {
+						sb = String.format("%s ->", sb);
+					} else if (field.getName().equals("prix")) {
+						sb = String.format("(%s€)", sb);
 					}
-					
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return sb.toString();
+					return sb;
+				}).collect(Collectors.joining(" "));
+
 	}
-	
+
 	/**
 	 * Constructeur par défaut
 	 */
@@ -77,63 +76,75 @@ public class Pizza{
 
 	/**
 	 * Getter ID
+	 * 
 	 * @return int ID de le pizza
 	 */
 	public int getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Setter ID
-	 * @param id ID à modifier
+	 * 
+	 * @param id
+	 *            ID à modifier
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * Getter code
+	 * 
 	 * @return String code de le pizza
 	 */
 	public String getCode() {
 		return code;
 	}
-	
+
 	/**
 	 * Setter code
-	 * @param code code à modifier
+	 * 
+	 * @param code
+	 *            code à modifier
 	 */
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
 	/**
 	 * Getter nom
+	 * 
 	 * @return String nom de le pizza
 	 */
 	public String getNom() {
 		return nom;
 	}
-	
+
 	/**
 	 * Setter nom
-	 * @param nom nom à modifier
+	 * 
+	 * @param nom
+	 *            nom à modifier
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	/**
 	 * Getter prix
+	 * 
 	 * @return double prix de le pizza
 	 */
 	public double getPrix() {
 		return prix;
 	}
-	
+
 	/**
 	 * Setter prix
-	 * @param prix prix à modifier
+	 * 
+	 * @param prix
+	 *            prix à modifier
 	 */
 	public void setPrix(double prix) {
 		this.prix = prix;
@@ -141,6 +152,7 @@ public class Pizza{
 
 	/**
 	 * Getter catégorie
+	 * 
 	 * @return CatégoriePizza categorie de la pizza
 	 */
 	public CategoriePizza getCat() {
@@ -149,15 +161,12 @@ public class Pizza{
 
 	/**
 	 * Setter catégorie
-	 * @param cat catégorie à modifier
+	 * 
+	 * @param cat
+	 *            catégorie à modifier
 	 */
 	public void setCat(CategoriePizza cat) {
 		this.cat = cat;
 	}
 
-	
-	
-	
-	
-	
 }

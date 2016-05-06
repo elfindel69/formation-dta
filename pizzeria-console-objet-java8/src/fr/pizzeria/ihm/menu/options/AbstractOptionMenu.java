@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm.menu.options;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -89,9 +89,7 @@ public abstract class AbstractOptionMenu {
 		newPizza.setPrix(sc.nextDouble());
 		CategoriePizza[] cat = CategoriePizza.values();
 		System.out.println(MENU_MSG_SAISIE_CATEGORIE);
-		for (CategoriePizza el : cat) {
-			System.out.println(el.ordinal() + " -> " + el.getLibelle());
-		}
+		Arrays.stream(cat).forEach(el -> System.out.println(el.ordinal() + " -> " + el.getLibelle()));
 		int index = sc.nextInt();
 		newPizza.setCat(cat[index]);
 		return newPizza;
@@ -102,10 +100,7 @@ public abstract class AbstractOptionMenu {
 	 */
 	void affichageListe() {
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		Collections.sort(pizzas, ((o1, o2) -> o1.getCode().compareTo(o2.getCode())));
-		for (Pizza p : pizzas) {
-			System.out.println(p);
-		}
+		pizzas.stream().sorted(((o1, o2) -> o1.getCode().compareTo(o2.getCode()))).forEach(System.out::println);
 	}
 
 	/**
