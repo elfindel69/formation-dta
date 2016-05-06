@@ -68,8 +68,8 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	}
 
 	private String pizzaToString(Pizza newPizza) {
-		
-		String line = newPizza.getNom()+";"+newPizza.getPrix()+";"+newPizza.getCat();
+		String cat=newPizza.getCat().toString().toUpperCase().replaceAll(" ", "_");
+		String line = newPizza.getNom()+";"+newPizza.getPrix()+";"+cat;
 		return line;
 	}
 
