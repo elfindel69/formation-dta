@@ -43,7 +43,7 @@ public class Menu {
 		int saisie;
 		while (continuer) {
 			System.out.println("*****" + MENU_LIBELLE + "*****");
-			mapMenus.forEach((key,value) -> {
+			mapMenus.forEach((key, value) -> {
 				DesactiverOptionMenu annotation = value.getClass().getAnnotation(DesactiverOptionMenu.class);
 
 				if (annotation == null) {

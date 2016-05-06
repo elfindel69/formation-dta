@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -100,7 +101,13 @@ public abstract class AbstractOptionMenu {
 	 * Affichage de la liste
 	 */
 	void affichageListe() {
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		List<Pizza> pizzas = null;
+		try {
+			pizzas = pizzaDao.findAllPizzas();
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		pizzas.stream().sorted(Comparator.comparing(Pizza::getCode)).forEach(System.out::println);
 	}
 

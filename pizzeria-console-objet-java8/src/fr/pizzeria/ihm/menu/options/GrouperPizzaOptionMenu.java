@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
 public class GrouperPizzaOptionMenu extends AbstractOptionMenu {
@@ -16,10 +17,15 @@ public class GrouperPizzaOptionMenu extends AbstractOptionMenu {
 
 	@Override
 	public boolean execute() {
-		pizzaDao.findAllPizzas().stream().collect(Collectors.groupingBy(Pizza::getCat)).forEach((categ, liste) -> {
-			System.out.println(categ);
-			liste.stream().sorted(Comparator.comparing(Pizza::getCode)).forEach(System.out::println);
-		});
+		try {
+			pizzaDao.findAllPizzas().stream().collect(Collectors.groupingBy(Pizza::getCat)).forEach((categ, liste) -> {
+				System.out.println(categ);
+				liste.stream().sorted(Comparator.comparing(Pizza::getCode)).forEach(System.out::println);
+			});
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return true;
 	}

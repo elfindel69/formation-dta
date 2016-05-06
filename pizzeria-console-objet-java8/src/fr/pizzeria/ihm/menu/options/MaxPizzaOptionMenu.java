@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
 public class MaxPizzaOptionMenu extends AbstractOptionMenu {
@@ -18,7 +19,13 @@ public class MaxPizzaOptionMenu extends AbstractOptionMenu {
 
 	@Override
 	public boolean execute() {
-		Optional<Pizza> collect = pizzaDao.findAllPizzas().stream().collect(Collectors.maxBy(Comparator.comparing(Pizza::getPrix)));
+		Optional<Pizza> collect = null;
+		try {
+			collect = pizzaDao.findAllPizzas().stream().collect(Collectors.maxBy(Comparator.comparing(Pizza::getPrix)));
+		} catch (DaoException e) {
+
+			e.printStackTrace();
+		}
 		if(collect.isPresent()){
 			System.out.println(collect.get());
 			

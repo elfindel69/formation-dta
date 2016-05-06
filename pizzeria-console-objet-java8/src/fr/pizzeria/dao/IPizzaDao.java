@@ -16,8 +16,9 @@ public interface IPizzaDao {
 	 * Liste des pizzas
 	 * 
 	 * @return liste des pizzas
+	 * @throws DaoException 
 	 */
-	List<Pizza> findAllPizzas();
+	List<Pizza> findAllPizzas() throws DaoException;
 
 	/**
 	 * Ajout d'une pizza

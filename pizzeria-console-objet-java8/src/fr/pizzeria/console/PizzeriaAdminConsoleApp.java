@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.PizzaDaoImplFiles;
 
 /**
  * Classe principale - administration de la pizzeria
@@ -24,7 +25,7 @@ public class PizzeriaAdminConsoleApp {
 		Scanner sc = new Scanner(System.in);
 		// liste des pizzas
 
-		IPizzaDao dao = new PizzaDaoImpl();
+		IPizzaDao dao = new PizzaDaoImplFiles();
 		fr.pizzeria.ihm.menu.Menu menu = new fr.pizzeria.ihm.menu.Menu(sc, dao);
 		menu.afficher();
 		sc.close();
