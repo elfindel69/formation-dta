@@ -13,10 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import fr.pizzeria.exceptions.DaoException;
+import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoFilesImpl implements IPizzaDao {
+	private static final String DATA = "data";
+
 	public PizzaDaoFilesImpl() {
 
 	}
@@ -25,7 +28,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	public List<Pizza> findAllPizzas() throws DaoException {
 		List<Pizza> pizzas = new ArrayList<>();
 		try {
-			pizzas = Files.list(Paths.get("data")).map(path -> {
+			pizzas = Files.list(Paths.get(DATA)).map(path -> {
 				Pizza p = new Pizza();
 
 				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
@@ -55,12 +58,11 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 		
 		
 			try {
-				Path fichier = Paths.get("data/"+newPizza.getCode()+".txt");
+				Path fichier = Paths.get(DATA+"/"+newPizza.getCode()+".txt");
 				
 				Files.write(fichier, Arrays.asList(pizzaToString(newPizza)), StandardOpenOption.CREATE_NEW);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new DaoException(e);
 			}
 			
 		
@@ -75,13 +77,33 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		// TODO Auto-generated method stub
+		Path fichier = Paths.get(DATA+"/"+codePizza+".txt");
+		if (!Files.exists(fichier)) {
+			throw new UpdatePizzaException("code non trouvé!");
+		}
+		try {
+			
+			
+			Files.write(fichier, Arrays.asList(pizzaToString(updatePizza)), StandardOpenOption.WRITE);
+		} catch (IOException e) {
+			throw new DaoException(e);
+		}
 
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
-		// TODO Auto-generated method stub
+		Path fichier = Paths.get(DATA+"/"+codePizza+".txt");
+		if (!Files.exists(fichier)) {
+			throw new UpdatePizzaException("code non trouvé!");
+		}
+		try {
+			
+			
+			Files.delete(fichier);
+		} catch (IOException e) {
+			throw new DaoException(e);
+		}
 
 	}
 }
