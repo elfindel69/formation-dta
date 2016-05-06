@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm.menu.options;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -100,7 +101,7 @@ public abstract class AbstractOptionMenu {
 	 */
 	void affichageListe() {
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		pizzas.stream().sorted(((o1, o2) -> o1.getCode().compareTo(o2.getCode()))).forEach(System.out::println);
+		pizzas.stream().sorted(Comparator.comparing(Pizza::getCode)).forEach(System.out::println);
 	}
 
 	/**

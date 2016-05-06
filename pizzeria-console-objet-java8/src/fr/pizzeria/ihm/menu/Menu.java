@@ -9,6 +9,7 @@ import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.options.GrouperPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.MAJPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.options.MaxPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.options.SupprimerPizzaOptionMenu;
@@ -32,6 +33,7 @@ public class Menu {
 		mapMenus.put(3, new MAJPizzaOptionMenu(scanner, pizzaDao));
 		mapMenus.put(4, new SupprimerPizzaOptionMenu(scanner, pizzaDao));
 		mapMenus.put(5, new GrouperPizzaOptionMenu(pizzaDao));
+		mapMenus.put(6, new MaxPizzaOptionMenu(pizzaDao));
 		mapMenus.put(99, new QuitterOptionMenu());
 	}
 
