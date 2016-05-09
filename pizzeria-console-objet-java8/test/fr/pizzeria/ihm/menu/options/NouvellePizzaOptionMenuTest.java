@@ -3,9 +3,13 @@ package fr.pizzeria.ihm.menu.options;
 import static org.junit.Assert.*;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -43,8 +47,8 @@ public class NouvellePizzaOptionMenuTest {
 	}
 
 	@Test
-	public void testExecute() throws DaoException {
-		systemInMock.provideLines("NEW","aa","12","0");
+	public void testExecute() throws DaoException, IOException {
+		systemInMock.provideLines("NEW","aa","12,5","0");
 		boolean next = m.execute();
 		assertTrue(next);
 		List<Pizza> list =  pizzaDao.findAllPizzas();
@@ -53,10 +57,10 @@ public class NouvellePizzaOptionMenuTest {
 			Pizza pizzaTrouve = opt.get();
 			assertEquals("NEW",pizzaTrouve.getCode());
 			assertEquals("aa",pizzaTrouve.getNom());
-			assertTrue(12 == pizzaTrouve.getPrix());
+			assertTrue(12.5 == pizzaTrouve.getPrix());
 			assertEquals(CategoriePizza.VIANDE,pizzaTrouve.getCat());
-			String outAttendu = "Ajout d'une nouvelle pizza\r\nVeuillez saisir le code...\r\nVeuillez saisir le nom (sans espace)...\r\nVeuillez saisir le prix...\r\nVeuillez choisir la catégorie...\r\n";
-			outAttendu +="0 -> Viande\r\n1 -> Poisson\r\n2 -> Sans viande\r\nPizza ajoutée ^^\r\n";
+			String outAttendu = Files.lines(Paths.get("test/fr/pizzeria/ihm/menu/options/resultatAjouterPizzaMenu.txt")).collect(Collectors.joining("\r\n"));
+			outAttendu+="\r\n";
 			assertEquals(outAttendu,systemOutRule.getLog());
 		}
 	}
