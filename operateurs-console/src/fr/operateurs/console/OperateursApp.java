@@ -12,11 +12,11 @@ public class OperateursApp {
 		double nb1 = sc.nextDouble();
 		System.out.println("Veuillez saisir le second nombre");
 		double nb2 = sc.nextDouble();
-		System.out.println(nb1+" + "+nb2+" = "+(nb1+nb2));
-		System.out.println(nb1+" - "+nb2+" = "+(nb1-nb2));
-		System.out.println(nb1+" * "+nb2+" = "+(nb1*nb2));
-		System.out.println(nb1+" / "+nb2+" = "+(nb1/nb2));
-		System.out.println(nb1+" % "+nb2+" = "+(nb1%nb2));
+		System.out.println(nb1 + " + " + nb2 + " = " + (nb1 + nb2));
+		System.out.println(nb1 + " - " + nb2 + " = " + (nb1 - nb2));
+		System.out.println(nb1 + " * " + nb2 + " = " + (nb1 * nb2));
+		System.out.println(nb1 + " / " + nb2 + " = " + (nb1 / nb2));
+		System.out.println(nb1 + " % " + nb2 + " = " + (nb1 % nb2));
 		sc.close();
 	}
 
