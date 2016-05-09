@@ -61,7 +61,7 @@ public class Pizza {
 					if (field.getName().equals("code")) {
 						sb = String.format("%s ->", sb);
 					} else if (field.getName().equals("prix")) {
-						sb = String.format("(%s�)", sb);
+						sb = String.format("(%s€)", sb);
 					}
 					return sb;
 				}).collect(Collectors.joining(" "));
