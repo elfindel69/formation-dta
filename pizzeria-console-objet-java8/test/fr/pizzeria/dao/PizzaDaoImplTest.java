@@ -32,7 +32,7 @@ public class PizzaDaoImplTest {
 		assertList.add(new Pizza("IND", "L'indienne", 14.00,CategoriePizza.VIANDE));
 		assertList.add(new Pizza("SAM", "La saumonetta", 14.00,CategoriePizza.POISSON));
 		assertList.sort(Comparator.comparing(Pizza::getCode));
-		Assert.assertArrayEquals(assertList.<Pizza>toArray(),list.<Pizza>toArray());
+		Assert.assertArrayEquals(assertList.toArray(),list.toArray());
 	}
 	
 	@Test
