@@ -18,7 +18,7 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoFilesImpl implements IPizzaDao {
-	private static final String DATA = "data";
+	private static final String DATA = "src/main/ressources";
 
 	public PizzaDaoFilesImpl() {
 

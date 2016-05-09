@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,8 +58,8 @@ public class NouvellePizzaOptionMenuTest {
 			assertEquals("aa",pizzaTrouve.getNom());
 			assertTrue(12.5 == pizzaTrouve.getPrix());
 			assertEquals(CategoriePizza.VIANDE,pizzaTrouve.getCat());
-			String outAttendu = Files.lines(Paths.get("test/fr/pizzeria/ihm/menu/options/resultatAjouterPizzaMenu.txt")).collect(Collectors.joining("\r\n"));
-			outAttendu+="\r\n";
+			String outAttendu = Files.lines(Paths.get("test/ressources/resultatAjouterPizzaMenu.txt")).collect(Collectors.joining(System.lineSeparator()));
+			outAttendu+=System.lineSeparator();
 			assertEquals(outAttendu,systemOutRule.getLog());
 		}
 	}
