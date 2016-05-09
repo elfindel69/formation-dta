@@ -25,7 +25,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Constructeur initialise le tableau
 	 */
 	public PizzaDaoImpl() {
-		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", 12.50,CategoriePizza.VIANDE));
+		pizzas.put("PEP", new Pizza("PEP", "PÃ©pÃ©roni", 12.50,CategoriePizza.VIANDE));
 		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00,CategoriePizza.SANS_VIANDE));
 		pizzas.put("REI", new Pizza("REI", "Reine", 11.50,CategoriePizza.VIANDE));
 		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", 12.00,CategoriePizza.SANS_VIANDE));
@@ -51,7 +51,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Ajout d'une pizza
 	 * 
 	 * @param newPizza
-	 *            pizza à ajouter
+	 *            pizza Ã  ajouter
 	 * @throws SavePizzaException
 	 */
 	@Override
@@ -68,16 +68,16 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * MAJ d'une pizza
 	 * 
 	 * @param codePizza
-	 *            code de la Pizza à MAJ
+	 *            code de la Pizza Ã  MAJ
 	 * @param updatePizza
-	 *            pizza modifiée
+	 *            pizza modifiÃ©e
 	 * @return boolean flag de modification
 	 * @throws UpdatePizzaException
 	 */
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
 		if (!pizzas.containsKey(codePizza)) {
-			throw new UpdatePizzaException("code non trouvé!");
+			throw new UpdatePizzaException("code non trouvÃ©!");
 		}
 		pizzas.put(codePizza, updatePizza);
 
@@ -87,13 +87,13 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Suppression d'une pizza
 	 * 
 	 * @param codePizza
-	 *            code de la Pizza à supprimer
+	 *            code de la Pizza ï¿½ supprimer
 	 * @throws DeletePizzaException
 	 */
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
 		if (!pizzas.containsKey(codePizza)) {
-			throw new DeletePizzaException("code non trouvé!");
+			throw new DeletePizzaException("code non trouvÃ©!");
 		}
 		pizzas.remove(codePizza);
 		Pizza.nbPizzas--;

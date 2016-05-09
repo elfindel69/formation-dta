@@ -22,27 +22,27 @@ public abstract class AbstractOptionMenu {
 	private static final String MENU_MSG_SAISIE_CODE = "Veuillez saisir le code...";
 	protected static final String MENU_CODE_ABANDON = "99";
 	protected static final String MENU_MSG_CODE_ABANDON = "99 pour abandonner";
-	private static final String MENU_MSG_SAISIE_CATEGORIE = "Veuillez choisir la catégorie...";
+	private static final String MENU_MSG_SAISIE_CATEGORIE = "Veuillez choisir la catÃ©gorie...";
 	protected final String libelle;
 	protected Scanner sc;
 	protected Pizza[] tabPizza;
 	protected IPizzaDao pizzaDao;
 
 	/**
-	 * Constructeur par défault
+	 * Constructeur par dÃ©fault
 	 * 
 	 * @param libelle
-	 *            - libellé du menu
+	 *            - libellÃ© du menu
 	 */
 	public AbstractOptionMenu(String libelle) {
 		this.libelle = libelle;
 	}
 
 	/**
-	 * Constructeur par défault
+	 * Constructeur par dÃ©fault
 	 * 
 	 * @param libelle
-	 *            - libellé du menu
+	 *            - libellÃ© du menu
 	 * @param pizzaDao
 	 *            - lien vers la DAO
 	 */
@@ -55,7 +55,7 @@ public abstract class AbstractOptionMenu {
 	 * Constructeur complet
 	 * 
 	 * @param libelle
-	 *            - libellé du menu
+	 *            - libellÃ© du menu
 	 * @param scanner
 	 *            - scanner du menu
 	 * @param pizzaDao
@@ -79,7 +79,7 @@ public abstract class AbstractOptionMenu {
 	 * 
 	 * @param sc
 	 *            - Scanner de saisie
-	 * @return Pizza - pizza créée
+	 * @return Pizza - pizza crÃ©Ã©e
 	 */
 	Pizza saisiePizza(Scanner sc) {
 		Pizza newPizza = new Pizza();
@@ -112,9 +112,9 @@ public abstract class AbstractOptionMenu {
 	}
 
 	/**
-	 * Getter libellé
+	 * Getter libellÃ©
 	 * 
-	 * @return String libellé
+	 * @return String libellÃ©
 	 */
 	public String getLibelle() {
 		return this.libelle;

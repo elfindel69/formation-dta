@@ -8,14 +8,14 @@ import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
 /**
- * Menu de création d'une Pizza
+ * Menu de crï¿½ation d'une Pizza
  * 
  * @author Valentin
  *
  */
 public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String AJOUTER_PIZZA_MSG_OK = "Pizza ajoutée ^^";
+	private static final String AJOUTER_PIZZA_MSG_OK = "Pizza ajoutÃ©e ^^";
 	private static final String AJOUTER_MSG = "Ajout d'une nouvelle pizza";
 	private static final String AJOUTER_LIBELLE_MENU = "Ajouter une nouvelle pizza";
 

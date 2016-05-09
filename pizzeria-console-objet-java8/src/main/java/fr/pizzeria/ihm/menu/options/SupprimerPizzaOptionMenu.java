@@ -13,7 +13,7 @@ import fr.pizzeria.exceptions.DaoException;
  */
 public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String SUPPR_PIZZA_MSG_OK = "Pizza Supprimée ^^";
+	private static final String SUPPR_PIZZA_MSG_OK = "Pizza SupprimÃ©e ^^";
 	private static final String SUPPRIMER_PIZZA_LIBELLE_MENU = "Supprimer une pizza";
 
 	/**
@@ -38,7 +38,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 		
 		System.out.println("Supprimer une pizza");
 		affichageListe();
-		System.out.println("Veuillez choisir la pizza à supprimer (code)");
+		System.out.println("Veuillez choisir la pizza Ã  supprimer (code)");
 		System.out.println(MENU_MSG_CODE_ABANDON);
 		String codePizza = sc.next();
 		if (!codePizza.equals(MENU_CODE_ABANDON)) {

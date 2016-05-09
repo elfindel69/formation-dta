@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * Classe Pizza - gère une pizza
+ * Classe Pizza - gÃ¨re une pizza
  * 
  * @author Valentin
  *
@@ -23,7 +23,7 @@ public class Pizza {
 	public static int nbPizzas;
 
 	/**
-	 * Constructeur crée une Pizza
+	 * Constructeur crÃ©e une Pizza
 	 * 
 	 * @param code
 	 *            code ('AAA') de la pizza
@@ -61,7 +61,7 @@ public class Pizza {
 					if (field.getName().equals("code")) {
 						sb = String.format("%s ->", sb);
 					} else if (field.getName().equals("prix")) {
-						sb = String.format("(%s€)", sb);
+						sb = String.format("(%sï¿½)", sb);
 					}
 					return sb;
 				}).collect(Collectors.joining(" "));
@@ -110,7 +110,7 @@ public class Pizza {
 	}
 
 	/**
-	 * Constructeur par défaut
+	 * Constructeur par dï¿½faut
 	 */
 	public Pizza() {
 	}
@@ -128,7 +128,7 @@ public class Pizza {
 	 * Setter ID
 	 * 
 	 * @param id
-	 *            ID à modifier
+	 *            ID Ã  modifier
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -147,7 +147,7 @@ public class Pizza {
 	 * Setter code
 	 * 
 	 * @param code
-	 *            code à modifier
+	 *            code Ã  modifier
 	 */
 	public void setCode(String code) {
 		this.code = code;
@@ -166,7 +166,7 @@ public class Pizza {
 	 * Setter nom
 	 * 
 	 * @param nom
-	 *            nom à modifier
+	 *            nom Ã  modifier
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -185,26 +185,26 @@ public class Pizza {
 	 * Setter prix
 	 * 
 	 * @param prix
-	 *            prix à modifier
+	 *            prix Ã  modifier
 	 */
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 
 	/**
-	 * Getter catégorie
+	 * Getter catÃ©gorie
 	 * 
-	 * @return CatégoriePizza categorie de la pizza
+	 * @return CatÃ©goriePizza categorie de la pizza
 	 */
 	public CategoriePizza getCat() {
 		return cat;
 	}
 
 	/**
-	 * Setter catégorie
+	 * Setter catÃ©gorie
 	 * 
 	 * @param cat
-	 *            catégorie à modifier
+	 *            catÃ©gorie Ã  modifier
 	 */
 	public void setCat(CategoriePizza cat) {
 		this.cat = cat;

@@ -79,7 +79,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
 		Path fichier = Paths.get(DATA+"/"+codePizza+".txt");
 		if (!Files.exists(fichier)) {
-			throw new UpdatePizzaException("code non trouvé!");
+			throw new UpdatePizzaException("code non trouvÃ©!");
 		}
 		try {
 			
@@ -95,7 +95,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	public void deletePizza(String codePizza) throws DaoException {
 		Path fichier = Paths.get(DATA+"/"+codePizza+".txt");
 		if (!Files.exists(fichier)) {
-			throw new UpdatePizzaException("code non trouvé!");
+			throw new UpdatePizzaException("code non trouvÃ©!");
 		}
 		try {
 			

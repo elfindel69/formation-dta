@@ -22,7 +22,7 @@ public class PizzaDaoImplTest {
 		List<Pizza> list =  pizza.findAllPizzas();
 		list.sort(Comparator.comparing(Pizza::getCode));
 		List<Pizza> assertList = new ArrayList<>();
-		assertList.add(new Pizza("PEP", "Pépéroni", 12.50,CategoriePizza.VIANDE));
+		assertList.add(new Pizza("PEP", "PÃ©pÃ©roni", 12.50,CategoriePizza.VIANDE));
 		assertList.add(new Pizza("MAR", "Margherita", 14.00,CategoriePizza.SANS_VIANDE));
 		assertList.add(new Pizza("REI", "Reine", 11.50,CategoriePizza.VIANDE));
 		assertList.add(new Pizza("FRO", "La 4 fromages", 12.00,CategoriePizza.SANS_VIANDE));
