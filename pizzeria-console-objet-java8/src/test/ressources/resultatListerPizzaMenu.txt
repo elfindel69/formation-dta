@@ -1,0 +1,11 @@
+Liste des Pizzas
+CAN -> La cannibale (12.5€) VIANDE
+FRO -> La 4 fromages (12.0€) SANS VIANDE
+IND -> L'indienne (14.0€) VIANDE
+MAR -> Margherita (14.0€) SANS VIANDE
+ORI -> L'orientale (13.5€) VIANDE
+PEP -> Pépéroni (12.5€) VIANDE
+REI -> Reine (11.5€) VIANDE
+SAM -> La saumonetta (14.0€) POISSON
+SAV -> La savoyarde (13.0€) VIANDE
+-------9 pizzas créées depuis l'initialisation du programme

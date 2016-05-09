@@ -10,7 +10,7 @@ import fr.pizzeria.model.Pizza;
  */
 public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String LISTER_PIZZA_MSG_NB_PIZZAS = " pizzas créées depuis l�initialisation du programme";
+	private static final String LISTER_PIZZA_MSG_NB_PIZZAS = " pizzas créées depuis l'initialisation du programme";
 	private static final String LISTER_PIZZA_MSG = "Liste des Pizzas";
 	private static final String LISTER_PIZZA_LIBELLE_MENU = "Lister pizzas";
 	
