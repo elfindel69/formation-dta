@@ -1,0 +1,2 @@
+vegan;10.0;SANS_VIANDE
+

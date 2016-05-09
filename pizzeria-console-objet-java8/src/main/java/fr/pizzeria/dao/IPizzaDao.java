@@ -24,7 +24,7 @@ public interface IPizzaDao {
 	 * Ajout d'une pizza
 	 * 
 	 * @param newPizza
-	 *            pizza à ajouter
+	 *            pizza Ã  ajouter
 	 * 
 	 */
 	void savePizza(Pizza newPizza) throws DaoException;
@@ -33,9 +33,9 @@ public interface IPizzaDao {
 	 * MAJ d'une pizza
 	 * 
 	 * @param codePizza
-	 *            code de la Pizza à MAJ
+	 *            code de la Pizza Ã  MAJ
 	 * @param updatePizza
-	 *            pizza modifiée
+	 *            pizza modifiÃ©e
 	 */
 	void updatePizza(String codePizza, Pizza updatePizza) throws DaoException;
 
@@ -43,7 +43,7 @@ public interface IPizzaDao {
 	 * Suppression d'une pizza
 	 * 
 	 * @param codePizza
-	 *            code de la Pizza à supprimer
+	 *            code de la Pizza Ã  supprimer
 	 */
 	void deletePizza(String codePizza) throws DaoException;
 }

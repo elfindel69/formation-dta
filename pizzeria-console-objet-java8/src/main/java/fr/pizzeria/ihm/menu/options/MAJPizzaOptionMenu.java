@@ -14,13 +14,13 @@ import fr.pizzeria.model.Pizza;
  * @author Valentin
  *
  */
-@DesactiverOptionMenu(libelleOption = "MAJ caché")
+@DesactiverOptionMenu(libelleOption = "MAJ cachÃ©")
 public class MAJPizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String MAJ_PIZZA_MSG_OK = "Pizza modifiée ^^";
-	private static final String MAJ_PIZZA_MSG_SAISIE_CODE = "Veuillez choisir la pizza à modifier (code)";
-	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre à jour une pizza";
-	private static final String MAJ_PIZZA_MSG = "Mise à jour d'une pizza";
+	private static final String MAJ_PIZZA_MSG_OK = "Pizza modifiÃ©e ^^";
+	private static final String MAJ_PIZZA_MSG_SAISIE_CODE = "Veuillez choisir la pizza Ã  modifier (code)";
+	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre Ã  jour une pizza";
+	private static final String MAJ_PIZZA_MSG = "Mise Ã  jour d'une pizza";
 
 	/**
 	 * Constructeur

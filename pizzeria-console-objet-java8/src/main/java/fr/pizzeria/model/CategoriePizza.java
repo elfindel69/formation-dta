@@ -1,7 +1,7 @@
 package fr.pizzeria.model;
 
 /**
- * Catégorie de pizza
+ * CatÃ©gorie de pizza
  * 
  * @author Valentin
  *
