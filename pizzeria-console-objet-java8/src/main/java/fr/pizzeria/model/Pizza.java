@@ -3,6 +3,9 @@ package fr.pizzeria.model;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Classe Pizza - gère une pizza
  * 
@@ -72,45 +75,37 @@ public class Pizza {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cat == null) ? 0 : cat.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(prix);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+		  return new HashCodeBuilder(17, 37).
+			       append(code).
+			       append(nom).
+			       append(prix).
+			       append(cat).
+			       toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if(obj==null){
+			return false;
+		}
+		if(obj==this){
 			return true;
-		if (obj == null)
+		}
+		if(obj.getClass()!=getClass()){
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pizza other = (Pizza) obj;
-		if (cat != other.cat)
-			return false;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (Double.doubleToLongBits(prix) != Double.doubleToLongBits(other.prix))
-			return false;
-		return true;
+		}
+		 Pizza rhs = (Pizza) obj;
+		   return new EqualsBuilder()
+		                 .appendSuper(super.equals(obj))
+		                 .append(code, rhs.code)
+		                 .append(nom, rhs.nom)
+		                 .append(prix, rhs.prix)
+		                 .append(cat, rhs.cat)
+		                 .isEquals();
 	}
 
 	/**
-	 * Constructeur par d�faut
+	 * Constructeur par défaut
 	 */
 	public Pizza() {
 	}
