@@ -56,7 +56,7 @@ public class SupprimerPizzaOptionMenuTest {
 		Optional<Pizza> opt = list.stream().filter(pizza -> "SAM".equals(pizza.getCode())).findFirst();
 		assertFalse(opt.isPresent());
 
-		String outAttendu = Files.lines(Paths.get("src/test/ressources/resultatSupprimerPizzaMenu.txt"))
+		String outAttendu = Files.lines(Paths.get("src/test/resources/resultatSupprimerPizzaMenu.txt"))
 				.collect(Collectors.joining(System.lineSeparator()));
 		outAttendu += System.lineSeparator();
 		assertEquals(outAttendu, systemOutRule.getLog());
@@ -70,7 +70,7 @@ public class SupprimerPizzaOptionMenuTest {
 		boolean next = m.execute();
 		assertTrue(next);
 
-		String outAttendu = Files.lines(Paths.get("src/test/ressources/resultatKOSupprimerPizzaMenu.txt"))
+		String outAttendu = Files.lines(Paths.get("src/test/resources/resultatKOSupprimerPizzaMenu.txt"))
 				.collect(Collectors.joining(System.lineSeparator()));
 		outAttendu += System.lineSeparator();
 		assertEquals(outAttendu, systemOutRule.getLog());

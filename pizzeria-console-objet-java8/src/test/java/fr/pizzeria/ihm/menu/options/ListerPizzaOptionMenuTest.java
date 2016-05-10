@@ -39,7 +39,7 @@ public class ListerPizzaOptionMenuTest {
 	public void testExecute() throws IOException {
 		boolean next = m.execute();
 		assertTrue(next);
-		String outAttendu = Files.lines(Paths.get("src/test/ressources/resultatListerPizzaMenu.txt"))
+		String outAttendu = Files.lines(Paths.get("src/test/resources/resultatListerPizzaMenu.txt"))
 				.collect(Collectors.joining(System.lineSeparator()));
 		outAttendu += System.lineSeparator();
 		assertEquals(outAttendu, systemOutRule.getLog());

@@ -59,7 +59,7 @@ public class MAJPizzaOptionMenuTest {
 			assertEquals("aa", pizzaTrouve.getNom());
 			assertTrue(12.5 == pizzaTrouve.getPrix());
 			assertEquals(CategoriePizza.VIANDE, pizzaTrouve.getCat());
-			String outAttendu = Files.lines(Paths.get("src/test/ressources/resultatMAJPizzaMenu.txt"))
+			String outAttendu = Files.lines(Paths.get("src/test/resources/resultatMAJPizzaMenu.txt"))
 					.collect(Collectors.joining(System.lineSeparator()));
 			outAttendu += System.lineSeparator();
 			assertEquals(outAttendu, systemOutRule.getLog());
@@ -81,7 +81,7 @@ public class MAJPizzaOptionMenuTest {
 			assertEquals("aa", pizzaTrouve.getNom());
 			assertTrue(12.5 == pizzaTrouve.getPrix());
 			assertEquals(CategoriePizza.VIANDE, pizzaTrouve.getCat());
-			String outAttendu = Files.lines(Paths.get("src/test/ressources/resultatMAJPizzaMenu.txt"))
+			String outAttendu = Files.lines(Paths.get("src/test/resources/resultatMAJPizzaMenu.txt"))
 					.collect(Collectors.joining(System.lineSeparator()));
 			outAttendu += System.lineSeparator();
 			assertEquals(outAttendu, systemOutRule.getLog());
