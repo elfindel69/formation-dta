@@ -13,8 +13,34 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<dao.impl>0</dao.impl>
+			</properties>
+			<activation>
 
+				<activeByDefault>true</activeByDefault>
+
+
+			</activation>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<dao.impl>1</dao.impl>
+			</properties>
+		</profile>
+	</profiles>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<pluginManagement>
 
 			<plugins>
@@ -82,7 +108,7 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-model</artifactId>
