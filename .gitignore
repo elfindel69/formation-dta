@@ -15,3 +15,5 @@ JAVA1_TP5_bankonet
 .classpath
 .project
 tp_proxy
+/target/
+/bin/

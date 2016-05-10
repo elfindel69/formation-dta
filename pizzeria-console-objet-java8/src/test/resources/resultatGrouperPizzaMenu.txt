@@ -1,8 +1,8 @@
-Poisson
-SAM -> La saumonetta (14.0€) POISSON
 Sans viande
 FRO -> La 4 fromages (12.0€) SANS VIANDE
 MAR -> Margherita (14.0€) SANS VIANDE
+Poisson
+SAM -> La saumonetta (14.0€) POISSON
 Viande
 CAN -> La cannibale (12.5€) VIANDE
 IND -> L'indienne (14.0€) VIANDE
