@@ -4,31 +4,21 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>fr.pizzeria</groupId>
-
 	<artifactId>pizzeria-console-objet-java8</artifactId>
 
-	<version>1.0.0</version>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<junit.version>4.12</junit.version>
-		<system-rules.version>1.16.0</system-rules.version>
-		<java.source>1.8</java.source>
-		<java.target>1.8</java.target>
-	</properties>
+
+	<parent>
+		<groupId>fr.pizzeria</groupId>
+		<artifactId>pizzeria-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
 	<build>
 		<pluginManagement>
 
 			<plugins>
 
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>${java.source}</source>
-						<target>${java.target}</target>
-					</configuration>
-				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
@@ -74,6 +64,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 
 	</build>
@@ -82,23 +73,26 @@
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
-			<version>${system-rules.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>fr.pizzeria</groupId>
+			<artifactId>pizzeria-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>fr.pizzeria</groupId>
+			<artifactId>pizzeria-dao</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

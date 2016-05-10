@@ -8,4 +8,4 @@ PEP -> Pépéroni (12.5€) VIANDE
 REI -> Reine (11.5€) VIANDE
 SAM -> La saumonetta (14.0€) POISSON
 SAV -> La savoyarde (13.0€) VIANDE
--------132 pizzas créées depuis l'initialisation du programme
+-------18 pizzas créées depuis l'initialisation du programme
