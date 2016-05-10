@@ -21,7 +21,7 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-			<plugin>
+				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
 						<source>${java.source}</source>
