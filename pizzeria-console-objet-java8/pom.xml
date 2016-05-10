@@ -29,8 +29,24 @@
 						<target>${java.target}</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<archive>
+
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<mainClass>fr.pizzeria.console.PizzeriaAdminConsoleApp</mainClass>
+							</manifest>
+
+						</archive>
+					</configuration>
+				</plugin>
 
 			</plugins>
+
 
 		</pluginManagement>
 

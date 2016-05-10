@@ -58,7 +58,7 @@ public class NouvellePizzaOptionMenuTest {
 			assertEquals("aa",pizzaTrouve.getNom());
 			assertTrue(12.5 == pizzaTrouve.getPrix());
 			assertEquals(CategoriePizza.VIANDE,pizzaTrouve.getCat());
-			String outAttendu = Files.lines(Paths.get("src/test/ressources/resultatAjouterPizzaMenu.txt")).collect(Collectors.joining(System.lineSeparator()));
+			String outAttendu = Files.lines(Paths.get("src/test/resources/resultatAjouterPizzaMenu.txt")).collect(Collectors.joining(System.lineSeparator()));
 			outAttendu+=System.lineSeparator();
 			assertEquals(outAttendu,systemOutRule.getLog());
 		}

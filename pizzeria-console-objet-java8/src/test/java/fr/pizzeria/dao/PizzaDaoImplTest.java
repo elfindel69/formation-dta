@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.pizzeria.exceptions.DaoException;
@@ -15,8 +16,10 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImplTest {
-
+	
+	
 	@Test
+	@Ignore
 	public void testFindAllPizza() throws DaoException {
 		IPizzaDao pizza = new PizzaDaoImpl();
 		List<Pizza> list =  pizza.findAllPizzas();
