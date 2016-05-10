@@ -20,10 +20,7 @@
 				<dao.impl>0</dao.impl>
 			</properties>
 			<activation>
-
 				<activeByDefault>true</activeByDefault>
-
-
 			</activation>
 		</profile>
 
