@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * Classe Pizza - gère une pizza
+ * Classe Pizza - gÃ¨re une pizza
  * 
  * @author Valentin
  *
