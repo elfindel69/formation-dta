@@ -30,7 +30,7 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 	public boolean execute() {
 		System.out.println(LISTER_PIZZA_MSG);
 		affichageListe();
-		System.out.println("-------" + Pizza.nbPizzas + LISTER_PIZZA_MSG_NB_PIZZAS);
+		System.out.println("-------" + Pizza.getNbPizzas() + LISTER_PIZZA_MSG_NB_PIZZAS);
 		return true;
 	}
 

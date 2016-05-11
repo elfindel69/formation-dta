@@ -23,7 +23,7 @@ public class Pizza {
 	private double prix;
 	@ToString(toUpperCase = true)
 	private CategoriePizza cat;
-	public static int nbPizzas;
+	private static int nbPizzas;
 
 	/**
 	 * Constructeur crée une Pizza
@@ -37,8 +37,8 @@ public class Pizza {
 	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
 
-		this.id = Pizza.nbPizzas;
-		++Pizza.nbPizzas;
+		this.id = Pizza.getNbPizzas();
+		Pizza.setNbPizzas(Pizza.getNbPizzas() + 1);
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
@@ -203,6 +203,14 @@ public class Pizza {
 	 */
 	public void setCat(CategoriePizza cat) {
 		this.cat = cat;
+	}
+
+	public static int getNbPizzas() {
+		return nbPizzas;
+	}
+
+	public static void setNbPizzas(int nbPizzas) {
+		Pizza.nbPizzas = nbPizzas;
 	}
 
 }
