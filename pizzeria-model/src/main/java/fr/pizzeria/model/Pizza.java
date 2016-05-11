@@ -58,12 +58,13 @@ public class Pizza {
 						sb = field.getAnnotation(ToString.class).toUpperCase() ? field.get(this).toString().toUpperCase() : field.get(this).toString();
 					} catch (IllegalArgumentException | IllegalAccessException e) {
 						sb = "";
+						System.out.println(e.getMessage());
 						e.printStackTrace();
 					}
 
-					if (field.getName().equals("code")) {
+					if ("code".equals(field.getName())) {
 						sb = String.format("%s ->", sb);
-					} else if (field.getName().equals("prix")) {
+					} else if ("prix".equals(field.getName())) {
 						sb = String.format("(%s€)", sb);
 					}
 					return sb;
