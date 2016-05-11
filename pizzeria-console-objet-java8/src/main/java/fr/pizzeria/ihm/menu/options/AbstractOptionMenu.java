@@ -105,7 +105,7 @@ public abstract class AbstractOptionMenu {
 		try {
 			pizzas = pizzaDao.findAllPizzas();
 		} catch (DaoException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		if(pizzas !=null){

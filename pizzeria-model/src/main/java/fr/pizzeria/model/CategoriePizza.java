@@ -12,6 +12,14 @@ public enum CategoriePizza {
 	private String libelle;
 
 	/**
+	 * Constructeur
+	 * @param libelle - libelle
+	 */
+	private CategoriePizza(String libelle) {
+		this.libelle = libelle;
+	}
+	
+	/**
 	 * Getter libelle
 	 * 
 	 * @return String - libelle
@@ -20,13 +28,6 @@ public enum CategoriePizza {
 		return libelle;
 	}
 
-	/**
-	 * Constructeur
-	 * @param libelle - libelle
-	 */
-	private CategoriePizza(String libelle) {
-		this.libelle = libelle;
-	}
 
 	/**
 	 * affichage
