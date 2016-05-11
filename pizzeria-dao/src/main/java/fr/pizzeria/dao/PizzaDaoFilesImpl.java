@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.UpdatePizzaException;
@@ -19,15 +20,11 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoFilesImpl implements IPizzaDao {
 	private static final String DATA = "data";
 
-	public PizzaDaoFilesImpl() {
-
-	}
-
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 		List<Pizza> pizzas = new ArrayList<>();
-		try {
-			pizzas = Files.list(Paths.get(DATA)).map(path -> {
+		try(Stream<Path> datastream =Files.list(Paths.get(DATA)) ) {
+			pizzas = datastream.map(path -> {
 				Pizza p = new Pizza();
 
 				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
@@ -70,8 +67,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 	private String pizzaToString(Pizza newPizza) {
 		String cat=newPizza.getCat().toString().toUpperCase().replaceAll(" ", "_");
-		String line = newPizza.getNom()+";"+newPizza.getPrix()+";"+cat;
-		return line;
+		return newPizza.getNom()+";"+newPizza.getPrix()+";"+cat;
 	}
 
 	@Override

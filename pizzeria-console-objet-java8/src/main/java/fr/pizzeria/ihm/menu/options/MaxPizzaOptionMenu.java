@@ -24,9 +24,10 @@ public class MaxPizzaOptionMenu extends AbstractOptionMenu {
 			collect = pizzaDao.findAllPizzas().stream().collect(Collectors.maxBy(Comparator.comparing(Pizza::getPrix)));
 		} catch (DaoException e) {
 
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		if(collect.isPresent()){
+		if(collect!= null && collect.isPresent()){
 			System.out.println(collect.get());
 			
 		}
