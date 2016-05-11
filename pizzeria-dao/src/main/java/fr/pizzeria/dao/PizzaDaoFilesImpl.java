@@ -93,8 +93,6 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 			throw new UpdatePizzaException("code non trouvé!");
 		}
 		try {
-			
-			
 			Files.delete(fichier);
 		} catch (IOException e) {
 			throw new DaoException(e);
