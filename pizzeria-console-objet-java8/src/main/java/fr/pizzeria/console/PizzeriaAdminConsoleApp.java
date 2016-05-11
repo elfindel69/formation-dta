@@ -27,13 +27,15 @@ public class PizzeriaAdminConsoleApp {
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
 		int daoImplConf = Integer.valueOf(confString);
-		System.out.println(confString);
+		
 
 		switch (daoImplConf) {
 		case 0:
+			System.out.println("DAO mémoire");
 			lancerApplication(new PizzaDaoImpl());
 			break;
 		case 1:
+			System.out.println("DAO fichiers");
 			lancerApplication(new PizzaDaoFilesImpl());
 			break;
 		default:
