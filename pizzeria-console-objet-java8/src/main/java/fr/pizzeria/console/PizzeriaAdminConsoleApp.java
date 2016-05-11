@@ -24,7 +24,7 @@ public class PizzeriaAdminConsoleApp {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		ResourceBundle bundle = ResourceBundle.getBundle("application")
+		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
 		int daoImplConf = Integer.valueOf(confString);
 		System.out.println(confString);
