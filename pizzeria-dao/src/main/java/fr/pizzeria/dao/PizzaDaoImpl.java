@@ -19,7 +19,7 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public class PizzaDaoImpl implements IPizzaDao {
-	Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
+	Map<String, Pizza> pizzas = new HashMap<>();
 
 	/**
 	 * Constructeur initialise le tableau
@@ -44,7 +44,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	@Override
 	public List<Pizza> findAllPizzas() {
 
-		return new ArrayList<Pizza>(pizzas.values());
+		return new ArrayList<>(pizzas.values());
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Suppression d'une pizza
 	 * 
 	 * @param codePizza
-	 *            code de la Pizza � supprimer
+	 *            code de la Pizza à supprimer
 	 * @throws DeletePizzaException
 	 */
 	@Override

@@ -26,7 +26,7 @@ public class PizzeriaAdminConsoleApp {
 
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
-		int daoImplConf = Integer.valueOf(confString);
+		int daoImplConf = Integer.parseInt(confString);
 		
 
 		switch (daoImplConf) {

@@ -108,7 +108,10 @@ public abstract class AbstractOptionMenu {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pizzas.stream().sorted(Comparator.comparing(Pizza::getCode)).forEach(System.out::println);
+		if(pizzas !=null){
+			pizzas.stream().sorted(Comparator.comparing(Pizza::getCode)).forEach(System.out::println);
+		}
+		
 	}
 
 	/**

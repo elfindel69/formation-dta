@@ -1,6 +1,5 @@
 package fr.pizzeria.dao;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -40,7 +39,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 					p.setCat(CategoriePizza.valueOf(tab[2]));
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
 					e.printStackTrace();
 				}
 				return p;
