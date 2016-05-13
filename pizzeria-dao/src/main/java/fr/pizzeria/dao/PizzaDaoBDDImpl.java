@@ -71,21 +71,9 @@ public class PizzaDaoBDDImpl implements IPizzaDao {
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException {
 		if (!mapPizzas.containsKey(newPizza.getCode())) {
-			try (Connection connection = getConnection();
-					PreparedStatement statement = connection
-							.prepareStatement("INSERT INTO pizza (nom,code,prix,categorie) VALUES (?,?,?,?)");) {
-				statement.setString(1, newPizza.getNom());
-				statement.setString(2, newPizza.getCode());
-				statement.setDouble(3, newPizza.getPrix());
-				statement.setString(4, newPizza.getCat().name());
-				int queryUpdate = statement.executeUpdate();
-				if (queryUpdate != 1) {
+			try (Connection connection = getConnection();) {
+				insertPizza(connection, newPizza);
 
-					throw new SavePizzaException("problème d'insertion");
-
-				} else {
-					mapPizzas.put(newPizza.getCode(), newPizza);
-				}
 			} catch (SQLException e) {
 				throw new DaoException(e);
 			}
@@ -150,67 +138,57 @@ public class PizzaDaoBDDImpl implements IPizzaDao {
 	}
 
 	@Override
-	public void importPizzas() throws DaoException {
-		PizzaDaoFilesImpl files = new PizzaDaoFilesImpl();
-		List<Pizza> pizzas = null;
-		try {
-			pizzas = files.findAllPizzas();
-		} catch (DaoException e) {
-			throw new DaoException(e);
-		}
-		List<List<Pizza>> partition = ListUtils.partition(pizzas, 3);
+	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
+		
+		List<List<Pizza>> partition = ListUtils.partition(pizzas, i);
 		try (Connection connection = getConnection();) {
 			connection.setAutoCommit(false);
-			for (List<Pizza> list : partition) {
-				for (Pizza p : list) {
-					if (!mapPizzas.containsKey(p.getCode())) {
-						insertPizza(connection,p);
-					} else {
-						updatePizza(connection,p);
-					}
-				}
-				connection.commit();
-			}
+			insertPizzas(partition, connection);
 		} catch (SQLException e1) {
 			throw new SavePizzaException(e1);
 		}
 
 	}
 
-	private void updatePizza(Connection connection, Pizza p) throws DaoException, SQLException {
-		try (Statement statement = connection.createStatement();) {
-			int queryUpdate = statement.executeUpdate(String.format(
-					"UPDATE pizza SET nom=\"%s\",prix ='%s',categorie ='%s' WHERE code='%s'",
-					p.getNom(), p.getPrix(), p.getCat().name(),p.getCode()));
-			if (queryUpdate != 1) {
-				connection.rollback();
-				throw new UpdatePizzaException("problème de MAJ");
-			} else {
-				mapPizzas.put(p.getCode(), p);
+	private void insertPizzas(List<List<Pizza>> partition, Connection connection) throws SQLException, DaoException {
+		try{
+			for (List<Pizza> list : partition) {
+				
+				for (Pizza p : list) {
+					if (!mapPizzas.containsKey(p.getCode())) {
+						insertPizza(connection, p);
+						System.out.println("pizza créée");
+					} else {
+						System.out.println("pizza existante");
+						connection.rollback();
+					}
+				}
+				connection.commit();
 			}
-
-		} catch (SQLException e) {
+		}catch(DaoException e){
 			connection.rollback();
-			throw new DaoException(e);
-		}
-	}
-
-	private void insertPizza(Connection connection,Pizza p) throws SQLException, DaoException {
-		try (Statement statement = connection.createStatement();) {
-			int queryUpdate = statement.executeUpdate(String.format(
-					"INSERT INTO pizza (nom,code,prix,categorie) VALUES (\"%s\",'%s','%s','%s')",
-					p.getNom(), p.getCode(), p.getPrix(), p.getCat().name()));
-			if (queryUpdate != 1) {
-				connection.rollback();
-				throw new SavePizzaException("problème d'insertion");
-			} else {
-				mapPizzas.put(p.getCode(), p);
-			}
-
-		} catch (SQLException e) {
-			connection.rollback();
-			throw new DaoException(e);
 		}
 		
+	}
+
+	private void insertPizza(Connection connection, Pizza p) throws SQLException, DaoException {
+		try (PreparedStatement statement = connection
+				.prepareStatement("INSERT INTO pizza (nom,code,prix,categorie) VALUES (?,?,?,?)");) {
+			statement.setString(1, p.getNom());
+			statement.setString(2, p.getCode());
+			statement.setDouble(3, p.getPrix());
+			statement.setString(4, p.getCat().name());
+			int queryUpdate = statement.executeUpdate();
+			if (queryUpdate != 1) {
+
+				throw new SavePizzaException("problème d'insertion");
+
+			} else {
+				mapPizzas.put(p.getCode(), p);
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+
 	}
 }

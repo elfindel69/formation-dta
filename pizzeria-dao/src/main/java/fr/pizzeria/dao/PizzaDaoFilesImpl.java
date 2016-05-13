@@ -109,9 +109,10 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 		mapPizzas.remove(codePizza);
 	}
 
+	
+
 	@Override
-	public void importPizzas() throws DaoException {
-		throw new DaoException("méthode non supportée");
+	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
 		
 	}
 }

@@ -101,9 +101,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public void importPizzas() throws DaoException {
-		throw new DaoException("méthode non supportée");
+	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
+		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }
