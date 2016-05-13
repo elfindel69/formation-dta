@@ -46,4 +46,6 @@ public interface IPizzaDao {
 	 *            code de la Pizza à supprimer
 	 */
 	void deletePizza(String codePizza) throws DaoException;
+
+	void importPizzas() throws DaoException;
 }

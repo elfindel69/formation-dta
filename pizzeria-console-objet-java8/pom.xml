@@ -17,7 +17,11 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<dao.impl>0</dao.impl>
+				<dao.impl>2</dao.impl>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria</jdbc.url>
+				<jdbc.user>root</jdbc.user>
+				<jdbc.password>alpine</jdbc.password>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -99,6 +103,8 @@
 			<artifactId>system-rules</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+
 
 		<dependency>
 			<groupId>junit</groupId>

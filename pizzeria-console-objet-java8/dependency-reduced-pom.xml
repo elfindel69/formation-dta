@@ -3,11 +3,17 @@
   <parent>
     <artifactId>pizzeria-parent</artifactId>
     <groupId>fr.pizzeria</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>pizzeria-console-objet-java8</artifactId>
   <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -47,6 +53,24 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <jdbc.url>jdbc:mysql://localhost:3306/pizzeria</jdbc.url>
+        <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+        <jdbc.user>root</jdbc.user>
+        <jdbc.password>alpine</jdbc.password>
+        <dao.impl>2</dao.impl>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <dao.impl>1</dao.impl>
+      </properties>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>com.github.stefanbirkner</groupId>

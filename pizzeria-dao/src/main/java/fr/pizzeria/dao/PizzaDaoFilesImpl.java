@@ -8,7 +8,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,11 +21,23 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoFilesImpl implements IPizzaDao {
 	private static final String DATA = "data";
+	private Map<String, Pizza> mapPizzas = new HashMap<>();
+
+	public PizzaDaoFilesImpl() {
+		try {
+			List<Pizza> pizzas = findAllPizzas();
+			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 		List<Pizza> pizzas = new ArrayList<>();
-		try(Stream<Path> datastream =Files.list(Paths.get(DATA)) ) {
+		try (Stream<Path> datastream = Files.list(Paths.get(DATA))) {
 			pizzas = datastream.map(path -> {
 				Pizza p = new Pizza();
 
@@ -51,45 +65,40 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException {
-		
-		
-			try {
-				Path fichier = Paths.get(DATA+"/"+newPizza.getCode()+".txt");
-				
-				Files.write(fichier, Arrays.asList(pizzaToString(newPizza)), StandardOpenOption.CREATE_NEW);
-			} catch (IOException e) {
-				throw new DaoException(e);
-			}
-			
-		
+		try {
+			Path fichier = Paths.get(DATA + "/" + newPizza.getCode() + ".txt");
 
+			Files.write(fichier, Arrays.asList(pizzaToString(newPizza)), StandardOpenOption.CREATE_NEW);
+		} catch (IOException e) {
+			throw new DaoException(e);
+		}
+		mapPizzas.put(newPizza.getCode(), newPizza);
 	}
 
 	private String pizzaToString(Pizza newPizza) {
-		String cat=newPizza.getCat().toString().toUpperCase().replaceAll(" ", "_");
-		return newPizza.getNom()+";"+newPizza.getPrix()+";"+cat;
+
+		return newPizza.getNom() + ";" + newPizza.getPrix() + ";" + newPizza.getCat().name();
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		Path fichier = Paths.get(DATA+"/"+codePizza+".txt");
-		if (!Files.exists(fichier)) {
+		Path fichier = Paths.get(DATA + "/" + codePizza + ".txt");
+		if (!mapPizzas.containsKey(codePizza)) {
 			throw new UpdatePizzaException("code non trouvé!");
 		}
 		try {
-			
-			
+
 			Files.write(fichier, Arrays.asList(pizzaToString(updatePizza)), StandardOpenOption.WRITE);
 		} catch (IOException e) {
 			throw new DaoException(e);
 		}
-
+		mapPizzas.put(codePizza, updatePizza);
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
-		Path fichier = Paths.get(DATA+"/"+codePizza+".txt");
-		if (!Files.exists(fichier)) {
+		Path fichier = Paths.get(DATA + "/" + codePizza + ".txt");
+		if (!mapPizzas.containsKey(codePizza)) {
 			throw new UpdatePizzaException("code non trouvé!");
 		}
 		try {
@@ -97,6 +106,12 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 		} catch (IOException e) {
 			throw new DaoException(e);
 		}
+		mapPizzas.remove(codePizza);
+	}
 
+	@Override
+	public void importPizzas() throws DaoException {
+		throw new DaoException("méthode non supportée");
+		
 	}
 }

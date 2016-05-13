@@ -17,6 +17,8 @@
 		<java.source>1.8</java.source>
 		<java.target>1.8</java.target>
 		<commons-lang.version>3.4</commons-lang.version>
+		<mysql.version>5.1.38</mysql.version>
+		<collections4.version>4.1</collections4.version>
 	</properties>
 	<build>
 		<pluginManagement>
@@ -60,7 +62,11 @@
 				<version>${system-rules.version}</version>
 				<scope>test</scope>
 			</dependency>
-
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${collections4.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -81,6 +87,12 @@
 				<groupId>fr.pizzeria</groupId>
 				<artifactId>pizzeria-dao</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+				<scope>runtime</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

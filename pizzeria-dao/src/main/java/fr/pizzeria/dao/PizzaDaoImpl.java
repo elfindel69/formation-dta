@@ -100,4 +100,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	}
 
+	@Override
+	public void importPizzas() throws DaoException {
+		throw new DaoException("méthode non supportée");
+		
+	}
+
 }
