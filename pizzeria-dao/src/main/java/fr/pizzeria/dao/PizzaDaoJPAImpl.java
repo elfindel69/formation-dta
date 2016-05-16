@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.ListUtils;
@@ -51,7 +51,7 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 			insertPizza(em, newPizza);
 			et.commit();
 			em.close();
-		}else {
+		} else {
 			throw new SavePizzaException("ce code existe déjà");
 		}
 
@@ -78,7 +78,8 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 	}
 
 	private Pizza findPizzaByCode(String codePizza, EntityManager em) {
-		return em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", codePizza).getSingleResult();
+		return em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", codePizza)
+				.getSingleResult();
 	}
 
 	@Override
@@ -111,13 +112,14 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 		for (List<Pizza> list : partition) {
 			et.begin();
 			for (Pizza p : list) {
-					try {
-						insertPizza(em, p);
-					} catch (DaoException e) {
-						System.out.println("pizza existante");
-						et.rollback();
-					}
-					System.out.println("pizza créée");
+				try {
+					insertPizza(em, p);
+				} catch (DaoException e) {
+					System.out.println("pizza existante");
+					et.rollback();
+					et.begin();
+				}
+				System.out.println("pizza créée");
 			}
 			et.commit();
 		}
@@ -127,7 +129,7 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 	private void insertPizza(EntityManager em, Pizza p) throws DaoException {
 		try {
 			em.persist(p);
-		} catch (EntityExistsException e) {
+		} catch (PersistenceException e) {
 			throw new DaoException(e);
 		}
 		mapPizzas.put(p.getCode(), p);

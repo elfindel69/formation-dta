@@ -40,7 +40,7 @@ public class Pizza {
 	private String nom;
 
 	@ToString
-	private BigDecimal prix;
+	private BigDecimal prix ;
 
 	@ToString(toUpperCase = true)
 	@Column(name = "categorie")
@@ -52,6 +52,7 @@ public class Pizza {
 	 * Constructeur par défaut
 	 */
 	public Pizza() {
+		super();
 	}
 
 	/**
