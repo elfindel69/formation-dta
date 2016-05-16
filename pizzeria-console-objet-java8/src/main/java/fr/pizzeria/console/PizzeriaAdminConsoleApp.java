@@ -62,6 +62,7 @@ public class PizzeriaAdminConsoleApp {
 		case 3:
 			System.out.println("DAO JPA");
 			try {
+				java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 				EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");
 				lancerApplication(new PizzaDaoJPAImpl(em),true);
 				em.close();
@@ -78,9 +79,7 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	public static void lancerApplication(IPizzaDao impl, boolean menuJdbc) throws DaoException{
-		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		// scanner
-		
 		try (Scanner sc = new Scanner(System.in)) {// liste des pizzas
 			fr.pizzeria.ihm.menu.Menu menu = new fr.pizzeria.ihm.menu.Menu(sc, impl,menuJdbc);
 			menu.afficher();

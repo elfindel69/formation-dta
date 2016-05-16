@@ -38,7 +38,6 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 		EntityManager em = entityFacto.createEntityManager();
 		TypedQuery<Pizza> query = em.createNamedQuery("pizza.listPizzas", Pizza.class);
 		List<Pizza> pizzas = query.getResultList();
-		em.clear();
 		em.close();
 		return pizzas;
 	}
@@ -64,9 +63,12 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 			EntityManager em = entityFacto.createEntityManager();
 			EntityTransaction et = em.getTransaction();
 			et.begin();
-			Pizza oldPizza = mapPizzas.get(codePizza);
-			updatePizza.setId(oldPizza.getId());
-			em.merge(updatePizza);
+			Pizza oldPizza = findPizzaByCode(codePizza, em);
+			oldPizza.setCode(updatePizza.getCode());
+			oldPizza.setNom(updatePizza.getNom());
+			oldPizza.setPrix(updatePizza.getPrix());
+			oldPizza.setCat(updatePizza.getCat());
+			mapPizzas.put(codePizza, oldPizza);
 			et.commit();
 			em.close();
 		} else {
@@ -75,14 +77,19 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 
 	}
 
+	private Pizza findPizzaByCode(String codePizza, EntityManager em) {
+		return em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", codePizza).getSingleResult();
+	}
+
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
 		if (mapPizzas.containsKey(codePizza)) {
 			EntityManager em = entityFacto.createEntityManager();
 			EntityTransaction et = em.getTransaction();
 			et.begin();
-			Pizza oldPizza = mapPizzas.get(codePizza);
+			Pizza oldPizza = findPizzaByCode(codePizza, em);
 			em.remove(oldPizza);
+			mapPizzas.remove(codePizza);
 			et.commit();
 			em.close();
 		} else {

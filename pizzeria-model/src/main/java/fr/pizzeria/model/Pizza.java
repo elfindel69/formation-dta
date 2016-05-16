@@ -23,25 +23,26 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  */
 @Entity
-@NamedQuery(name="pizza.listPizzas", query="Select p from Pizza p")
-@Table(name="personne")
+@NamedQuery(name = "pizza.listPizzas", query = "Select p from Pizza p")
+@Table(name = "personne")
 public class Pizza {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ToString
-	@Column(name = "code", unique = true)
+	@Column(name = "code", length = 3, nullable = false, unique = true)
 	private String code;
-	
+
 	@ToString
+	@Column(name = "nom", nullable = false)
 	private String nom;
-	
+
 	@ToString
 	private double prix;
-	
+
 	@ToString(toUpperCase = true)
-	@Column(name="categorie")
+	@Column(name = "categorie")
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza cat;
 	private static int nbPizzas;
@@ -51,7 +52,7 @@ public class Pizza {
 	 */
 	public Pizza() {
 	}
-	
+
 	/**
 	 * Constructeur crée une Pizza
 	 * 
@@ -82,7 +83,8 @@ public class Pizza {
 				.filter(field -> field.getAnnotation(ToString.class) != null).map(field -> {
 					String sb = null;
 					try {
-						sb = field.getAnnotation(ToString.class).toUpperCase() ? field.get(this).toString().toUpperCase() : field.get(this).toString();
+						sb = field.getAnnotation(ToString.class).toUpperCase()
+								? field.get(this).toString().toUpperCase() : field.get(this).toString();
 					} catch (IllegalArgumentException | IllegalAccessException e) {
 						sb = "";
 						System.out.println(e.getMessage());
@@ -99,40 +101,26 @@ public class Pizza {
 
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
-		  return new HashCodeBuilder(17, 37).
-			       append(code).
-			       append(nom).
-			       append(prix).
-			       append(cat).
-			       toHashCode();
+		return new HashCodeBuilder(17, 37).append(code).append(nom).append(prix).append(cat).toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj==null){
+		if (obj == null) {
 			return false;
 		}
-		if(obj==this){
+		if (obj == this) {
 			return true;
 		}
-		if(obj.getClass()!=getClass()){
+		if (obj.getClass() != getClass()) {
 			return false;
 		}
-		 Pizza rhs = (Pizza) obj;
-		   return new EqualsBuilder()
-		                 .appendSuper(super.equals(obj))
-		                 .append(code, rhs.code)
-		                 .append(nom, rhs.nom)
-		                 .append(prix, rhs.prix)
-		                 .append(cat, rhs.cat)
-		                 .isEquals();
+		Pizza rhs = (Pizza) obj;
+		return new EqualsBuilder().appendSuper(super.equals(obj)).append(code, rhs.code).append(nom, rhs.nom)
+				.append(prix, rhs.prix).append(cat, rhs.cat).isEquals();
 	}
-
-	
 
 	/**
 	 * Getter ID
