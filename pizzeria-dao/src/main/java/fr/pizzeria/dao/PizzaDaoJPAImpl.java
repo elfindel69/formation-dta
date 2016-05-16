@@ -23,13 +23,13 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 	private EntityManagerFactory entityFacto;
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoJPAImpl(EntityManagerFactory entityFacto) throws DaoException {
+	public PizzaDaoJPAImpl(EntityManagerFactory entityFacto) {
 		this.entityFacto = entityFacto;
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
 		} catch (DaoException e) {
-			throw new DaoException(e);
+			System.err.println(e);
 		}
 	}
 

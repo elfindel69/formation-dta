@@ -26,20 +26,20 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 	private String user;
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoJDBCImpl(String driver, String url2, String user2, String password2) throws DaoException {
+	public PizzaDaoJDBCImpl(String driver, String url2, String user2, String password2){
 		try {
 			Class.forName(driver);
 			this.url = url2;
 			this.user = user2;
 			this.password = password2;
 		} catch (ClassNotFoundException e) {
-			throw new DaoException(e);
+			System.err.println(e);
 		}
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
 		} catch (DaoException e) {
-			throw new DaoException(e);
+			System.err.println(e);
 		}
 
 	}

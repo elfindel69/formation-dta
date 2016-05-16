@@ -23,7 +23,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	private static final String DATA = "data";
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoFilesImpl() {
+	public PizzaDaoFilesImpl(){
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
