@@ -23,12 +23,12 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	private static final String DATA = "data";
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoFilesImpl() throws DaoException {
+	public PizzaDaoFilesImpl() {
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
 		} catch (DaoException e) {
-			throw new DaoException(e);
+			System.err.println("erreur d'importation");
 		}
 
 	}
