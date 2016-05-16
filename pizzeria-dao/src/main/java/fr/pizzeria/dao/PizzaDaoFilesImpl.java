@@ -23,13 +23,12 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	private static final String DATA = "data";
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoFilesImpl() {
+	public PizzaDaoFilesImpl() throws DaoException {
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
 		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new DaoException(e);
 		}
 
 	}
@@ -113,6 +112,6 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
-		
+		throw new DaoException("méthode non implémentée");
 	}
 }

@@ -102,7 +102,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
-		// TODO Auto-generated method stub
+		throw new DaoException("méthode non implémentée");
 		
 	}
 

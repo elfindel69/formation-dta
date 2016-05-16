@@ -111,7 +111,6 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 		for (List<Pizza> list : partition) {
 			et.begin();
 			for (Pizza p : list) {
-				if (!mapPizzas.containsKey(p.getCode())) {
 					try {
 						insertPizza(em, p);
 					} catch (DaoException e) {
@@ -119,11 +118,6 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 						et.rollback();
 					}
 					System.out.println("pizza créée");
-				} else {
-					System.out.println("pizza existante");
-					et.rollback();
-					et.begin();
-				}
 			}
 			et.commit();
 		}
