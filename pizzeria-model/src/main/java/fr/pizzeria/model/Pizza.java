@@ -3,6 +3,16 @@ package fr.pizzeria.model;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -12,19 +22,36 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @author Valentin
  *
  */
+@Entity
+@NamedQuery(name="pizza.listPizzas", query="Select p from Pizza p")
+@Table(name="personne")
 public class Pizza {
-
-	private int id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
 	@ToString
+	@Column(name = "code", unique = true)
 	private String code;
+	
 	@ToString
 	private String nom;
+	
 	@ToString
 	private double prix;
+	
 	@ToString(toUpperCase = true)
+	@Column(name="categorie")
+	@Enumerated(EnumType.STRING)
 	private CategoriePizza cat;
 	private static int nbPizzas;
 
+	/**
+	 * Constructeur par défaut
+	 */
+	public Pizza() {
+	}
+	
 	/**
 	 * Constructeur crée une Pizza
 	 * 
@@ -105,18 +132,14 @@ public class Pizza {
 		                 .isEquals();
 	}
 
-	/**
-	 * Constructeur par défaut
-	 */
-	public Pizza() {
-	}
+	
 
 	/**
 	 * Getter ID
 	 * 
 	 * @return int ID de le pizza
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -126,7 +149,7 @@ public class Pizza {
 	 * @param id
 	 *            ID à modifier
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -3,11 +3,14 @@ package fr.pizzeria.console;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoBDDImpl;
-import fr.pizzeria.dao.PizzaDaoFilesImpl;
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.PizzaDaoJDBCImpl;
+import fr.pizzeria.dao.PizzaDaoJPAImpl;
 import fr.pizzeria.exceptions.DaoException;
 
 /**
@@ -44,14 +47,25 @@ public class PizzeriaAdminConsoleApp {
 			
 			break;
 		case 2:
-			System.out.println("DAO BDD");
+			System.out.println("DAO JDBC");
 			ResourceBundle jdbcBundle = ResourceBundle.getBundle("jdbc");
 			String driver = jdbcBundle.getString("jdbc.driver");
 			String url = jdbcBundle.getString("jdbc.url");
 			String user = jdbcBundle.getString("jdbc.user");
 			String password = jdbcBundle.getString("jdbc.password");
 			try {
-				lancerApplication(new PizzaDaoBDDImpl(driver,url,user,password),true);
+				lancerApplication(new PizzaDaoJDBCImpl(driver,url,user,password),true);
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
+			break;
+		case 3:
+			System.out.println("DAO JPA");
+			try {
+				EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");
+				lancerApplication(new PizzaDaoJPAImpl(em),true);
+				em.close();
+	
 			} catch (DaoException e) {
 				e.printStackTrace();
 			}
@@ -63,8 +77,10 @@ public class PizzeriaAdminConsoleApp {
 
 	}
 
-	public static void lancerApplication(IPizzaDao impl, boolean menuJdbc) {
+	public static void lancerApplication(IPizzaDao impl, boolean menuJdbc) throws DaoException{
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		// scanner
+		
 		try (Scanner sc = new Scanner(System.in)) {// liste des pizzas
 			fr.pizzeria.ihm.menu.Menu menu = new fr.pizzeria.ihm.menu.Menu(sc, impl,menuJdbc);
 			menu.afficher();

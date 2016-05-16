@@ -61,5 +61,6 @@ public class Menu {
 			saisie = sc.nextInt();
 			continuer = mapMenus.get(saisie).execute();
 		}
+		
 	}
 }

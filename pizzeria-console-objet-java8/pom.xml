@@ -17,7 +17,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<dao.impl>2</dao.impl>
+				<dao.impl>3</dao.impl>
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria</jdbc.url>
 				<jdbc.user>root</jdbc.user>
@@ -103,8 +103,14 @@
 			<artifactId>system-rules</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

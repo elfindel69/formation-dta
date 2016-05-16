@@ -20,13 +20,13 @@ import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaoBDDImpl implements IPizzaDao {
+public class PizzaDaoJDBCImpl implements IPizzaDao {
 	private String url;
 	private String password;
 	private String user;
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoBDDImpl(String driver, String url2, String user2, String password2) throws DaoException {
+	public PizzaDaoJDBCImpl(String driver, String url2, String user2, String password2) throws DaoException {
 		try {
 			Class.forName(driver);
 			this.url = url2;
