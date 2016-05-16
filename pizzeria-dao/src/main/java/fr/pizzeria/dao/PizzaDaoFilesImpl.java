@@ -1,6 +1,7 @@
 package fr.pizzeria.dao;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,7 +46,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 					String line = Files.readAllLines(path, Charset.forName("UTF-8")).get(0);
 					String[] tab = line.split(";");
 					p.setNom(tab[0]);
-					p.setPrix(Double.valueOf(tab[1]));
+					p.setPrix(new BigDecimal(tab[1]));
 					p.setCat(CategoriePizza.valueOf(tab[2]));
 
 				} catch (IOException e) {

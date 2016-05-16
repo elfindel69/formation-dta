@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.options;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -88,7 +89,7 @@ public abstract class AbstractOptionMenu {
 		System.out.println(MENU_MSG_SAISIE_NOM);
 		newPizza.setNom(sc.next());
 		System.out.println(MENU_MSG_SAISIE_PRIX);
-		newPizza.setPrix(sc.nextDouble());
+		newPizza.setPrix(BigDecimal.valueOf(sc.nextDouble()));
 		CategoriePizza[] cat = CategoriePizza.values();
 		System.out.println(MENU_MSG_SAISIE_CATEGORIE);
 		Arrays.stream(cat).forEach(el -> System.out.println(el.ordinal() + " -> " + el.getLibelle()));

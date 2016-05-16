@@ -1,5 +1,6 @@
 package fr.pizzeria.model;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 @Entity
 @NamedQuery(name = "pizza.listPizzas", query = "Select p from Pizza p")
-@Table(name = "personne")
+@Table(name = "pizza")
 public class Pizza {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +40,7 @@ public class Pizza {
 	private String nom;
 
 	@ToString
-	private double prix;
+	private BigDecimal prix;
 
 	@ToString(toUpperCase = true)
 	@Column(name = "categorie")
@@ -63,7 +64,7 @@ public class Pizza {
 	 * @param prix
 	 *            prix de la pizza
 	 */
-	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
+	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat) {
 
 		this.id = Pizza.getNbPizzas();
 		Pizza.setNbPizzas(Pizza.getNbPizzas() + 1);
@@ -184,7 +185,7 @@ public class Pizza {
 	 * 
 	 * @return double prix de le pizza
 	 */
-	public double getPrix() {
+	public BigDecimal getPrix() {
 		return prix;
 	}
 
@@ -194,7 +195,7 @@ public class Pizza {
 	 * @param prix
 	 *            prix à modifier
 	 */
-	public void setPrix(double prix) {
+	public void setPrix(BigDecimal prix) {
 		this.prix = prix;
 	}
 

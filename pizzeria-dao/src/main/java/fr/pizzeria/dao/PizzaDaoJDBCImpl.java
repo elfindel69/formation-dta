@@ -1,5 +1,6 @@
 package fr.pizzeria.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -59,7 +60,7 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 
 			while (querySelect.next()) {
 				pizzas.add(new Pizza(querySelect.getString("code"), querySelect.getString("nom"),
-						querySelect.getDouble("prix"), CategoriePizza.valueOf(querySelect.getString("categorie"))));
+						BigDecimal.valueOf(querySelect.getDouble("prix")), CategoriePizza.valueOf(querySelect.getString("categorie"))));
 			}
 
 		} catch (SQLException e) {
@@ -91,7 +92,7 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 							.prepareStatement("UPDATE pizza SET nom =?,code=?,prix=?,categorie=? WHERE code=?");) {
 				statement.setString(1, updatePizza.getNom());
 				statement.setString(2, updatePizza.getCode());
-				statement.setDouble(3, updatePizza.getPrix());
+				statement.setDouble(3, updatePizza.getPrix().doubleValue());
 				statement.setString(4, updatePizza.getCat().name());
 				statement.setString(5, codePizza);
 
@@ -176,7 +177,7 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 				.prepareStatement("INSERT INTO pizza (nom,code,prix,categorie) VALUES (?,?,?,?)");) {
 			statement.setString(1, p.getNom());
 			statement.setString(2, p.getCode());
-			statement.setDouble(3, p.getPrix());
+			statement.setDouble(3, p.getPrix().doubleValue());
 			statement.setString(4, p.getCat().name());
 			int queryUpdate = statement.executeUpdate();
 			if (queryUpdate != 1) {
