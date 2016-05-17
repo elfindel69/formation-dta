@@ -1,4 +1,6 @@
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
 Ajout d'une nouvelle pizza
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
 Veuillez saisir le code...
 Veuillez saisir le nom (sans espace)...
 Veuillez saisir le prix...
@@ -6,4 +8,6 @@ Veuillez choisir la catégorie...
 0 -> Viande
 1 -> Poisson
 2 -> Sans viande
+Hibernate: insert into pizza (categorie, code, nom, prix, url_image) values (?, ?, ?, ?, ?)
 Pizza ajoutée ^^
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_

@@ -1,13 +1,22 @@
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
 Supprimer une pizza
-CAN -> La cannibale (12.5€) VIANDE
-FRO -> La 4 fromages (12.0€) SANS VIANDE
-IND -> L'indienne (14.0€) VIANDE
-MAR -> Margherita (14.0€) SANS VIANDE
-ORI -> L'orientale (13.5€) VIANDE
-PEP -> Pépéroni (12.5€) VIANDE
-REI -> Reine (11.5€) VIANDE
-SAM -> La saumonetta (14.0€) POISSON
-SAV -> La savoyarde (13.0€) VIANDE
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
+CAN -> La cannibale (12.50€) VIANDE
+FRO -> La 4 fromages (12.00€) SANS VIANDE
+GAR -> gargantua (17.00€) VIANDE
+HAV -> Havaienne (10.00€) VIANDE
+IND -> L'indienne (14.00€) VIANDE
+MAR -> Margherita (14.00€) SANS VIANDE
+NEW -> aa (12.50€) VIANDE
+ORI -> L'orientale (13.50€) VIANDE
+PEP -> Peperoni (12.50€) VIANDE
+REI -> reine (11.40€) VIANDE
+VEG -> vegan (10.00€) SANS VIANDE
 Veuillez choisir la pizza à supprimer (code)
 99 pour abandonner
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_ where pizza0_.code=?
+Hibernate: delete from pizza where id=?
 Pizza Supprimée ^^
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_

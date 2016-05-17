@@ -58,11 +58,11 @@ public class SupprimerPizzaOptionMenuTest {
 
 	@Test
 	public void testExecute() throws DaoException, IOException {
-		systemInMock.provideLines("SAM");
+		systemInMock.provideLines("REI");
 		boolean next = m.execute();
 		assertTrue(next);
 		List<Pizza> list = pizzaDao.findAllPizzas();
-		Optional<Pizza> opt = list.stream().filter(pizza -> "SAM".equals(pizza.getCode())).findFirst();
+		Optional<Pizza> opt = list.stream().filter(pizza -> "REI".equals(pizza.getCode())).findFirst();
 		assertFalse(opt.isPresent());
 
 		String outAttendu = Files.lines(Paths.get("src/test/resources/resultatSupprimerPizzaMenu.txt"))

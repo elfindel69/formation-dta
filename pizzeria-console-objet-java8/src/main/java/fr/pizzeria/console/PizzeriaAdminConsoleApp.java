@@ -8,9 +8,6 @@ import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoJDBCImpl;
-import fr.pizzeria.dao.PizzaDaoJPAImpl;
 import fr.pizzeria.factory.DaoFactoryJPAImpl;
 import fr.pizzeria.factory.IDaoFactory;
 
@@ -60,10 +57,10 @@ public class PizzeriaAdminConsoleApp {
 	private static void launchJPA() {
 		System.out.println("DAO JPA");
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
-		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
-		daoFact = DaoFactoryJPAImpl.getImpl(em);
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pizzeria-console");
+		daoFact = DaoFactoryJPAImpl.getImpl(entityManagerFactory);
 		lancerApplication(true);
-		em.close();
+		entityManagerFactory.close();
 	}
 
 	private static void launchJDBC() {
