@@ -1,25 +1,18 @@
 package fr.pizzeria.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import fr.pizzeria.exceptions.DaoException;
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.model.Client;
 
-/**
- * interface de manipulation des Pizzas
- * 
- * @author Valentin
- *
- */
-public interface IPizzaDao {
+public interface IClientDao {
 	/**
 	 * Liste des pizzas
 	 * 
 	 * @return liste des pizzas
 	 * @throws DaoException 
 	 */
-	List<Pizza> findAllPizzas() throws DaoException;
+	List<Client> findAllClients() throws DaoException;
 
 	/**
 	 * Ajout d'une pizza
@@ -28,7 +21,7 @@ public interface IPizzaDao {
 	 *            pizza à ajouter
 	 * 
 	 */
-	void savePizza(Pizza newPizza) throws DaoException;
+	void saveClient(Client newPizza) throws DaoException;
 
 	/**
 	 * MAJ d'une pizza
@@ -38,7 +31,7 @@ public interface IPizzaDao {
 	 * @param updatePizza
 	 *            pizza modifiée
 	 */
-	void updatePizza(String codePizza, Pizza updatePizza) throws DaoException;
+	void updateClient(String codeClient, Client updateClient) throws DaoException;
 
 	/**
 	 * Suppression d'une pizza
@@ -46,9 +39,7 @@ public interface IPizzaDao {
 	 * @param codePizza
 	 *            code de la Pizza à supprimer
 	 */
-	void deletePizza(String codePizza) throws DaoException;
+	void deleteClient(String codeClient) throws DaoException;
 
-	void importPizzas(List<Pizza> pizzas, int i) throws DaoException;
-
-	Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException;
+	Client connect(Client newClient);
 }

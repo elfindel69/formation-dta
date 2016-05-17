@@ -56,8 +56,8 @@ public class PizzeriaAdminConsoleApp {
 
 	private static void launchJPA() {
 		System.out.println("DAO JPA");
-		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
-		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
+		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
 		lancerApplication(new PizzaDaoJPAImpl(em), true);
 		em.close();
 	}

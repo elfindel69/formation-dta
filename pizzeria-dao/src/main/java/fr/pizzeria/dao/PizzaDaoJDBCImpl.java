@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.ListUtils;
 
@@ -191,5 +192,10 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 			throw new DaoException(e);
 		}
 
+	}
+
+	@Override
+	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
+		throw new DaoException("méthode non implémentée");
 	}
 }
