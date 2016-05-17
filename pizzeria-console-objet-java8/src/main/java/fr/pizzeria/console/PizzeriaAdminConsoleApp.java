@@ -68,9 +68,9 @@ public class PizzeriaAdminConsoleApp {
 
 	private static void launchJDBC() {
 		//TODO implémentation JDBC ?
-		System.out.println("DAO JDBC");
+		/*System.out.println("DAO JDBC");
 		ResourceBundle jdbcBundle = ResourceBundle.getBundle("jdbc");
-		/*String driver = jdbcBundle.getString("jdbc.driver");
+		String driver = jdbcBundle.getString("jdbc.driver");
 		String url = jdbcBundle.getString("jdbc.url");
 		String user = jdbcBundle.getString("jdbc.user");
 		String password = jdbcBundle.getString("jdbc.password");*/

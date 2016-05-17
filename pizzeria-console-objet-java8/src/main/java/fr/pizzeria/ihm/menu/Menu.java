@@ -4,11 +4,11 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.options.GrouperPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.ImportPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.options.ListerCommandesNonTraiteesOptionMenu;
 import fr.pizzeria.ihm.menu.options.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.MAJPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.MaxPizzaOptionMenu;
@@ -24,11 +24,11 @@ public class Menu {
 
 	public Menu(Scanner sc, IDaoFactory daoFact, boolean menuJdbc) {
 		super();
-		initialiserOptions(sc, daoFact,menuJdbc);
+		initialiserOptions(sc, daoFact, menuJdbc);
 		this.sc = sc;
 	}
 
-	private void initialiserOptions(Scanner sc2, IDaoFactory daoFact,boolean menuJdbc) {
+	private void initialiserOptions(Scanner sc2, IDaoFactory daoFact, boolean menuJdbc) {
 		mapMenus = new TreeMap<>();
 		mapMenus.put(1, new ListerPizzaOptionMenu(daoFact));
 		mapMenus.put(2, new NouvellePizzaOptionMenu(sc2, daoFact));
@@ -36,13 +36,13 @@ public class Menu {
 		mapMenus.put(4, new SupprimerPizzaOptionMenu(sc2, daoFact));
 		mapMenus.put(5, new GrouperPizzaOptionMenu(daoFact));
 		mapMenus.put(6, new MaxPizzaOptionMenu(daoFact));
-		if(menuJdbc){
+		if (menuJdbc) {
 			mapMenus.put(7, new ImportPizzaOptionMenu(daoFact));
-			mapMenus.put(8, new MaxPizzaOptionMenu(daoFact));
+			mapMenus.put(8, new ListerCommandesNonTraiteesOptionMenu(daoFact));
 		}
-		
+
 		mapMenus.put(99, new QuitterOptionMenu());
-		
+
 	}
 
 	public void afficher() {
@@ -64,6 +64,6 @@ public class Menu {
 			saisie = sc.nextInt();
 			continuer = mapMenus.get(saisie).execute();
 		}
-		
+
 	}
 }
