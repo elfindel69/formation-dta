@@ -41,5 +41,5 @@ public interface IClientDao {
 	 */
 	void deleteClient(String codeClient) throws DaoException;
 
-	Client connect(Client newClient);
+	Client connect(String email,String password) throws DaoException;
 }

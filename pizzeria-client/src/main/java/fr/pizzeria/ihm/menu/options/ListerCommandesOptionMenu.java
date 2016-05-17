@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.ICommandeDao;
+import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
@@ -34,7 +35,12 @@ public class ListerCommandesOptionMenu extends AbstractOptionMenu {
 	 * Affichage de la liste
 	 */
 	void affichageListeCommandes() {
-		List<Commande> commandes = commandeDao.findAllCommandes(client);
+		List<Commande> commandes = null;
+		try {
+			commandes = commandeDao.findAllCommandes(client);
+		} catch (DaoException e) {
+			System.err.println(e.getMessage());
+		}
 		if (commandes != null) {
 			commandes.stream().sorted(Comparator.comparing(Commande::getNoCommande)).forEach(System.out::println);
 		}

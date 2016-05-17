@@ -56,7 +56,7 @@ public class CommanderPizzaOptionMenu extends AbstractOptionMenu {
 		try {
 			pizzas = createPizzaDao.findPizzasByCode(codes);
 		} catch (DaoException e1) {
-			e1.printStackTrace();
+			System.err.println(e1.getMessage());
 		}
 		Commande cmd = new Commande();
 		cmd.setClient(client);
@@ -64,7 +64,7 @@ public class CommanderPizzaOptionMenu extends AbstractOptionMenu {
 		java.util.Date utilDate = new java.util.Date();
 		cmd.setDateCommande(new Date(utilDate.getTime()));
 		cmd.setStatut(StatutCommande.NON_TRAITE);
-		cmd.setNoCommande("CMD" + new Timestamp(utilDate.getTime()));
+		cmd.setNoCommande("CMD" + new Timestamp(utilDate.getTime()).toString().replaceAll(" ", "_"));
 		ICommandeDao cmdDao = daoFact.createCommandeDao();
 		try {
 			cmdDao.saveCommande(cmd);

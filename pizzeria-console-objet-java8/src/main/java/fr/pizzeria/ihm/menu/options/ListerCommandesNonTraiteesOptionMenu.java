@@ -6,7 +6,6 @@ import java.util.List;
 import fr.pizzeria.dao.ICommandeDao;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Commande;
-import fr.pizzeria.model.Pizza;
 
 /**
  * Affichage de la liste des Pizzas
@@ -15,17 +14,14 @@ import fr.pizzeria.model.Pizza;
  */
 public class ListerCommandesNonTraiteesOptionMenu extends AbstractOptionMenu {
 
-	
 	private static final String LISTER_LES_COMMANDES = "Lister les commandes non traitées";
-	private IDaoFactory daoFact;
-	private ICommandeDao commandeDao;
+	
 	/**
 	 * Constructeur
 	 * @param daoFact - lien vers la DAO
 	 */
 	public ListerCommandesNonTraiteesOptionMenu(IDaoFactory daoFact) {
 		super(LISTER_LES_COMMANDES,daoFact);
-		
 	}
 
 	/**
@@ -35,7 +31,7 @@ public class ListerCommandesNonTraiteesOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean execute() {
 		System.out.println(LISTER_LES_COMMANDES);
-		commandeDao = daoFact.createCommandeDao();
+
 		affichageListeCommandes();
 
 		return true;
@@ -45,6 +41,7 @@ public class ListerCommandesNonTraiteesOptionMenu extends AbstractOptionMenu {
 	 * Affichage de la liste
 	 */
 	void affichageListeCommandes() {
+		ICommandeDao commandeDao = pizzaDao.createCommandeDao();
 		List<Commande> commandes = commandeDao.findCommandesNonTraitees();
 		if (commandes != null) {
 			commandes.stream().sorted(Comparator.comparing(Commande::getNoCommande)).forEach(System.out::println);

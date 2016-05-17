@@ -6,6 +6,8 @@ import java.util.TreeMap;
 
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
+import fr.pizzeria.ihm.menu.options.AjouterLivreurOptionMenu;
+import fr.pizzeria.ihm.menu.options.ExpedierCommandeOptionMenu;
 import fr.pizzeria.ihm.menu.options.GrouperPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.ImportPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.ListerCommandesNonTraiteesOptionMenu;
@@ -39,6 +41,8 @@ public class Menu {
 		if (menuJdbc) {
 			mapMenus.put(7, new ImportPizzaOptionMenu(daoFact));
 			mapMenus.put(8, new ListerCommandesNonTraiteesOptionMenu(daoFact));
+			mapMenus.put(9, new AjouterLivreurOptionMenu(sc2, daoFact));
+			mapMenus.put(10, new ExpedierCommandeOptionMenu(sc2, daoFact));
 		}
 
 		mapMenus.put(99, new QuitterOptionMenu());
