@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
+import fr.pizzeria.model.StatutCommande;
 
 public class CommandeDaoJPAImpl implements ICommandeDao {
 	private EntityManagerFactory entityFacto;
@@ -40,6 +41,16 @@ public class CommandeDaoJPAImpl implements ICommandeDao {
 		EntityManager em = entityFacto.createEntityManager();
 		TypedQuery<Commande> query = em.createQuery("select c from Commande c where c.client =:client", Commande.class)
 				.setParameter("client", client);
+		List<Commande> commandes = query.getResultList();
+		em.close();
+		return commandes;
+	}
+
+	@Override
+	public List<Commande> findCommandesNonTraitees() {
+		EntityManager em = entityFacto.createEntityManager();
+		TypedQuery<Commande> query = em.createQuery("select c from Commande c where c.statut =:statut", Commande.class)
+				.setParameter("statut", StatutCommande.NON_TRAITE);
 		List<Commande> commandes = query.getResultList();
 		em.close();
 		return commandes;

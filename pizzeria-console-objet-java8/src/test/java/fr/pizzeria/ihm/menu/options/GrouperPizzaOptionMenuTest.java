@@ -1,11 +1,16 @@
 package fr.pizzeria.ihm.menu.options;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -14,8 +19,8 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemErrRule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.factory.DaoFactoryJPAImpl;
+import fr.pizzeria.factory.IDaoFactory;
 
 public class GrouperPizzaOptionMenuTest {
 
@@ -28,12 +33,14 @@ public class GrouperPizzaOptionMenuTest {
 	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
 	private GrouperPizzaOptionMenu m;
-	private IPizzaDao pizzaDao;
+	private IDaoFactory daoFact;
 
 	@Before
 	public void setUp() {
-		pizzaDao = new PizzaDaoImpl();
-		m = new GrouperPizzaOptionMenu(pizzaDao);
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
+		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
+		daoFact = DaoFactoryJPAImpl.getImpl(em);
+		m = new GrouperPizzaOptionMenu(daoFact);
 	}
 
 	@Test

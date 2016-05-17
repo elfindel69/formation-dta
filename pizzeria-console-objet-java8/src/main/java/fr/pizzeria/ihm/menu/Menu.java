@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.options.GrouperPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.options.ImportPizzaOptionMenu;
@@ -21,23 +22,25 @@ public class Menu {
 	private Map<Integer, AbstractOptionMenu> mapMenus;
 	private Scanner sc;
 
-	public Menu(Scanner sc, IPizzaDao pizzaDao, boolean menuJdbc) {
+	public Menu(Scanner sc, IDaoFactory daoFact, boolean menuJdbc) {
 		super();
-		initialiserOptions(sc, pizzaDao,menuJdbc);
+		initialiserOptions(sc, daoFact,menuJdbc);
 		this.sc = sc;
 	}
 
-	private void initialiserOptions(Scanner scanner, IPizzaDao pizzaDao,boolean menuJdbc) {
+	private void initialiserOptions(Scanner sc2, IDaoFactory daoFact,boolean menuJdbc) {
 		mapMenus = new TreeMap<>();
-		mapMenus.put(1, new ListerPizzaOptionMenu(pizzaDao));
-		mapMenus.put(2, new NouvellePizzaOptionMenu(scanner, pizzaDao));
-		mapMenus.put(3, new MAJPizzaOptionMenu(scanner, pizzaDao));
-		mapMenus.put(4, new SupprimerPizzaOptionMenu(scanner, pizzaDao));
-		mapMenus.put(5, new GrouperPizzaOptionMenu(pizzaDao));
-		mapMenus.put(6, new MaxPizzaOptionMenu(pizzaDao));
+		mapMenus.put(1, new ListerPizzaOptionMenu(daoFact));
+		mapMenus.put(2, new NouvellePizzaOptionMenu(sc2, daoFact));
+		mapMenus.put(3, new MAJPizzaOptionMenu(sc2, daoFact));
+		mapMenus.put(4, new SupprimerPizzaOptionMenu(sc2, daoFact));
+		mapMenus.put(5, new GrouperPizzaOptionMenu(daoFact));
+		mapMenus.put(6, new MaxPizzaOptionMenu(daoFact));
 		if(menuJdbc){
-			mapMenus.put(7, new ImportPizzaOptionMenu(pizzaDao));
+			mapMenus.put(7, new ImportPizzaOptionMenu(daoFact));
+			mapMenus.put(8, new MaxPizzaOptionMenu(daoFact));
 		}
+		
 		mapMenus.put(99, new QuitterOptionMenu());
 		
 	}

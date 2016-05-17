@@ -34,7 +34,7 @@ Le menu affiché
 ```
 
 Les sources sont dans le répertoire [pizzeria-console-objet](pizzeria-console-objet)
-## pizzeria-console-objet-java8
+## pizzeria-console
 Cette application applique une **approche orientée objet de la programmation**.
 
 Elle réécrit l'application `pizzeria-console-imperative` en appliquant les principes objet (encapsulation, héritage, polymorphisme, ...) et les specs 1.8 (lambdas).
@@ -49,5 +49,5 @@ Le menu affiché
 4. Quitter
 ```
 
-Les sources sont dans le répertoire [pizzeria-console-objet-java8](pizzeria-console-objet-java8)
+Les sources sont dans le répertoire [pizzeria-console](pizzeria-console)
 

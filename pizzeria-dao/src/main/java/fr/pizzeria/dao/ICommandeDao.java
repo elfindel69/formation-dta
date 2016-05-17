@@ -12,4 +12,6 @@ public interface ICommandeDao {
 
 	List<Commande> findAllCommandes(Client client);
 
+	List<Commande> findCommandesNonTraitees();
+
 }
