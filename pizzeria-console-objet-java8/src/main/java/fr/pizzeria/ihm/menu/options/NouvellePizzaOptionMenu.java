@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
+import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -27,7 +28,7 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 	 * @param dao
 	 *            - lien vers la DAO
 	 */
-	public NouvellePizzaOptionMenu(Scanner sc, IPizzaDao dao) {
+	public NouvellePizzaOptionMenu(Scanner sc, IDaoFactory dao) {
 		super(AJOUTER_LIBELLE_MENU, sc, dao);
 	}
 
@@ -41,8 +42,9 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 
 		System.out.println(AJOUTER_MSG);
 		try {
+			IPizzaDao pizzaDaoImpl = pizzaDao.createPizzaDao();
 			Pizza newPizza = saisiePizza(sc);
-			pizzaDao.savePizza(newPizza);
+			pizzaDaoImpl.savePizza(newPizza);
 			System.out.println(AJOUTER_PIZZA_MSG_OK);
 
 		} catch (DaoException e) {

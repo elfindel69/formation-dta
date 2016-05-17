@@ -1,8 +1,10 @@
 package fr.pizzeria.dao;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,8 +22,8 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJPAImpl implements IPizzaDao {
 
-	private EntityManagerFactory entityFacto;
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
+	private EntityManagerFactory entityFacto;
 
 	public PizzaDaoJPAImpl(EntityManagerFactory entityFacto) {
 		this.entityFacto = entityFacto;
@@ -133,6 +135,19 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 			throw new DaoException(e);
 		}
 		mapPizzas.put(p.getCode(), p);
+	}
+
+	@Override
+	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
+		Set<Pizza> pizzas = new HashSet<>();
+		for (String code : codes) {
+			EntityManager em = entityFacto.createEntityManager();
+			Pizza p = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class)
+					.setParameter("code", code).getSingleResult();
+			em.close();
+			pizzas.add(p);
+		}
+		return pizzas;
 	}
 
 }

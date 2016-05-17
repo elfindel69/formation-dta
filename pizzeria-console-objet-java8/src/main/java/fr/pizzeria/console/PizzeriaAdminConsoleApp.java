@@ -11,6 +11,8 @@ import javax.persistence.Persistence;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoJDBCImpl;
 import fr.pizzeria.dao.PizzaDaoJPAImpl;
+import fr.pizzeria.factory.DaoFactoryJPAImpl;
+import fr.pizzeria.factory.IDaoFactory;
 
 /**
  * Classe principale - administration de la pizzeria
@@ -19,6 +21,7 @@ import fr.pizzeria.dao.PizzaDaoJPAImpl;
  *
  */
 public class PizzeriaAdminConsoleApp {
+	private static IDaoFactory daoFact;
 	private PizzeriaAdminConsoleApp(){
 		
 	}
@@ -29,7 +32,7 @@ public class PizzeriaAdminConsoleApp {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-
+		
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
 		int daoImplConf = Integer.parseInt(confString);
@@ -56,26 +59,29 @@ public class PizzeriaAdminConsoleApp {
 
 	private static void launchJPA() {
 		System.out.println("DAO JPA");
-		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
-		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");
-		lancerApplication(new PizzaDaoJPAImpl(em), true);
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
+		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
+		daoFact = DaoFactoryJPAImpl.getImpl(em);
+		lancerApplication(true);
 		em.close();
 	}
 
 	private static void launchJDBC() {
-		System.out.println("DAO JDBC");
+		//TODO implémentation JDBC ?
+		/*System.out.println("DAO JDBC");
 		ResourceBundle jdbcBundle = ResourceBundle.getBundle("jdbc");
 		String driver = jdbcBundle.getString("jdbc.driver");
 		String url = jdbcBundle.getString("jdbc.url");
 		String user = jdbcBundle.getString("jdbc.user");
-		String password = jdbcBundle.getString("jdbc.password");
-		lancerApplication(new PizzaDaoJDBCImpl(driver, url, user, password), true);
+		String password = jdbcBundle.getString("jdbc.password");*/
+		//lancerApplication(new PizzaDaoJDBCImpl(driver, url, user, password), true);
 	}
 
-	public static void lancerApplication(IPizzaDao impl, boolean menuJdbc) {
+
+	public static void lancerApplication(boolean menuJdbc) {
 		// scanner
 		try (Scanner sc = new Scanner(System.in)) {// liste des pizzas
-			fr.pizzeria.ihm.menu.Menu menu = new fr.pizzeria.ihm.menu.Menu(sc, impl, menuJdbc);
+			fr.pizzeria.ihm.menu.Menu menu = new fr.pizzeria.ihm.menu.Menu(sc, daoFact, menuJdbc);
 			menu.afficher();
 		}
 

@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
+import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -27,7 +28,7 @@ public abstract class AbstractOptionMenu {
 	protected final String libelle;
 	protected Scanner sc;
 	protected Pizza[] tabPizza;
-	protected IPizzaDao pizzaDao;
+	protected IDaoFactory pizzaDao;
 
 	/**
 	 * Constructeur par défault
@@ -44,12 +45,12 @@ public abstract class AbstractOptionMenu {
 	 * 
 	 * @param libelle
 	 *            - libellé du menu
-	 * @param pizzaDao
+	 * @param daoFact
 	 *            - lien vers la DAO
 	 */
-	public AbstractOptionMenu(String libelle, IPizzaDao pizzaDao) {
+	public AbstractOptionMenu(String libelle, IDaoFactory daoFact) {
 		this.libelle = libelle;
-		this.pizzaDao = pizzaDao;
+		this.pizzaDao = daoFact;
 	}
 
 	/**
@@ -62,7 +63,7 @@ public abstract class AbstractOptionMenu {
 	 * @param pizzaDao
 	 *            - lien vers la DAO
 	 */
-	public AbstractOptionMenu(String libelle, Scanner scanner, IPizzaDao pizzaDao) {
+	public AbstractOptionMenu(String libelle, Scanner scanner, IDaoFactory pizzaDao) {
 		this.libelle = libelle;
 		this.pizzaDao = pizzaDao;
 		this.sc = scanner;
@@ -103,8 +104,9 @@ public abstract class AbstractOptionMenu {
 	 */
 	void affichageListe() {
 		List<Pizza> pizzas = null;
+		IPizzaDao pizzaDaoImpl = pizzaDao.createPizzaDao();
 		try {
-			pizzas = pizzaDao.findAllPizzas();
+			pizzas = pizzaDaoImpl.findAllPizzas();
 		} catch (DaoException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

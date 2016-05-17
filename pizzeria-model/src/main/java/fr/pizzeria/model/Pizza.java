@@ -46,6 +46,10 @@ public class Pizza {
 	@Column(name = "categorie")
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza cat;
+	
+	@Column(name = "url_image")
+	private String urlImage;
+	
 	private static int nbPizzas;
 
 	/**
@@ -225,6 +229,14 @@ public class Pizza {
 
 	public static void setNbPizzas(int nbPizzas) {
 		Pizza.nbPizzas = nbPizzas;
+	}
+
+	public String getUrl_image() {
+		return urlImage;
+	}
+
+	public void setUrl_image(String url_image) {
+		this.urlImage = url_image;
 	}
 
 }

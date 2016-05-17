@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.DeletePizzaException;
@@ -105,6 +106,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
 		throw new DaoException("méthode non implémentée");
 		
+	}
+
+	@Override
+	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
+		throw new DaoException("méthode non implémentée");
 	}
 
 	

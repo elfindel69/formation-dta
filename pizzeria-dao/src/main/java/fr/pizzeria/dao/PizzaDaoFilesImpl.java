@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,11 +44,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
 				try {
-					String line = Files.readAllLines(path, Charset.forName("UTF-8")).get(0);
-					String[] tab = line.split(";");
-					p.setNom(tab[0]);
-					p.setPrix(new BigDecimal(tab[1]));
-					p.setCat(CategoriePizza.valueOf(tab[2]));
+					p=setPizza(path, p);
 
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
@@ -61,6 +58,15 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 		}
 
 		return pizzas;
+	}
+
+	private Pizza setPizza(Path path, Pizza p) throws IOException {
+		String line = Files.readAllLines(path, Charset.forName("UTF-8")).get(0);
+		String[] tab = line.split(";");
+		p.setNom(tab[0]);
+		p.setPrix(new BigDecimal(tab[1]));
+		p.setCat(CategoriePizza.valueOf(tab[2]));
+		return p;
 	}
 
 	@Override
@@ -113,6 +119,11 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
+		throw new DaoException("méthode non implémentée");
+	}
+
+	@Override
+	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
 		throw new DaoException("méthode non implémentée");
 	}
 }

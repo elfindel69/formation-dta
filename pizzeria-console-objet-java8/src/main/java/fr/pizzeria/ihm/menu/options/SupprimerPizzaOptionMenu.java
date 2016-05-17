@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
+import fr.pizzeria.factory.IDaoFactory;
 
 /**
  * Menu de suppression d'une pizza
@@ -24,7 +25,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	 * @param dao
 	 *            - lien vers la DAO
 	 */
-	public SupprimerPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
+	public SupprimerPizzaOptionMenu(Scanner sc, IDaoFactory pizzaDao) {
 		super(SUPPRIMER_PIZZA_LIBELLE_MENU, sc, pizzaDao);
 	}
 
@@ -43,7 +44,8 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 		String codePizza = sc.next();
 		if (!codePizza.equals(MENU_CODE_ABANDON)) {
 			try {
-				pizzaDao.deletePizza(codePizza);
+				IPizzaDao pizzaDaoImpl = pizzaDao.createPizzaDao();
+				pizzaDaoImpl.deletePizza(codePizza);
 				System.out.println(SUPPR_PIZZA_MSG_OK);
 				
 			} catch (DaoException e) {

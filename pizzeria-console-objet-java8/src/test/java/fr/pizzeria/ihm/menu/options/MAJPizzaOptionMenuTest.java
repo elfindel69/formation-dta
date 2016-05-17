@@ -11,7 +11,11 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,8 +25,9 @@ import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exceptions.DaoException;
+import fr.pizzeria.factory.DaoFactoryJPAImpl;
+import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -39,12 +44,16 @@ public class MAJPizzaOptionMenuTest {
 	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
 	private MAJPizzaOptionMenu m;
+	private IDaoFactory daoFact;
 	private IPizzaDao pizzaDao;
 
 	@Before
 	public void setUp() {
-		pizzaDao = new PizzaDaoImpl();
-		m = new MAJPizzaOptionMenu(new Scanner(System.in), pizzaDao);
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
+		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
+		daoFact = DaoFactoryJPAImpl.getImpl(em);
+		m = new MAJPizzaOptionMenu(new Scanner(System.in), daoFact);
+		pizzaDao = daoFact.createPizzaDao();
 	}
 
 	@Test
@@ -67,7 +76,7 @@ public class MAJPizzaOptionMenuTest {
 			systemOutRule.clearLog();
 		}
 	}
-	
+
 	@Test
 	public void testExecuteCodeNonExistant() throws DaoException, IOException {
 		systemOutRule.clearLog();

@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm.menu.options;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -16,10 +16,10 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 	
 	/**
 	 * Constructeur
-	 * @param pizzaDao - lien vers la DAO
+	 * @param daoFact - lien vers la DAO
 	 */
-	public ListerPizzaOptionMenu(IPizzaDao pizzaDao) {
-		super(LISTER_PIZZA_LIBELLE_MENU,pizzaDao);
+	public ListerPizzaOptionMenu(IDaoFactory daoFact) {
+		super(LISTER_PIZZA_LIBELLE_MENU,daoFact);
 	}
 
 	/**
