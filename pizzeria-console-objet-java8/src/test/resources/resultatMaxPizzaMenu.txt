@@ -1,0 +1,3 @@
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
+Hibernate: select pizza0_.id as id1_4_, pizza0_.categorie as categori2_4_, pizza0_.code as code3_4_, pizza0_.nom as nom4_4_, pizza0_.prix as prix5_4_, pizza0_.url_image as url_imag6_4_ from pizza pizza0_
+GAR -> gargantua (17.00€) VIANDE

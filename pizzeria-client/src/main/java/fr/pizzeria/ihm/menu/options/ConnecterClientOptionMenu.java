@@ -26,29 +26,26 @@ public class ConnecterClientOptionMenu extends AbstractOptionMenu {
 		boolean continuer = true;
 		System.out.println(CONNECTION_MSG);
 		Client newClient = saisieCredentials(sc,clientDao);
-		try {
-			clientDao.saveClient(newClient);
-		} catch (DaoException e) {
-			e.printStackTrace();
-		}
 		if (newClient != null) {
-
 			ConnectionMenu menu = new ConnectionMenu(sc, newClient, daoFact);
 			menu.afficher();
-
 		}
 
 		return continuer;
 	}
 
 	private Client saisieCredentials(Scanner sc, IClientDao clientDao) {
-		Client newClient = new Client();
 		System.out.println(MENU_MSG_SAISIE_EMAIL);
-		newClient.setEmail(sc.next());
+		String email = sc.next();
 		System.out.println(MENU_MSG_SAISIE_PASSWORD);
-		newClient.setPassword(DigestUtils.md5Hex(sc.next()));
-
-		return clientDao.connect(newClient);
+		String password =DigestUtils.md5Hex(sc.next());
+		Client client = null;
+		try {
+			client = clientDao.connect(email,password);
+		} catch (DaoException e) {
+			System.err.println(e.getMessage());
+		}
+		return client;
 	}
 
 }

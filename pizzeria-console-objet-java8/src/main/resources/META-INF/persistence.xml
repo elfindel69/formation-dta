@@ -11,8 +11,7 @@
 			<property name="javax.persistence.jdbc.user" value="${jdbc.user}"/>
 			<property name="javax.persistence.jdbc.password" value="${jdbc.password}"/>
 			<property name="javax.persistence.jdbc.driver" value="${jdbc.driver}"/>
-			<property name="hibernate.show_sql" value="true" />
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> 
+			<property name="hibernate.show_sql" value="true" /> 
 		</properties>
 	</persistence-unit>
 </persistence>

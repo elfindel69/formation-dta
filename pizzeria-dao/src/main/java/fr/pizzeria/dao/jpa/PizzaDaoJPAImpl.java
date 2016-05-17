@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.jpa;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +14,7 @@ import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.ListUtils;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.DeletePizzaException;
 import fr.pizzeria.exceptions.SavePizzaException;
@@ -142,9 +143,16 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 		Set<Pizza> pizzas = new HashSet<>();
 		for (String code : codes) {
 			EntityManager em = entityFacto.createEntityManager();
-			Pizza p = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class)
-					.setParameter("code", code).getSingleResult();
-			em.close();
+			
+			Pizza p = null;
+			try{
+				em.createQuery("select p from Pizza p where p.code = :code", Pizza.class)
+				.setParameter("code", code).getSingleResult();
+			}catch(PersistenceException e){
+				throw new DaoException("ce code n'existe pas");
+			}finally{
+				em.close();
+			}
 			pizzas.add(p);
 		}
 		return pizzas;

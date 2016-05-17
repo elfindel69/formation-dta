@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -45,7 +48,10 @@ public class MaxPizzaOptionMenuTest {
 		boolean next = m.execute();
 		assertTrue(next);
 
-		assertEquals("IND -> L'indienne (14.0€) VIANDE" + System.lineSeparator(), systemOutRule.getLog());
+		String outAttendu = Files.lines(Paths.get("src/test/resources/resultatMaxPizzaMenu.txt"))
+				.collect(Collectors.joining(System.lineSeparator()));
+		outAttendu += System.lineSeparator();
+		assertEquals(outAttendu, systemOutRule.getLog());
 		systemOutRule.clearLog();
 
 	}
