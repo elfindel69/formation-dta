@@ -6,30 +6,33 @@ import java.util.List;
 import fr.pizzeria.dao.ICommandeDao;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Commande;
-import fr.pizzeria.model.Pizza;
 
 /**
  * Affichage de la liste des Pizzas
+ * 
  * @author Valentin
  *
  */
 public class ListerCommandesNonTraiteesOptionMenu extends AbstractOptionMenu {
 
-	
 	private static final String LISTER_LES_COMMANDES = "Lister les commandes non traitées";
 	private IDaoFactory daoFact;
 	private ICommandeDao commandeDao;
+
 	/**
 	 * Constructeur
-	 * @param daoFact - lien vers la DAO
+	 * 
+	 * @param daoFact
+	 *            - lien vers la DAO
 	 */
 	public ListerCommandesNonTraiteesOptionMenu(IDaoFactory daoFact) {
-		super(LISTER_LES_COMMANDES,daoFact);
-		
+		super(LISTER_LES_COMMANDES, daoFact);
+
 	}
 
 	/**
 	 * execution du menu
+	 * 
 	 * @return flag d'execution (true)
 	 */
 	@Override

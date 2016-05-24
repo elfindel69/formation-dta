@@ -8,9 +8,6 @@ import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoJDBCImpl;
-import fr.pizzeria.dao.PizzaDaoJPAImpl;
 import fr.pizzeria.factory.DaoFactoryJPAImpl;
 import fr.pizzeria.factory.IDaoFactory;
 
@@ -22,9 +19,11 @@ import fr.pizzeria.factory.IDaoFactory;
  */
 public class PizzeriaAdminConsoleApp {
 	private static IDaoFactory daoFact;
-	private PizzeriaAdminConsoleApp(){
-		
+
+	private PizzeriaAdminConsoleApp() {
+
 	}
+
 	/**
 	 * main - Gestion des pizzas
 	 * 
@@ -32,7 +31,7 @@ public class PizzeriaAdminConsoleApp {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		
+
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
 		int daoImplConf = Integer.parseInt(confString);
@@ -67,16 +66,18 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	private static void launchJDBC() {
-		//TODO implémentation JDBC ?
-		/*System.out.println("DAO JDBC");
-		ResourceBundle jdbcBundle = ResourceBundle.getBundle("jdbc");
-		String driver = jdbcBundle.getString("jdbc.driver");
-		String url = jdbcBundle.getString("jdbc.url");
-		String user = jdbcBundle.getString("jdbc.user");
-		String password = jdbcBundle.getString("jdbc.password");*/
-		//lancerApplication(new PizzaDaoJDBCImpl(driver, url, user, password), true);
+		// TODO implémentation JDBC ?
+		/*
+		 * System.out.println("DAO JDBC"); ResourceBundle jdbcBundle =
+		 * ResourceBundle.getBundle("jdbc"); String driver =
+		 * jdbcBundle.getString("jdbc.driver"); String url =
+		 * jdbcBundle.getString("jdbc.url"); String user =
+		 * jdbcBundle.getString("jdbc.user"); String password =
+		 * jdbcBundle.getString("jdbc.password");
+		 */
+		// lancerApplication(new PizzaDaoJDBCImpl(driver, url, user, password),
+		// true);
 	}
-
 
 	public static void lancerApplication(boolean menuJdbc) {
 		// scanner

@@ -9,6 +9,8 @@
 		<module>pizzeria-model</module>
 		<module>pizzeria-dao</module>
 		<module>pizzeria-console-objet-java8</module>
+		<module>pizzeria-client</module>
+		<module>pizzeria-admin-app</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,6 +24,7 @@
 		<hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
 		<hibernate-entity.version>5.1.0.Final</hibernate-entity.version>
 		<commons-codec.version>1.10</commons-codec.version>
+		<servlet.version>3.1.0</servlet.version>
 	</properties>
 	<build>
 		<pluginManagement>
@@ -59,11 +62,16 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-			    <groupId>commons-codec</groupId>
-			    <artifactId>commons-codec</artifactId>
-			    <version>${commons-codec.version}</version>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
 			</dependency>
-		
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
 			<dependency>
 				<groupId>org.hibernate.javax.persistence</groupId>
 				<artifactId>hibernate-jpa-2.1-api</artifactId>

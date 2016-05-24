@@ -231,12 +231,12 @@ public class Pizza {
 		Pizza.nbPizzas = nbPizzas;
 	}
 
-	public String getUrl_image() {
+	public String getUrlImage() {
 		return urlImage;
 	}
 
-	public void setUrl_image(String url_image) {
-		this.urlImage = url_image;
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 }
