@@ -9,8 +9,12 @@
 	</parent>
 	<artifactId>pizzeria-admin-app</artifactId>
 	<packaging>war</packaging>
+
 	<name>pizzeria-admin-app Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+	</properties>
 	<dependencies>
 
 		<dependency>
@@ -22,12 +26,8 @@
 			<artifactId>pizzeria-dao</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>fr.pizzeria</groupId>
-			<artifactId>pizzeria-model</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>jstl</groupId>
-				<artifactId>jstl</artifactId>
+			<artifactId>jstl</artifactId>
 		</dependency>
 	</dependencies>
 
