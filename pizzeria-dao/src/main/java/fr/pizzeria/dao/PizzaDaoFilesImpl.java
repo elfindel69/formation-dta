@@ -126,4 +126,9 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
 		throw new DaoException("méthode non implémentée");
 	}
+
+	@Override
+	public Pizza findPizzaByCode(String parameter) throws DaoException {
+		throw new DaoException("méthode non implémentée");
+	}
 }

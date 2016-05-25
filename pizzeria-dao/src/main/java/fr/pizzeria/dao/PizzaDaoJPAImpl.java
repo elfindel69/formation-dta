@@ -150,4 +150,13 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 		return pizzas;
 	}
 
+	@Override
+	public Pizza findPizzaByCode(String code) throws DaoException {
+		EntityManager em = entityFacto.createEntityManager();
+		Pizza p = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class)
+				.setParameter("code", code).getSingleResult();
+		em.close();
+		return p;
+	}
+
 }

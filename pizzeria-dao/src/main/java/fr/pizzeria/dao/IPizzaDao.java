@@ -13,6 +13,8 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public interface IPizzaDao {
+	IPizzaDao DEFAULT_IMPLEMENTATION = new PizzaDaoImpl();
+
 	/**
 	 * Liste des pizzas
 	 * 
@@ -51,4 +53,6 @@ public interface IPizzaDao {
 	void importPizzas(List<Pizza> pizzas, int i) throws DaoException;
 
 	Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException;
+
+	Pizza findPizzaByCode(String parameter) throws DaoException;
 }

@@ -113,6 +113,14 @@ public class PizzaDaoImpl implements IPizzaDao {
 		throw new DaoException("méthode non implémentée");
 	}
 
+	@Override
+	public Pizza findPizzaByCode(String code) throws DaoException {
+		if (!pizzas.containsKey(code)) {
+			throw new DeletePizzaException("code non trouvé!");
+		}
+		return pizzas.get(code);
+	}
+
 	
 
 }
