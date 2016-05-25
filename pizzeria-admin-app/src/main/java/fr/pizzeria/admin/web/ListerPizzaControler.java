@@ -35,8 +35,7 @@ public class ListerPizzaControler extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("list", pizzas);
-		RequestDispatcher dispatcher = this.getServletContext()
-				.getRequestDispatcher("/WEB-INF/views/pizzas/listerPizzas.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pizzas/listerPizzas.jsp");
 
 		dispatcher.forward(request, response);
 	}
