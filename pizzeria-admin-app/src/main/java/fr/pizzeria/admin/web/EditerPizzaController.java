@@ -61,16 +61,16 @@ public class EditerPizzaController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (StringUtils.isBlank(request.getParameter("id")) || StringUtils.isBlank(request.getParameter("code"))
+		if (StringUtils.isBlank(request.getParameter("id")) ||StringUtils.isBlank(request.getParameter("oldCode"))|| StringUtils.isBlank(request.getParameter("newCode"))
 				|| StringUtils.isBlank(request.getParameter("nom")) || StringUtils.isBlank(request.getParameter("prix"))
 				|| StringUtils.isBlank(request.getParameter("cat"))) {
 			response.sendError(400, "Non non non ! Donnes moi toutes les valeurs !");
 		}
 		Pizza newPizza = new Pizza();
-		String code = request.getParameter("code");
+		String code = request.getParameter("oldCode");
 		newPizza.setId(Integer.parseInt(request.getParameter("id")));
 		newPizza.setNom(request.getParameter("nom"));
-		newPizza.setCode(code);
+		newPizza.setCode(request.getParameter("newCode"));
 		try {
 			newPizza.setPrix(new BigDecimal(request.getParameter("prix")));
 		} catch (NumberFormatException e) {

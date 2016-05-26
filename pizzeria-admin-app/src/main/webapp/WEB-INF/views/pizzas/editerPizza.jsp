@@ -14,14 +14,13 @@
 </head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <body>
-	<c:set var='pizza' value="${pizza}"/>
 	<form method="post" class="form-horizontal" role="form">
 		<fieldset>
 			<legend>edition d'une pizza</legend>
 			<div class="form-group">
 				<label for="code" class="col-md-2 control-label">Code</label>
 				<div class="col-md-10">
-					<input type="text" name="code" id="code"
+					<input type="text" name="newCode" id="code"
 						class="form-control input-md" value="<c:out value='${pizza.code}'/>">
 				</div>
 
@@ -52,7 +51,7 @@
 			</div>
 			<div class="col-md-2 col-md-offset-2">
 				<input type="hidden" name="id"  value="<c:out value='${pizza.id}'/>">
-
+				<input type="hidden" name="oldCode"  value="<c:out value='${pizza.code}'/>">
 				<button class="btn btn-success"type="submit">Valider</button>
 			</div>
 		</fieldset>
@@ -60,7 +59,7 @@
 
 	</form>
 
-<c:remove var='pizza'/>
+
 
 </body>
 </html>
