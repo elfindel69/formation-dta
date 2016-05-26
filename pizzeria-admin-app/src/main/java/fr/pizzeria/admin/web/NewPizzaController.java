@@ -3,6 +3,7 @@ package fr.pizzeria.admin.web;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
+
 @WebServlet("/pizzas/new")
 public class NewPizzaController extends HttpServlet {
 
@@ -23,12 +25,14 @@ public class NewPizzaController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
+	@Inject
+	private PizzaService pizzaService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setStatus(200);
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/pizzas/newPizza.jsp");
+		RequestDispatcher dispatcher = this.getServletContext()
+				.getRequestDispatcher("/WEB-INF/views/pizzas/newPizza.jsp");
 		dispatcher.forward(req, resp);
 	}
 
@@ -45,7 +49,7 @@ public class NewPizzaController extends HttpServlet {
 		} else {
 			try {
 				Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(categ));
-				pizzaDao.savePizza(newPizza);
+				pizzaService.savePizza(newPizza);
 				resp.setStatus(201);
 				resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 			} catch (DaoException e) {

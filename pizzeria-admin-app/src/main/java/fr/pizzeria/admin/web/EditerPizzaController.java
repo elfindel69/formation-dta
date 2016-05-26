@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -25,7 +26,8 @@ import fr.pizzeria.model.Pizza;
 public class EditerPizzaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = Logger.getLogger(EditerPizzaController.class.toString());
-	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
+	@Inject
+	private PizzaService pizzaService;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -39,7 +41,7 @@ public class EditerPizzaController extends HttpServlet {
 		} else {
 			Pizza pizza = new Pizza();
 			try {
-				pizza = pizzaDao.findPizzaByCode(code);
+				pizza = pizzaService.findPizzaByCode(code);
 				response.setStatus(200);
 			} catch (DaoException e) {
 				response.sendRedirect("/pizzas/list/?msgErreur=OOps pizza non trouvée");
@@ -78,7 +80,7 @@ public class EditerPizzaController extends HttpServlet {
 		newPizza.setCat(CategoriePizza.valueOf(request.getParameter("cat")));
 
 		try {
-			pizzaDao.updatePizza(code, newPizza);
+			pizzaService.updatePizza(code, newPizza);
 			System.out.println(newPizza);
 
 		} catch (DaoException e) {
@@ -96,7 +98,7 @@ public class EditerPizzaController extends HttpServlet {
 			resp.sendError(400, "nombre de paramètre incorrect");
 		} else {
 			try {
-				pizzaDao.deletePizza(code);
+				pizzaService.deletePizza(code);
 			} catch (DaoException e) {
 				resp.sendError(500, "Problème lors de la création de la pizza : pizza inexistante");
 			} catch (NumberFormatException e) {
