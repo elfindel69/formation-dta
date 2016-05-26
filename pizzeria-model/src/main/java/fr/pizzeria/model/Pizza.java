@@ -70,9 +70,6 @@ public class Pizza {
 	 *            prix de la pizza
 	 */
 	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat) {
-
-		this.id = Pizza.getNbPizzas();
-		Pizza.setNbPizzas(Pizza.getNbPizzas() + 1);
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;

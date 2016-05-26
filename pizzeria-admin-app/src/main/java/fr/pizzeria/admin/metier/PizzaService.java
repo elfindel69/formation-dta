@@ -3,48 +3,65 @@ package fr.pizzeria.admin.metier;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
-import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
-@SessionScoped
-public class PizzaService implements Serializable{
+@Stateless
+public class PizzaService implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Inject
-	private IPizzaDao pizzaDao;
-	
-	
+	@PersistenceContext(unitName = "pizzeria-db")
+	private EntityManager em;
 
 	public PizzaService() {
 		super();
 	}
 
 	public void savePizza(Pizza newPizza) throws DaoException {
-		pizzaDao.savePizza(newPizza);
+		try {
+			em.persist(newPizza);
+		} catch (PersistenceException e) {
+			throw new DaoException(e);
+		}
 
 	}
 
 	public void updatePizza(String code, Pizza newPizza) throws DaoException {
-		pizzaDao.updatePizza(code, newPizza);
+		Pizza oldPizza = findPizzaByCode(code);
+		oldPizza.setCode(newPizza.getCode());
+		oldPizza.setNom(newPizza.getNom());
+		oldPizza.setPrix(newPizza.getPrix());
+		oldPizza.setCat(newPizza.getCat());
 	}
 
 	public Pizza findPizzaByCode(String code) throws DaoException {
-		return pizzaDao.findPizzaByCode(code);
+		try{
+			return em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", code)
+					.getSingleResult();
+		}catch(NoResultException e){
+			throw new DaoException("code non trouvé!");
+		}
+		
 	}
 
 	public void deletePizza(String code) throws DaoException {
-		pizzaDao.deletePizza(code);
+		Pizza oldPizza = findPizzaByCode(code);
+		em.remove(oldPizza);
 
 	}
 
 	public List<Pizza> findAllPizzas() throws DaoException {
-		return pizzaDao.findAllPizzas();
+		TypedQuery<Pizza> query = em.createQuery("Select p from Pizza p", Pizza.class);
+		return query.getResultList();
 	}
 
 }
