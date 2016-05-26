@@ -26,8 +26,7 @@
 		<commons-codec.version>1.10</commons-codec.version>
 		<servlet.version>3.0.1</servlet.version>
 		<jstl.version>1.2</jstl.version>
-		<cdi.version>1.2</cdi.version>
-		<ejb.version>3.0</ejb.version>
+		<jee.version>7.0</jee.version>
 	</properties>
 	<build>
 		<pluginManagement>
@@ -65,15 +64,9 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>javax.ejb</groupId>
-				<artifactId>ejb-api</artifactId>
-				<version>${ejb.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.enterprise</groupId>
-				<artifactId>cdi-api</artifactId>
-				<version>${cdi.version}</version>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${jee.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
