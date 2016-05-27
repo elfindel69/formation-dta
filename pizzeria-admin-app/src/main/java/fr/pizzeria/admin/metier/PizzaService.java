@@ -64,4 +64,8 @@ public class PizzaService implements Serializable {
 		return query.getResultList();
 	}
 
+	public void updatePizza(Pizza newPizza) throws DaoException {
+		updatePizza(newPizza.getCode(),newPizza);
+	}
+
 }
