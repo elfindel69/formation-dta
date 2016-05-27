@@ -17,25 +17,24 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
 import fr.pizzeria.exceptions.DaoException;
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.model.Commande;
 
-@Path("/pizzas")
-public class PizzaRessource {
+public class CommandeRessource {
 	@Inject
-	PizzaService service;
+	CommandeService service;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Pizza> findAllPizzas() {
-		return service.findAllPizzas();
+	public List<Commande> findAllCommandes() {
+		return service.findAllCommandes();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response savePizza(Pizza newPizza) {
+	public Response saveCommande(Commande newCommande) {
 		ResponseBuilder builder = null;
 		try {
-			service.savePizza(newPizza);
+			service.saveCommande(newCommande);
 			builder = Response.status(Status.CREATED);
 		} catch (DaoException e) {
 			builder = Response.status(400);
@@ -47,10 +46,10 @@ public class PizzaRessource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updatePizza(Pizza newPizza) {
+	public Response updateCommande(Commande newCommande) {
 		ResponseBuilder builder = null;
 		try {
-			service.updatePizza(newPizza);
+			service.updateCommande(newCommande);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);
@@ -59,11 +58,11 @@ public class PizzaRessource {
 	}
 
 	@DELETE
-	@Path("/{code}")
-	public Response deletePizza(@PathParam("code") String code) throws DaoException {
+	@Path("/{id}")
+	public Response deleteCommande(@PathParam("id") Integer id) throws DaoException {
 		ResponseBuilder builder = null;
 		try {
-			service.deletePizza(code);
+			service.deleteCommande(id);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);

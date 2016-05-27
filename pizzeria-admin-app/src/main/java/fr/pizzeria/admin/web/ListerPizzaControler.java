@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.pizzeria.admin.metier.PizzaService;
-import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -32,12 +31,7 @@ public class ListerPizzaControler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Pizza> pizzas = new ArrayList<>();
-		try {
-			pizzas = pizzaService.findAllPizzas();
-		} catch (DaoException e) {
-			response.sendError(500, "Désolé :(");
-			e.printStackTrace();
-		}
+		pizzas = pizzaService.findAllPizzas();
 		request.setAttribute("list", pizzas);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/pizzas/listerPizzas.jsp");
 
