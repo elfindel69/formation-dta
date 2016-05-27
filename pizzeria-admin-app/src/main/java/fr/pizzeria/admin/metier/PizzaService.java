@@ -44,13 +44,13 @@ public class PizzaService implements Serializable {
 	}
 
 	public Pizza findPizzaByCode(String code) throws DaoException {
-		try{
+		try {
 			return em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", code)
 					.getSingleResult();
-		}catch(NoResultException e){
+		} catch (NoResultException e) {
 			throw new DaoException("code non trouvé!");
 		}
-		
+
 	}
 
 	public void deletePizza(String code) throws DaoException {
@@ -65,7 +65,7 @@ public class PizzaService implements Serializable {
 	}
 
 	public void updatePizza(Pizza newPizza) throws DaoException {
-		updatePizza(newPizza.getCode(),newPizza);
+		updatePizza(newPizza.getCode(), newPizza);
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import fr.pizzeria.factory.DaoFactoryJPAImpl;
+import fr.pizzeria.factory.DaoFactoryRESTImpl;
 import fr.pizzeria.factory.IDaoFactory;
 
 /**
@@ -48,6 +49,10 @@ public class PizzeriaAdminConsoleApp {
 			break;
 		case 3:
 			launchJPA();
+			break;
+		case 4:
+			daoFact = DaoFactoryRESTImpl.getImpl();
+			lancerApplication(false);
 			break;
 		default:
 			System.err.println("Aucune configuration DAO trouvée!");

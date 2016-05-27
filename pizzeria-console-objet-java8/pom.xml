@@ -17,11 +17,8 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<dao.impl>3</dao.impl>
-				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria</jdbc.url>
-				<jdbc.user>root</jdbc.user>
-				<jdbc.password>alpine</jdbc.password>
+				<dao.impl>4</dao.impl>
+
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -97,7 +94,16 @@
 
 	</build>
 	<dependencies>
-
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
