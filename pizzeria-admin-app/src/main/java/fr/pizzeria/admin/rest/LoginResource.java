@@ -21,7 +21,7 @@ public class LoginResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response login(@FormParam("email") String email, @FormParam("password") String password) {
-		Response resp = null;
+		Response resp;
 		if (email.equals(ADMIN_PIZZERIA_FR) && password.equals(ADMIN)) {
 			String token = tokenService.generateToken();
 			resp = Response.ok(token).build();
