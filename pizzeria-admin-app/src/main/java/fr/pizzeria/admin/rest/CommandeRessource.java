@@ -1,4 +1,4 @@
-package fr.pizzeria.admin.metier;
+package fr.pizzeria.admin.rest;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
+import fr.pizzeria.admin.metier.CommandeService;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Commande;
 

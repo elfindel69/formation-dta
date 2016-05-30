@@ -1,4 +1,4 @@
-package fr.pizzeria.admin.metier;
+package fr.pizzeria.admin.rest;
 
 import java.util.List;
 
@@ -16,26 +16,27 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
+import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.exceptions.DaoException;
-import fr.pizzeria.model.Client;
+import fr.pizzeria.model.Pizza;
 
-@Path("/clients")
-public class ClientRessource {
+@Path("/pizzas")
+public class PizzaRessource {
 	@Inject
-	ClientService service;
+	PizzaService service;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Client> findAllClients() {
-		return service.findAllClients();
+	public List<Pizza> findAllPizzas() {
+		return service.findAllPizzas();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveClient(Client newClient) {
+	public Response savePizza(Pizza newPizza) {
 		ResponseBuilder builder = null;
 		try {
-			service.saveClient(newClient);
+			service.savePizza(newPizza);
 			builder = Response.status(Status.CREATED);
 		} catch (DaoException e) {
 			builder = Response.status(400);
@@ -47,10 +48,10 @@ public class ClientRessource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateClient(Client newClient) {
+	public Response updatePizza(Pizza newPizza) {
 		ResponseBuilder builder = null;
 		try {
-			service.updateClient(newClient);
+			service.updatePizza(newPizza);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);
@@ -59,11 +60,11 @@ public class ClientRessource {
 	}
 
 	@DELETE
-	@Path("/{id}")
-	public Response deleteClient(@PathParam("id") Integer id) throws DaoException {
+	@Path("/{code}")
+	public Response deletePizza(@PathParam("code") String code) throws DaoException {
 		ResponseBuilder builder = null;
 		try {
-			service.deleteClient(id);
+			service.deletePizza(code);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);
