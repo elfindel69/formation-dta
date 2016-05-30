@@ -27,7 +27,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
-		if (session.getAttribute("token")==null && !req.getRequestURI().contains("/login")) {
+		if (session.getAttribute("token")==null &&!req.getRequestURI().contains("/api")&& !req.getRequestURI().contains("/login")) {
 			((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/login");
 			
 		} else {

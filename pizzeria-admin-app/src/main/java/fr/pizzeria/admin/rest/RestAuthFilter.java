@@ -19,7 +19,7 @@ public class RestAuthFilter implements ContainerRequestFilter{
 	@Override
 	public void filter(ContainerRequestContext request) throws IOException {
 		String token = request.getHeaderString("auth");
-		if(!tokenService.isTokenValid(token) &&!request.getUriInfo().getPath().contains("/login")){	
+		if(!tokenService.isTokenValid(token) && !request.getUriInfo().getPath().contains("/login")){	
 				request.abortWith(Response.status(Status.FORBIDDEN).build());
 			}
 	}

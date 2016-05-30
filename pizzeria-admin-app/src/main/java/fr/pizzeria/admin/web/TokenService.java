@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class TokenService {
 	
 	private List<String> tokensValides = new ArrayList<>();
