@@ -2,6 +2,8 @@ package fr.pizzeria.console;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -26,31 +28,15 @@ public class PizzeriaAdminConsoleApp {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-
+		Logger.getLogger("org").setLevel(Level.SEVERE);
+		
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
-		lancerApplication(confString);
-	}
-
-	private static void launchJPA() {
-		/*
-		 * System.out.println("DAO JPA");
-		 * java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.
-		 * WARNING); EntityManagerFactory em =
-		 * Persistence.createEntityManagerFactory("pizzeria-console"); daoFact =
-		 * DaoFactoryJPAImpl.getImpl(em); lancerApplication(); em.close();
-		 */
-	}
-
-	
-
-	public static void lancerApplication(String confString) {
-		// scanner
-		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-config.xml",
-				confString)) {// liste des pizzas
-			fr.pizzeria.ihm.menu.Menu menu = context.getBean(Menu.class);
+		
+		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-config.xml",confString)) {
+			Menu menu = context.getBean(Menu.class);
 			menu.afficher();
 		}
-
 	}
+
 }
