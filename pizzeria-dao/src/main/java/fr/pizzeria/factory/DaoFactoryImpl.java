@@ -21,13 +21,11 @@ public class DaoFactoryImpl implements IDaoFactory {
 
 	@Override
 	public IClientDao createClientDao() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ICommandeDao createCommandeDao() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
