@@ -3,14 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<bean id='daoFactory' class="fr.pizzeria.factory.DaoFactoryJPAImpl">
+	<bean id='daoFactory' class="fr.pizzeria.factory.DaoFactoryJPAImpl">
 		<constructor-arg ref="pizzaDao"></constructor-arg>
 	</bean>
 	<bean id="pizzaDao" class="fr.pizzeria.dao.PizzaDaoJPAImpl">
 		<constructor-arg ref="emf"></constructor-arg>
-		
+
 	</bean>
-	<bean id='emf' class="javax.persistence.Persistence" factory-method="createEntityManagerFactory">
-	 <constructor-arg value="pizzeria-console"></constructor-arg>
+	<bean id='emf' class="javax.persistence.Persistence"
+		factory-method="createEntityManagerFactory">
+		<constructor-arg value="pizzeria-console"></constructor-arg>
 	</bean>
 </beans>

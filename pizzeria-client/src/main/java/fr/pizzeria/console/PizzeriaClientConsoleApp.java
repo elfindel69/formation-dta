@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import fr.pizzeria.dao.PizzaDaoJPAImpl;
 import fr.pizzeria.factory.DaoFactoryJPAImpl;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.Menu;
@@ -20,10 +21,11 @@ public class PizzeriaClientConsoleApp {
 	public static void main(String[] args) {
 		System.out.println("DAO JPA");
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pizzeria-console-client");
-		daoFact = DaoFactoryJPAImpl.getImpl(entityManagerFactory);
+		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console-client");
+		PizzaDaoJPAImpl pizza = new PizzaDaoJPAImpl(em);
+		daoFact = DaoFactoryJPAImpl.getImpl(pizza);
 		lancerApplication();
-		entityManagerFactory.close();
+		em.close();
 
 	}
 
