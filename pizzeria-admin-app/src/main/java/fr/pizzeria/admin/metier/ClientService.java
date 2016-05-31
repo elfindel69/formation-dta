@@ -16,12 +16,12 @@ public class ClientService {
 	@PersistenceContext(unitName = "pizzeria-db")
 	private EntityManager em;
 
-	public List<Client> findAllClients(){
+	public List<Client> findAll(){
 		TypedQuery<Client> query = em.createQuery("Select c from Client c", Client.class);
 		return query.getResultList();
 	}
 
-	public void saveClient(Client newClient) throws DaoException {
+	public void save(Client newClient) throws DaoException {
 		try {
 			em.persist(newClient);
 		} catch (PersistenceException e) {
@@ -30,16 +30,22 @@ public class ClientService {
 
 	}
 
-	public void updateClient(Client newClient) throws DaoException {
-		Client oldClient = getClientById(newClient.getId());
+	public void update(Client newClient) throws DaoException {
+		Client oldClient = getObjectById(newClient.getId());
 		oldClient.setNom(newClient.getNom());
 		oldClient.setPrenom(newClient.getPrenom());
 		oldClient.setEmail(newClient.getEmail());
 		oldClient.setPassword(newClient.getPassword());
 
 	}
+	
+	public void delete(Integer id) throws DaoException {
+		Client oldCommande = getObjectById(id);
+		em.remove(oldCommande);
 
-	private Client getClientById(Integer id) throws DaoException {
+	}
+
+	protected Client getObjectById(Integer id) throws DaoException {
 		Client oldClient = em.find(Client.class, id);
 		if(oldClient==null){
 			throw new DaoException("code non trouvé!");
@@ -47,10 +53,6 @@ public class ClientService {
 		return oldClient;
 	}
 
-	public void deleteClient(Integer id) throws DaoException {
-		Client oldClient = getClientById(id);
-		em.remove(oldClient);
 
-	}
 
 }

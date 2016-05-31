@@ -27,16 +27,16 @@ public class PizzaRessource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Pizza> findAllPizzas() {
-		return service.findAllPizzas();
+	public List<Pizza> findAll() {
+		return service.findAll();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response savePizza(Pizza newPizza) {
+	public Response save(Pizza newPizza) {
 		ResponseBuilder builder = null;
 		try {
-			service.savePizza(newPizza);
+			service.save(newPizza);
 			builder = Response.status(Status.CREATED);
 		} catch (DaoException e) {
 			builder = Response.status(400);
@@ -48,10 +48,10 @@ public class PizzaRessource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updatePizza(Pizza newPizza) {
+	public Response update(Pizza newPizza) {
 		ResponseBuilder builder = null;
 		try {
-			service.updatePizza(newPizza);
+			service.update(newPizza);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);
@@ -61,10 +61,10 @@ public class PizzaRessource {
 
 	@DELETE
 	@Path("/{code}")
-	public Response deletePizza(@PathParam("code") String code) throws DaoException {
+	public Response delete(@PathParam("code") String code) throws DaoException {
 		ResponseBuilder builder = null;
 		try {
-			service.deletePizza(code);
+			service.delete(code);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);

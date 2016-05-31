@@ -49,7 +49,7 @@ public class NewPizzaController extends HttpServlet {
 		} else {
 			try {
 				Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(categ));
-				pizzaService.savePizza(newPizza);
+				pizzaService.save(newPizza);
 				resp.setStatus(201);
 				resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 			} catch (DaoException e) {

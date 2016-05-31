@@ -26,7 +26,7 @@ public class PizzaService implements Serializable {
 		super();
 	}
 
-	public void savePizza(Pizza newPizza) throws DaoException {
+	public void save(Pizza newPizza) throws DaoException {
 		try {
 			em.persist(newPizza);
 		} catch (PersistenceException e) {
@@ -35,15 +35,15 @@ public class PizzaService implements Serializable {
 
 	}
 
-	public void updatePizza(String code, Pizza newPizza) throws DaoException {
-		Pizza oldPizza = findPizzaByCode(code);
+	public void update(String code, Pizza newPizza) throws DaoException {
+		Pizza oldPizza = findObjectByCode(code);
 		oldPizza.setCode(newPizza.getCode());
 		oldPizza.setNom(newPizza.getNom());
 		oldPizza.setPrix(newPizza.getPrix());
 		oldPizza.setCat(newPizza.getCat());
 	}
 
-	public Pizza findPizzaByCode(String code) throws DaoException {
+	public Pizza findObjectByCode(String code) throws DaoException {
 		try {
 			return em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", code)
 					.getSingleResult();
@@ -53,19 +53,19 @@ public class PizzaService implements Serializable {
 
 	}
 
-	public void deletePizza(String code) throws DaoException {
-		Pizza oldPizza = findPizzaByCode(code);
+	public void delete(String code) throws DaoException {
+		Pizza oldPizza = findObjectByCode(code);
 		em.remove(oldPizza);
 
 	}
 
-	public List<Pizza> findAllPizzas(){
+	public List<Pizza> findAll(){
 		TypedQuery<Pizza> query = em.createQuery("Select p from Pizza p", Pizza.class);
 		return query.getResultList();
 	}
 
-	public void updatePizza(Pizza newPizza) throws DaoException {
-		updatePizza(newPizza.getCode(), newPizza);
+	public void update(Pizza newPizza) throws DaoException {
+		update(newPizza.getCode(), newPizza);
 	}
 
 }

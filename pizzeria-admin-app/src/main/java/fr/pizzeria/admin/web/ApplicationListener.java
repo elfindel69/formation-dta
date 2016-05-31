@@ -48,7 +48,7 @@ public class ApplicationListener implements ServletContextListener {
 		
 		pizzas.forEach(t -> {
 			try {
-				pizzaSession.savePizza(t);
+				pizzaSession.save(t);
 			} catch (DaoException e) {
 				e.printStackTrace();
 			}

@@ -41,7 +41,7 @@ public class EditerPizzaController extends HttpServlet {
 		} else {
 			Pizza pizza = new Pizza();
 			try {
-				pizza = pizzaService.findPizzaByCode(code);
+				pizza = pizzaService.findObjectByCode(code);
 				response.setStatus(200);
 			} catch (DaoException e) {
 				response.sendRedirect("/pizzas/list/?msgErreur=OOps pizza non trouvée");
@@ -80,7 +80,7 @@ public class EditerPizzaController extends HttpServlet {
 		newPizza.setCat(CategoriePizza.valueOf(request.getParameter("cat")));
 
 		try {
-			pizzaService.updatePizza(code, newPizza);
+			pizzaService.update(code, newPizza);
 			System.out.println(newPizza);
 
 		} catch (DaoException e) {
@@ -98,7 +98,7 @@ public class EditerPizzaController extends HttpServlet {
 			resp.sendError(400, "nombre de paramètre incorrect");
 		} else {
 			try {
-				pizzaService.deletePizza(code);
+				pizzaService.delete(code);
 			} catch (DaoException e) {
 				resp.sendError(500, "Problème lors de la création de la pizza : pizza inexistante");
 			} catch (NumberFormatException e) {

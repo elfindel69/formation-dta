@@ -26,16 +26,16 @@ public class CommandeRessource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Commande> findAllCommandes() {
-		return service.findAllCommandes();
+	public List<Commande> findAll() {
+		return service.findAll();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveCommande(Commande newCommande) {
+	public Response save(Commande newCommande) {
 		ResponseBuilder builder = null;
 		try {
-			service.saveCommande(newCommande);
+			service.save(newCommande);
 			builder = Response.status(Status.CREATED);
 		} catch (DaoException e) {
 			builder = Response.status(400);
@@ -47,10 +47,10 @@ public class CommandeRessource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateCommande(Commande newCommande) {
+	public Response update(Commande newCommande) {
 		ResponseBuilder builder = null;
 		try {
-			service.updateCommande(newCommande);
+			service.update(newCommande);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);
@@ -60,10 +60,10 @@ public class CommandeRessource {
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteCommande(@PathParam("id") Integer id) throws DaoException {
+	public Response delete(@PathParam("id") Integer id) throws DaoException {
 		ResponseBuilder builder = null;
 		try {
-			service.deleteCommande(id);
+			service.delete(id);
 			builder = Response.status(Status.OK);
 		} catch (DaoException e) {
 			builder = Response.status(Status.INTERNAL_SERVER_ERROR);
