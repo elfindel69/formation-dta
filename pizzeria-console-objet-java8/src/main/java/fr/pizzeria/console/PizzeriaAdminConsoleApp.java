@@ -2,15 +2,10 @@ package fr.pizzeria.console;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-import java.util.logging.Level;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import fr.pizzeria.factory.DaoFactoryJPAImpl;
-import fr.pizzeria.factory.DaoFactoryRESTImpl;
-import fr.pizzeria.factory.IDaoFactory;
+import fr.pizzeria.ihm.menu.Menu;
 
 /**
  * Classe principale - administration de la pizzeria
@@ -19,7 +14,6 @@ import fr.pizzeria.factory.IDaoFactory;
  *
  */
 public class PizzeriaAdminConsoleApp {
-	private static IDaoFactory daoFact;
 
 	private PizzeriaAdminConsoleApp() {
 
@@ -35,59 +29,26 @@ public class PizzeriaAdminConsoleApp {
 
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
-		int daoImplConf = Integer.parseInt(confString);
-
-		switch (daoImplConf) {
-		case 0:
-			System.err.println("Veuillez configurer l’application avec une implémentation base de données. ");
-			break;
-		case 1:
-			System.err.println("Veuillez configurer l’application avec une implémentation base de données. ");
-			break;
-		case 2:
-			launchJDBC();
-			break;
-		case 3:
-			launchJPA();
-			break;
-		case 4:
-			daoFact = DaoFactoryRESTImpl.getImpl();
-			lancerApplication(false);
-			break;
-		default:
-			System.err.println("Aucune configuration DAO trouvée!");
-			break;
-		}
-
+		lancerApplication(confString);
 	}
 
 	private static void launchJPA() {
-		System.out.println("DAO JPA");
-		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
-		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
-		daoFact = DaoFactoryJPAImpl.getImpl(em);
-		lancerApplication(true);
-		em.close();
-	}
-
-	private static void launchJDBC() {
-		// TODO implémentation JDBC ?
 		/*
-		 * System.out.println("DAO JDBC"); ResourceBundle jdbcBundle =
-		 * ResourceBundle.getBundle("jdbc"); String driver =
-		 * jdbcBundle.getString("jdbc.driver"); String url =
-		 * jdbcBundle.getString("jdbc.url"); String user =
-		 * jdbcBundle.getString("jdbc.user"); String password =
-		 * jdbcBundle.getString("jdbc.password");
+		 * System.out.println("DAO JPA");
+		 * java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.
+		 * WARNING); EntityManagerFactory em =
+		 * Persistence.createEntityManagerFactory("pizzeria-console"); daoFact =
+		 * DaoFactoryJPAImpl.getImpl(em); lancerApplication(); em.close();
 		 */
-		// lancerApplication(new PizzaDaoJDBCImpl(driver, url, user, password),
-		// true);
 	}
 
-	public static void lancerApplication(boolean menuJdbc) {
+	
+
+	public static void lancerApplication(String confString) {
 		// scanner
-		try (Scanner sc = new Scanner(System.in)) {// liste des pizzas
-			fr.pizzeria.ihm.menu.Menu menu = new fr.pizzeria.ihm.menu.Menu(sc, daoFact, menuJdbc);
+		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-config.xml",
+				confString)) {// liste des pizzas
+			fr.pizzeria.ihm.menu.Menu menu = context.getBean(Menu.class);
 			menu.afficher();
 		}
 

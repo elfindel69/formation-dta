@@ -24,17 +24,9 @@ public class ApplicationListener implements ServletContextListener {
 	@Inject
 	private PizzaService pizzaSession;
 
-	/**
-	 * Default constructor.
-	 */
-	public ApplicationListener() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		// TODO Auto-generated method stub
-
+		//implémetation de base
 	}
 
 	@Override
@@ -58,7 +50,6 @@ public class ApplicationListener implements ServletContextListener {
 			try {
 				pizzaSession.savePizza(t);
 			} catch (DaoException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});

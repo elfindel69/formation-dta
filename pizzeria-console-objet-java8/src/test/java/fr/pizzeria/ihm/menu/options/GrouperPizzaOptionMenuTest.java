@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemErrRule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
+import fr.pizzeria.dao.PizzaDaoJPAImpl;
 import fr.pizzeria.factory.DaoFactoryJPAImpl;
 import fr.pizzeria.factory.IDaoFactory;
 
@@ -39,7 +40,8 @@ public class GrouperPizzaOptionMenuTest {
 	public void setUp() {
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
 		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
-		daoFact = DaoFactoryJPAImpl.getImpl(em);
+		PizzaDaoJPAImpl pizza = new PizzaDaoJPAImpl(em);
+		daoFact = DaoFactoryJPAImpl.getImpl(pizza);
 		m = new GrouperPizzaOptionMenu(daoFact);
 	}
 

@@ -1,7 +1,5 @@
 package fr.pizzeria.factory;
 
-import javax.persistence.EntityManagerFactory;
-
 import fr.pizzeria.dao.ClientDaoJPAImpl;
 import fr.pizzeria.dao.CommandeDaoJPAImpl;
 import fr.pizzeria.dao.IClientDao;
@@ -11,36 +9,50 @@ import fr.pizzeria.dao.PizzaDaoJPAImpl;
 
 public class DaoFactoryJPAImpl implements IDaoFactory {
 
-	private static EntityManagerFactory em;
 	private static DaoFactoryJPAImpl impl;
+	private PizzaDaoJPAImpl pizza;
+	private ClientDaoJPAImpl client;
+	private CommandeDaoJPAImpl commande;
 
-	private DaoFactoryJPAImpl(EntityManagerFactory createEntityManagerFactory) {
-		em = createEntityManagerFactory;
+	private DaoFactoryJPAImpl(PizzaDaoJPAImpl pizza) {
+		this.pizza = pizza;
+	}
+	
+	private DaoFactoryJPAImpl(PizzaDaoJPAImpl pizza,ClientDaoJPAImpl client,CommandeDaoJPAImpl commande) {
+		
+		this.pizza = pizza;
+		this.client = client;
+		this.commande = commande;
 	}
 
 	@Override
 	public IPizzaDao createPizzaDao() {
-		return new PizzaDaoJPAImpl(em);
+		return pizza;
 	}
 
 	@Override
 	public IClientDao createClientDao() {
-		return new ClientDaoJPAImpl(em);
+		return client;
 	}
 
 	@Override
 	public ICommandeDao createCommandeDao() {
-		return new CommandeDaoJPAImpl(em);
+		return commande;
 	}
 	
-	public static DaoFactoryJPAImpl getImpl(EntityManagerFactory createEntityManagerFactory) {
+	public static DaoFactoryJPAImpl getImpl(PizzaDaoJPAImpl pizza) {
 		if(impl==null){
-			impl= new DaoFactoryJPAImpl(createEntityManagerFactory);
+			impl= new DaoFactoryJPAImpl(pizza);
 		}
 		return impl;
 	}
 
-	
+	public static DaoFactoryJPAImpl getImpl(PizzaDaoJPAImpl pizza,ClientDaoJPAImpl client,CommandeDaoJPAImpl commande) {
+		if(impl==null){
+			impl= new DaoFactoryJPAImpl(pizza,client,commande);
+		}
+		return impl;
+	}
 
 
 }
