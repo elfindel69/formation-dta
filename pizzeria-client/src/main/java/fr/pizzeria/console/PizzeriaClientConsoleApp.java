@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import fr.pizzeria.dao.PizzaDaoJPAImpl;
+import fr.pizzeria.dao.pizza.PizzaDaoJPAImpl;
 import fr.pizzeria.factory.DaoFactoryJPAImpl;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.Menu;

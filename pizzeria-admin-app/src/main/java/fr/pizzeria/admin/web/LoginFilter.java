@@ -15,10 +15,11 @@ import javax.servlet.http.HttpSession;
 @WebFilter(urlPatterns={"/*"},description="filtre de login")
 public class LoginFilter implements Filter {
 
+	private static final String LOGIN = "/login";
+
 	@Override
 	public void destroy() {
-		
-
+		//implémetation de base
 	}
 
 	@Override
@@ -27,12 +28,12 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
-		if (session.getAttribute("token")==null &&!req.getRequestURI().contains("/api")&& !req.getRequestURI().contains("/login")) {
-			((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/login");
+		if (session.getAttribute("token")==null &&!req.getRequestURI().contains("/api")&& !req.getRequestURI().contains(LOGIN)) {
+			((HttpServletResponse)response).sendRedirect(req.getContextPath()+LOGIN);
 			
 		} else {
 			
-			if(req.getRequestURI().contains("/login") && session.getAttribute("token")!=null) {
+			if(req.getRequestURI().contains(LOGIN) && session.getAttribute("token")!=null) {
 				((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/pizzas/list");
 			} else{
 				chain.doFilter(req, response);
@@ -44,8 +45,7 @@ public class LoginFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		
-
+		//implémetation de base
 	}
 
 }

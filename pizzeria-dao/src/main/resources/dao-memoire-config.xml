@@ -7,6 +7,6 @@
 	<bean id='daoFactory' class="fr.pizzeria.factory.DaoFactoryImpl">
 		<constructor-arg ref="pizzaDao"></constructor-arg>
 	</bean>
-	<bean id="pizzaDao" class="fr.pizzeria.dao.PizzaDaoImpl"></bean>
+	<bean id="pizzaDao" class="fr.pizzeria.dao.pizza.PizzaDaoImpl"></bean>
 
 </beans>

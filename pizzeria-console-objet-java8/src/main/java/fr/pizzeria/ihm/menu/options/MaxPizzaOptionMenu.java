@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Pizza;

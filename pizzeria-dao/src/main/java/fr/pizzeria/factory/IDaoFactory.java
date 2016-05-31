@@ -2,7 +2,7 @@ package fr.pizzeria.factory;
 
 import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.ICommandeDao;
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.pizza.IPizzaDao;
 
 public interface IDaoFactory {
 	IPizzaDao createPizzaDao();

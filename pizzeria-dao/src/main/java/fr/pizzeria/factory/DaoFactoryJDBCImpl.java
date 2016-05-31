@@ -2,8 +2,8 @@ package fr.pizzeria.factory;
 
 import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.ICommandeDao;
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoJDBCImpl;
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoJDBCImpl;
 
 public class DaoFactoryJDBCImpl implements IDaoFactory {
 

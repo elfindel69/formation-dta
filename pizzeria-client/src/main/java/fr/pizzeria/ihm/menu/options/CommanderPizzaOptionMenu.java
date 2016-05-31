@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import fr.pizzeria.dao.ICommandeDao;
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Client;

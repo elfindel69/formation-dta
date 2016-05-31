@@ -3,7 +3,7 @@ package fr.pizzeria.ihm.menu.options;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.DesactiverOptionMenu;

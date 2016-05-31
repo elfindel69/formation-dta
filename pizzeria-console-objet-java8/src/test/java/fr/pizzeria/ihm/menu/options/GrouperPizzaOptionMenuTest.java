@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemErrRule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
-import fr.pizzeria.dao.PizzaDaoJPAImpl;
+import fr.pizzeria.dao.pizza.PizzaDaoJPAImpl;
 import fr.pizzeria.factory.DaoFactoryJPAImpl;
 import fr.pizzeria.factory.IDaoFactory;
 

@@ -4,8 +4,9 @@ import fr.pizzeria.dao.ClientDaoJPAImpl;
 import fr.pizzeria.dao.CommandeDaoJPAImpl;
 import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.ICommandeDao;
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoJPAImpl;
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoJPAImpl;
+
 
 public class DaoFactoryJPAImpl implements IDaoFactory {
 

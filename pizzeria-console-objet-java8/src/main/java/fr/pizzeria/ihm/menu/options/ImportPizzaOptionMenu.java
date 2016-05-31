@@ -3,8 +3,8 @@ package fr.pizzeria.ihm.menu.options;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoFilesImpl;
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoFilesImpl;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Pizza;

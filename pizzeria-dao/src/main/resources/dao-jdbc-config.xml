@@ -7,7 +7,7 @@
 	<bean id='daoFactory' class="fr.pizzeria.factory.DaoFactoryJDBCImpl">
 		<constructor-arg ref="pizzaDao"></constructor-arg>
 	</bean>
-	<bean id="pizzaDao" class="fr.pizzeria.dao.PizzaDaoJDBCImpl">
+	<bean id="pizzaDao" class="fr.pizzeria.dao.pizza.PizzaDaoJDBCImpl">
 		<constructor-arg value="${jdbc.driver}"></constructor-arg>
 		<constructor-arg value="${jdbc.url}"></constructor-arg>
 		<constructor-arg value="${jdbc.user}"></constructor-arg>
