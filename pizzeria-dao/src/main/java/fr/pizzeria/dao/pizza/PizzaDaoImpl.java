@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
+
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.DeletePizzaException;
 import fr.pizzeria.exceptions.SavePizzaException;
@@ -21,7 +24,10 @@ import fr.pizzeria.model.Pizza;
  * @author Valentin
  *
  */
-public class PizzaDaoImpl implements IPizzaDao, Serializable{
+
+@Repository
+@Lazy
+public class PizzaDaoImpl implements IPizzaDao, Serializable {
 	/**
 	 * 
 	 */

@@ -13,7 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.collections4.ListUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.DeletePizzaException;
@@ -22,18 +27,27 @@ import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
+@Repository
+@Lazy
 public class PizzaDaoJDBCImpl implements IPizzaDao {
+
 	private String url;
+
 	private String password;
+
 	private String user;
+
+	private String driver;
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoJDBCImpl(String driver, String url2, String user2, String password2){
+	public PizzaDaoJDBCImpl() {
+
+	}
+
+	@PostConstruct
+	void init() {
 		try {
 			Class.forName(driver);
-			this.url = url2;
-			this.user = user2;
-			this.password = password2;
 		} catch (ClassNotFoundException e) {
 			System.err.println(e);
 		}
@@ -43,7 +57,6 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 		} catch (DaoException e) {
 			System.err.println(e);
 		}
-
 	}
 
 	private Connection getConnection() throws SQLException {
@@ -61,7 +74,8 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 
 			while (querySelect.next()) {
 				pizzas.add(new Pizza(querySelect.getString("code"), querySelect.getString("nom"),
-						BigDecimal.valueOf(querySelect.getDouble("prix")), CategoriePizza.valueOf(querySelect.getString("categorie"))));
+						BigDecimal.valueOf(querySelect.getDouble("prix")),
+						CategoriePizza.valueOf(querySelect.getString("categorie"))));
 			}
 
 		} catch (SQLException e) {
@@ -141,7 +155,7 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
-		
+
 		List<List<Pizza>> partition = ListUtils.partition(pizzas, i);
 		try (Connection connection = getConnection();) {
 			connection.setAutoCommit(false);
@@ -153,9 +167,9 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 	}
 
 	private void insertPizzas(List<List<Pizza>> partition, Connection connection) throws SQLException, DaoException {
-		try{
+		try {
 			for (List<Pizza> list : partition) {
-				
+
 				for (Pizza p : list) {
 					if (!mapPizzas.containsKey(p.getCode())) {
 						insertPizza(connection, p);
@@ -167,10 +181,10 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 				}
 				connection.commit();
 			}
-		}catch(DaoException e){
+		} catch (DaoException e) {
 			connection.rollback();
 		}
-		
+
 	}
 
 	private void insertPizza(Connection connection, Pizza p) throws SQLException, DaoException {
@@ -202,5 +216,25 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 	@Override
 	public Pizza findPizzaByCode(String parameter) throws DaoException {
 		throw new DaoException("méthode non implémentée");
+	}
+
+	@Value("${jdbc.url}")
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	@Value("${jdbc.password}")
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Value("${jdbc.user}")
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	@Value("${jdbc.driver}")
+	public void setDriver(String driver) {
+		this.driver = driver;
 	}
 }

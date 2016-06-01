@@ -16,23 +16,34 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
+
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
+@Repository
+@Lazy
 public class PizzaDaoFilesImpl implements IPizzaDao {
 	private static final String DATA = "data";
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
-	public PizzaDaoFilesImpl(){
+	public PizzaDaoFilesImpl() {
+
+	}
+
+	@PostConstruct
+	void init() {
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
 		} catch (DaoException e) {
 			System.err.println("erreur d'importation");
 		}
-
 	}
 
 	@Override
@@ -44,7 +55,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 				p.setCode(path.getFileName().toString().replaceAll(".txt", ""));
 				try {
-					p=setPizza(path, p);
+					p = setPizza(path, p);
 
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
@@ -114,8 +125,6 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 		}
 		mapPizzas.remove(codePizza);
 	}
-
-	
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {

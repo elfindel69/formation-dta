@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,6 +14,9 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.ListUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.DeletePizzaException;
@@ -20,20 +24,31 @@ import fr.pizzeria.exceptions.SavePizzaException;
 import fr.pizzeria.exceptions.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
-
-public class PizzaDaoJPAImpl implements IPizzaDao  {
+@Repository
+@Lazy
+public class PizzaDaoJPAImpl implements IPizzaDao {
 
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
+	@Autowired
 	private EntityManagerFactory entityFacto;
 
-	public PizzaDaoJPAImpl(EntityManagerFactory entityFacto) {
-		this.entityFacto = entityFacto;
+	public PizzaDaoJPAImpl() {
+
+	}
+
+	@PostConstruct
+	void init() {
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
 		} catch (DaoException e) {
 			System.err.println(e);
 		}
+	}
+
+	public PizzaDaoJPAImpl(EntityManagerFactory em) {
+		this();
+		entityFacto = em;
 	}
 
 	@Override
@@ -154,10 +169,14 @@ public class PizzaDaoJPAImpl implements IPizzaDao  {
 	@Override
 	public Pizza findPizzaByCode(String code) throws DaoException {
 		EntityManager em = entityFacto.createEntityManager();
-		Pizza p = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class)
-				.setParameter("code", code).getSingleResult();
+		Pizza p = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", code)
+				.getSingleResult();
 		em.close();
 		return p;
+	}
+
+	public void setEntityFacto(EntityManagerFactory entityFacto) {
+		this.entityFacto = entityFacto;
 	}
 
 }

@@ -4,6 +4,11 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.options.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.options.GrouperPizzaOptionMenu;
@@ -17,23 +22,28 @@ import fr.pizzeria.ihm.menu.options.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.options.SupprimerPizzaOptionMenu;
 import fr.pizzeria.model.DesactiverOptionMenu;
 
+@Component
 public class Menu {
 	private static final String MENU_LIBELLE = "Pizzeria Administration";
 	private Map<Integer, AbstractOptionMenu> mapMenus;
+	@Autowired
 	private Scanner sc;
+	@Autowired
+	private IDaoFactory daoFact;
+	private boolean menuJdbc;
 
-	public Menu(Scanner sc, IDaoFactory daoFact, boolean menuJdbc) {
+	public Menu(boolean menuJdbc) {
 		super();
-		initialiserOptions(sc, daoFact, menuJdbc);
-		this.sc = sc;
+		this.menuJdbc = menuJdbc;
 	}
 
-	private void initialiserOptions(Scanner sc2, IDaoFactory daoFact, boolean menuJdbc) {
+	@PostConstruct
+	private void initialiserOptions() {
 		mapMenus = new TreeMap<>();
 		mapMenus.put(1, new ListerPizzaOptionMenu(daoFact));
-		mapMenus.put(2, new NouvellePizzaOptionMenu(sc2, daoFact));
-		mapMenus.put(3, new MAJPizzaOptionMenu(sc2, daoFact));
-		mapMenus.put(4, new SupprimerPizzaOptionMenu(sc2, daoFact));
+		mapMenus.put(2, new NouvellePizzaOptionMenu(sc, daoFact));
+		mapMenus.put(3, new MAJPizzaOptionMenu(sc, daoFact));
+		mapMenus.put(4, new SupprimerPizzaOptionMenu(sc, daoFact));
 		mapMenus.put(5, new GrouperPizzaOptionMenu(daoFact));
 		mapMenus.put(6, new MaxPizzaOptionMenu(daoFact));
 		if (menuJdbc) {
