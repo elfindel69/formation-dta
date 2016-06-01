@@ -3,6 +3,9 @@ package fr.pizzeria.dao.pizza;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -13,7 +16,8 @@ import com.sun.jersey.api.json.JSONConfiguration;
 
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
-
+@Repository
+@Lazy
 public class PizzaDaoRESTImpl implements IPizzaDao {
 	private static final String APPLICATION_JSON = "application/json";
 	private static final String URL_PIZZAS = "http://localhost:8080/pizzeria-admin-app/api/rest/pizzas";

@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -24,7 +25,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  */
 @Entity
-@NamedQuery(name = "pizza.listPizzas", query = "Select p from Pizza p")
+@NamedQueries({
+	@NamedQuery(name = "pizza.listPizzas", query = "Select p from Pizza p"),
+	@NamedQuery(name= "pizza.byCode", query= "select p from Pizza p where p.code = :code")	
+})
+
 @Table(name = "pizza")
 public class Pizza {
 	@Id

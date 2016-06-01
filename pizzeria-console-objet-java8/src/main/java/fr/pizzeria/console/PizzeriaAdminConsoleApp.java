@@ -27,7 +27,7 @@ public class PizzeriaAdminConsoleApp {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		Logger.getLogger("org").setLevel(Level.SEVERE);
+		 Logger.getLogger("org").setLevel(Level.SEVERE);
 
 		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class)) {
 			Menu menu = context.getBean(Menu.class);

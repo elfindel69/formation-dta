@@ -27,7 +27,7 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoJPAImpl;
 import fr.pizzeria.exceptions.DaoException;
-import fr.pizzeria.factory.DaoFactoryJPAImpl;
+import fr.pizzeria.factory.DaoFactoryGenericImpl;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -53,7 +53,7 @@ public class MAJPizzaOptionMenuTest {
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
 		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console");
 		PizzaDaoJPAImpl pizza = new PizzaDaoJPAImpl(em);
-		daoFact = DaoFactoryJPAImpl.getImpl(pizza);
+		daoFact = new DaoFactoryGenericImpl(pizza,null,null);
 		m = new MAJPizzaOptionMenu(new Scanner(System.in), daoFact);
 		pizzaDao = daoFact.createPizzaDao();
 	}

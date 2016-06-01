@@ -1,56 +1,45 @@
 package fr.pizzeria.dao.pizza;
 
-import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 import org.apache.commons.collections4.ListUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.exceptions.DeletePizzaException;
 import fr.pizzeria.exceptions.SavePizzaException;
 import fr.pizzeria.exceptions.UpdatePizzaException;
-import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 @Repository
 @Lazy
+@Transactional(rollbackFor = DaoException.class)
 public class PizzaDaoJDBCImpl implements IPizzaDao {
 
-	private String url;
+	private JdbcTemplate jdbcTemplate;
 
-	private String password;
-
-	private String user;
-
-	private String driver;
-	private Map<String, Pizza> mapPizzas = new HashMap<>();
-
-	public PizzaDaoJDBCImpl() {
-
+	@Autowired
+	public PizzaDaoJDBCImpl(DataSource datasource, PlatformTransactionManager txManager) {
+		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}
+	
+	
+
+	private Map<String, Pizza> mapPizzas = new HashMap<>();
 
 	@PostConstruct
 	void init() {
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			System.err.println(e);
-		}
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
@@ -59,40 +48,17 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 		}
 	}
 
-	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password);
-
-	}
-
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
-
-		List<Pizza> pizzas = new ArrayList<>();
-		try (Connection connection = getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet querySelect = statement.executeQuery("SELECT * from pizza");) {
-
-			while (querySelect.next()) {
-				pizzas.add(new Pizza(querySelect.getString("code"), querySelect.getString("nom"),
-						BigDecimal.valueOf(querySelect.getDouble("prix")),
-						CategoriePizza.valueOf(querySelect.getString("categorie"))));
-			}
-
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		}
+		String SQL = "select * from Pizza";
+		List<Pizza> pizzas = jdbcTemplate.query(SQL, new PizzaMapper());
 		return pizzas;
 	}
 
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException {
 		if (!mapPizzas.containsKey(newPizza.getCode())) {
-			try (Connection connection = getConnection();) {
-				insertPizza(connection, newPizza);
-
-			} catch (SQLException e) {
-				throw new DaoException(e);
-			}
+			insertPizza(newPizza);
 		} else {
 			throw new SavePizzaException("ce code existe déjà");
 		}
@@ -102,27 +68,11 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
 		if (mapPizzas.containsKey(codePizza)) {
-			try (Connection connection = getConnection();
-					PreparedStatement statement = connection
-							.prepareStatement("UPDATE pizza SET nom =?,code=?,prix=?,categorie=? WHERE code=?");) {
-				statement.setString(1, updatePizza.getNom());
-				statement.setString(2, updatePizza.getCode());
-				statement.setDouble(3, updatePizza.getPrix().doubleValue());
-				statement.setString(4, updatePizza.getCat().name());
-				statement.setString(5, codePizza);
 
-				int executeUpdate = statement.executeUpdate();
-				if (executeUpdate != 1) {
-					statement.close();
-					throw new DaoException("problème de MAJ");
-
-				} else {
-					mapPizzas.put(codePizza, updatePizza);
-				}
-
-			} catch (SQLException e) {
-				throw new DaoException(e);
-			}
+			String sql = "UPDATE pizza SET nom =?,code=?,prix=?,categorie=? WHERE code=?";
+			this.jdbcTemplate.update(sql, updatePizza.getNom(), updatePizza.getCode(),
+					updatePizza.getPrix().doubleValue(), updatePizza.getCat().name(), codePizza);
+			mapPizzas.put(codePizza, updatePizza);
 		} else {
 			throw new UpdatePizzaException("code non trouvé!");
 		}
@@ -132,21 +82,10 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
 		if (mapPizzas.containsKey(codePizza)) {
-			try (Connection connection = getConnection();
-					PreparedStatement statement = connection.prepareStatement("DELETE FROM pizza WHERE code = ?");) {
-				statement.setString(1, codePizza);
-				int executeUpdate = statement.executeUpdate();
-				if (executeUpdate != 1) {
-					statement.close();
-					throw new DaoException("problème de suppression");
 
-				} else {
-					mapPizzas.remove(codePizza);
-				}
-				statement.close();
-			} catch (SQLException e) {
-				throw new DaoException(e);
-			}
+			String sql = "DELETE FROM pizza WHERE code = ?";
+			this.jdbcTemplate.update(sql, codePizza);
+			mapPizzas.remove(codePizza);
 		} else {
 			throw new DeletePizzaException("code non trouvé!");
 		}
@@ -157,55 +96,30 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
 
 		List<List<Pizza>> partition = ListUtils.partition(pizzas, i);
-		try (Connection connection = getConnection();) {
-			connection.setAutoCommit(false);
-			insertPizzas(partition, connection);
-		} catch (SQLException e1) {
-			throw new SavePizzaException(e1);
-		}
+
+		insertPizzas(partition);
 
 	}
 
-	private void insertPizzas(List<List<Pizza>> partition, Connection connection) throws SQLException, DaoException {
-		try {
-			for (List<Pizza> list : partition) {
+	private void insertPizzas(List<List<Pizza>> partition) throws UpdatePizzaException {
+		for (List<Pizza> list : partition) {
 
-				for (Pizza p : list) {
-					if (!mapPizzas.containsKey(p.getCode())) {
-						insertPizza(connection, p);
-						System.out.println("pizza créée");
-					} else {
-						System.out.println("pizza existante");
-						connection.rollback();
-					}
+			for (Pizza p : list) {
+				if (!mapPizzas.containsKey(p.getCode())) {
+					insertPizza(p);
+					System.out.println("pizza créée");
+				} else {
+					throw new UpdatePizzaException("pizza existante!");
 				}
-				connection.commit();
 			}
-		} catch (DaoException e) {
-			connection.rollback();
 		}
 
 	}
 
-	private void insertPizza(Connection connection, Pizza p) throws SQLException, DaoException {
-		try (PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO pizza (nom,code,prix,categorie) VALUES (?,?,?,?)");) {
-			statement.setString(1, p.getNom());
-			statement.setString(2, p.getCode());
-			statement.setDouble(3, p.getPrix().doubleValue());
-			statement.setString(4, p.getCat().name());
-			int queryUpdate = statement.executeUpdate();
-			if (queryUpdate != 1) {
-
-				throw new SavePizzaException("problème d'insertion");
-
-			} else {
-				mapPizzas.put(p.getCode(), p);
-			}
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		}
-
+	private void insertPizza(Pizza p) {
+		String sql = "INSERT INTO pizza (nom,code,prix,categorie) VALUES (?,?,?,?)";
+		this.jdbcTemplate.update(sql, p.getNom(), p.getCode(), p.getPrix().doubleValue(), p.getCat().name());
+		mapPizzas.put(p.getCode(), p);
 	}
 
 	@Override
@@ -214,27 +128,10 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 	}
 
 	@Override
-	public Pizza findPizzaByCode(String parameter) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+	public Pizza findPizzaByCode(String code) {
+		String sql = "SELECT * FROM PIZZA WHERE code=?";
+
+		return this.jdbcTemplate.queryForObject(sql, new PizzaMapper(), code);
 	}
 
-	@Value("${jdbc.url}")
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	@Value("${jdbc.password}")
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Value("${jdbc.user}")
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	@Value("${jdbc.driver}")
-	public void setDriver(String driver) {
-		this.driver = driver;
-	}
 }

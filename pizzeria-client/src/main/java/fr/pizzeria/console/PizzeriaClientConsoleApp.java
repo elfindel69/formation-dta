@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import fr.pizzeria.dao.pizza.PizzaDaoJPAImpl;
-import fr.pizzeria.factory.DaoFactoryJPAImpl;
+import fr.pizzeria.factory.DaoFactoryGenericImpl;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.Menu;
 
@@ -23,7 +23,7 @@ public class PizzeriaClientConsoleApp {
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
 		EntityManagerFactory em = Persistence.createEntityManagerFactory("pizzeria-console-client");
 		PizzaDaoJPAImpl pizza = new PizzaDaoJPAImpl(em);
-		daoFact = DaoFactoryJPAImpl.getImpl(pizza);
+		daoFact = new DaoFactoryGenericImpl(pizza,null,null);
 		lancerApplication();
 		em.close();
 

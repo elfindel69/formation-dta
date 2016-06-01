@@ -28,12 +28,16 @@ import fr.pizzeria.model.Pizza;
 @Lazy
 public class PizzaDaoJPAImpl implements IPizzaDao {
 
+	private static final String PIZZA_LIST_PIZZAS = "pizza.listPizzas";
+	private static final String PIZZA_BY_CODE = "pizza.byCode";
+	
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
-	@Autowired
+	
 	private EntityManagerFactory entityFacto;
 
-	public PizzaDaoJPAImpl() {
-
+	@Autowired
+	public PizzaDaoJPAImpl(EntityManagerFactory em) {
+		entityFacto = em;
 	}
 
 	@PostConstruct
@@ -46,15 +50,10 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 		}
 	}
 
-	public PizzaDaoJPAImpl(EntityManagerFactory em) {
-		this();
-		entityFacto = em;
-	}
-
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 		EntityManager em = entityFacto.createEntityManager();
-		TypedQuery<Pizza> query = em.createNamedQuery("pizza.listPizzas", Pizza.class);
+		TypedQuery<Pizza> query = em.createNamedQuery(PIZZA_LIST_PIZZAS, Pizza.class);
 		List<Pizza> pizzas = query.getResultList();
 		em.close();
 		return pizzas;
@@ -96,7 +95,7 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 	}
 
 	private Pizza findPizzaByCode(String codePizza, EntityManager em) {
-		return em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", codePizza)
+		return em.createNamedQuery(PIZZA_BY_CODE, Pizza.class).setParameter("code", codePizza)
 				.getSingleResult();
 	}
 
@@ -158,8 +157,7 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 		Set<Pizza> pizzas = new HashSet<>();
 		for (String code : codes) {
 			EntityManager em = entityFacto.createEntityManager();
-			Pizza p = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class)
-					.setParameter("code", code).getSingleResult();
+			Pizza p = findPizzaByCode(code,em);
 			em.close();
 			pizzas.add(p);
 		}
@@ -169,14 +167,10 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 	@Override
 	public Pizza findPizzaByCode(String code) throws DaoException {
 		EntityManager em = entityFacto.createEntityManager();
-		Pizza p = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class).setParameter("code", code)
+		Pizza p = em.createNamedQuery(PIZZA_BY_CODE, Pizza.class).setParameter("code", code)
 				.getSingleResult();
 		em.close();
 		return p;
-	}
-
-	public void setEntityFacto(EntityManagerFactory entityFacto) {
-		this.entityFacto = entityFacto;
 	}
 
 }

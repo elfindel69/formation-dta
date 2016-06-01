@@ -26,30 +26,29 @@ import fr.pizzeria.model.DesactiverOptionMenu;
 public class Menu {
 	private static final String MENU_LIBELLE = "Pizzeria Administration";
 	private Map<Integer, AbstractOptionMenu> mapMenus;
-	@Autowired
-	private Scanner sc;
-	@Autowired
-	private IDaoFactory daoFact;
-	private boolean menuJdbc;
 
-	public Menu(boolean menuJdbc) {
+	private Scanner sc;
+	private IDaoFactory daoFactory;
+
+	@Autowired
+	public Menu(Scanner sc, IDaoFactory daoFactory) {
 		super();
-		this.menuJdbc = menuJdbc;
+
+		this.daoFactory = daoFactory;
+		this.sc = sc;
 	}
 
 	@PostConstruct
 	private void initialiserOptions() {
 		mapMenus = new TreeMap<>();
-		mapMenus.put(1, new ListerPizzaOptionMenu(daoFact));
-		mapMenus.put(2, new NouvellePizzaOptionMenu(sc, daoFact));
-		mapMenus.put(3, new MAJPizzaOptionMenu(sc, daoFact));
-		mapMenus.put(4, new SupprimerPizzaOptionMenu(sc, daoFact));
-		mapMenus.put(5, new GrouperPizzaOptionMenu(daoFact));
-		mapMenus.put(6, new MaxPizzaOptionMenu(daoFact));
-		if (menuJdbc) {
-			mapMenus.put(7, new ImportPizzaOptionMenu(daoFact));
-			mapMenus.put(8, new ListerCommandesNonTraiteesOptionMenu(daoFact));
-		}
+		mapMenus.put(1, new ListerPizzaOptionMenu(daoFactory));
+		mapMenus.put(2, new NouvellePizzaOptionMenu(sc, daoFactory));
+		mapMenus.put(3, new MAJPizzaOptionMenu(sc, daoFactory));
+		mapMenus.put(4, new SupprimerPizzaOptionMenu(sc, daoFactory));
+		mapMenus.put(5, new GrouperPizzaOptionMenu(daoFactory));
+		mapMenus.put(6, new MaxPizzaOptionMenu(daoFactory));
+		mapMenus.put(7, new ImportPizzaOptionMenu(daoFactory));
+		mapMenus.put(8, new ListerCommandesNonTraiteesOptionMenu(daoFactory));
 
 		mapMenus.put(99, new QuitterOptionMenu());
 
@@ -76,4 +75,5 @@ public class Menu {
 		}
 
 	}
+
 }
