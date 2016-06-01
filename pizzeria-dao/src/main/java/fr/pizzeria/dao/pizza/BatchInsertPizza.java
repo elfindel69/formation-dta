@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +20,7 @@ public class BatchInsertPizza {
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public BatchInsertPizza(DataSource datasource, PlatformTransactionManager txManager) {
+	public BatchInsertPizza(DataSource datasource) {
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}
 

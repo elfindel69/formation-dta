@@ -2,12 +2,15 @@ package fr.pizzeria.dao.pizza;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,7 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 
 	private JdbcTemplate jdbcTemplate;
 	private BatchInsertPizza batchInsertPizza;
+	private static final Logger LOG = Logger.getLogger(PizzaDaoJDBCImpl.class.toString());
 
 	@Autowired
 	public PizzaDaoJDBCImpl(DataSource datasource, BatchInsertPizza batchInsertPizza) {
@@ -57,9 +61,16 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 
 	@Override
 	@Transactional
-	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
+	public void importPizzas(List<Pizza> pizzas, int i){
 		List<List<Pizza>> partition = ListUtils.partition(pizzas, i);
-		partition.forEach(batchInsertPizza::insertPizzas);
+		partition.forEach(t -> {
+			try {
+				batchInsertPizza.insertPizzas(t);
+			} catch (DataAccessException e) {
+				LOG.log(Level.SEVERE, e.getMessage(), e);
+				throw e;
+			}
+		});
 	}
 
 

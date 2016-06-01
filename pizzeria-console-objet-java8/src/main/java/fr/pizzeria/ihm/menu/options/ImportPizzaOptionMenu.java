@@ -2,6 +2,10 @@ package fr.pizzeria.ihm.menu.options;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.dao.DataAccessException;
 
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoFilesImpl;
@@ -10,6 +14,8 @@ import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Pizza;
 
 public class ImportPizzaOptionMenu extends AbstractOptionMenu {
+	private static final Logger LOG = Logger.getLogger(ImportPizzaOptionMenu.class.toString());
+
 	public ImportPizzaOptionMenu(IDaoFactory pizzaDao) {
 		super("Importer les pizzas", pizzaDao);
 	}
@@ -22,11 +28,11 @@ public class ImportPizzaOptionMenu extends AbstractOptionMenu {
 		try {
 			pizzas = files.findAllPizzas();
 			pizzaDaoImpl.importPizzas(pizzas, 3);
-		} catch (DaoException e) {
-			System.err.println("erreur d'importation ");
-			e.printStackTrace();
+			LOG.log(Level.INFO, "importation réussie ^^");
+		} catch (DaoException|DataAccessException e) {
+			LOG.log(Level.SEVERE, "erreur d'importation ", e);
 		}
-		System.out.println("importation réussie ^^");
+		
 		return true;
 	}
 
