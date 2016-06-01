@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -30,7 +32,7 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 
 	private static final String PIZZA_LIST_PIZZAS = "pizza.listPizzas";
 	private static final String PIZZA_BY_CODE = "pizza.byCode";
-	
+	private static final Logger LOG = Logger.getLogger(PizzaDaoJPAImpl.class.toString());
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
 	
 	private EntityManagerFactory entityFacto;
@@ -131,12 +133,12 @@ public class PizzaDaoJPAImpl implements IPizzaDao {
 			for (Pizza p : list) {
 				try {
 					insertPizza(em, p);
+					LOG.log(Level.INFO, "pizza créée");
 				} catch (DaoException e) {
-					System.out.println("pizza existante");
+					LOG.log(Level.SEVERE, "pizza existante",e);
 					et.rollback();
 					et.begin();
-				}
-				System.out.println("pizza créée");
+				}	
 			}
 			et.commit();
 		}

@@ -21,7 +21,6 @@ public class ClientDaoJPAImpl implements IClientDao {
 
 	@Override
 	public List<Client> findAllClients() throws DaoException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

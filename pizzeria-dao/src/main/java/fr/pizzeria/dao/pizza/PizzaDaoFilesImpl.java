@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,20 +31,19 @@ import fr.pizzeria.model.Pizza;
 @Repository
 @Lazy
 public class PizzaDaoFilesImpl implements IPizzaDao {
+	private static final String METHODE_NON_IMPLEMENTEE = "méthode non implémentée";
+	private static final String CODE_NON_TROUVE = "code non trouvé!";
 	private static final String DATA = "data";
 	private Map<String, Pizza> mapPizzas = new HashMap<>();
-
-	public PizzaDaoFilesImpl() {
-
-	}
-
+	private static final Logger LOG = Logger.getLogger(PizzaDaoFilesImpl.class.toString());
+	
 	@PostConstruct
 	void init() {
 		try {
 			List<Pizza> pizzas = findAllPizzas();
 			pizzas.forEach(p -> mapPizzas.put(p.getCode(), p));
 		} catch (DaoException e) {
-			System.err.println("erreur d'importation");
+			LOG.log(Level.SEVERE, "erreur d'importation", e);
 		}
 	}
 
@@ -58,8 +59,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 					p = setPizza(path, p);
 
 				} catch (IOException e) {
-					System.out.println(e.getMessage());
-					e.printStackTrace();
+					LOG.log(Level.SEVERE, e.getMessage(), e);
 				}
 				return p;
 			}).collect(Collectors.toList());
@@ -101,7 +101,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
 		Path fichier = Paths.get(DATA + "/" + codePizza + ".txt");
 		if (!mapPizzas.containsKey(codePizza)) {
-			throw new UpdatePizzaException("code non trouvé!");
+			throw new UpdatePizzaException(CODE_NON_TROUVE);
 		}
 		try {
 
@@ -116,7 +116,7 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 	public void deletePizza(String codePizza) throws DaoException {
 		Path fichier = Paths.get(DATA + "/" + codePizza + ".txt");
 		if (!mapPizzas.containsKey(codePizza)) {
-			throw new UpdatePizzaException("code non trouvé!");
+			throw new UpdatePizzaException(CODE_NON_TROUVE);
 		}
 		try {
 			Files.delete(fichier);
@@ -128,16 +128,16 @@ public class PizzaDaoFilesImpl implements IPizzaDao {
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 	}
 
 	@Override
 	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 	}
 
 	@Override
 	public Pizza findPizzaByCode(String parameter) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 	}
 }

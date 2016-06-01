@@ -19,13 +19,11 @@ import fr.pizzeria.model.Pizza;
 @Repository
 @Lazy
 public class PizzaDaoRESTImpl implements IPizzaDao {
+	private static final String METHODE_NON_IMPLEMENTEE = "méthode non implémentée";
 	private static final String APPLICATION_JSON = "application/json";
 	private static final String URL_PIZZAS = "http://localhost:8080/pizzeria-admin-app/api/rest/pizzas";
 
-	public PizzaDaoRESTImpl() {
-		
-	}
-
+	
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 		ClientConfig clientConfig = new DefaultClientConfig();
@@ -83,18 +81,18 @@ public class PizzaDaoRESTImpl implements IPizzaDao {
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 
 	}
 
 	@Override
 	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 	}
 
 	@Override
 	public Pizza findPizzaByCode(String parameter) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 	}
 
 }

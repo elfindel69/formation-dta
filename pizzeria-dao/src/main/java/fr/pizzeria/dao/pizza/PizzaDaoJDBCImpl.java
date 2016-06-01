@@ -35,9 +35,8 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
-		String SQL = "select * from Pizza";
-		List<Pizza> pizzas = jdbcTemplate.query(SQL, new PizzaMapper());
-		return pizzas;
+		String sql = "select * from Pizza";
+		return jdbcTemplate.query(sql, new PizzaMapper());
 	}
 
 	@Override

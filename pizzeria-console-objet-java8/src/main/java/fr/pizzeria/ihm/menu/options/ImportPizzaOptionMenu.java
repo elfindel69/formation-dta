@@ -32,7 +32,6 @@ public class ImportPizzaOptionMenu extends AbstractOptionMenu {
 		} catch (DaoException|DataAccessException e) {
 			LOG.log(Level.SEVERE, "erreur d'importation ", e);
 		}
-		
 		return true;
 	}
 

@@ -28,6 +28,8 @@ import fr.pizzeria.model.Pizza;
 @Repository
 @Lazy
 public class PizzaDaoImpl implements IPizzaDao, Serializable {
+	private static final String METHODE_NON_IMPLEMENTEE = "méthode non implémentée";
+	private static final String CODE_NON_TROUVE = "code non trouvé!";
 	/**
 	 * 
 	 */
@@ -90,7 +92,7 @@ public class PizzaDaoImpl implements IPizzaDao, Serializable {
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
 		if (!pizzas.containsKey(codePizza)) {
-			throw new UpdatePizzaException("code non trouvé!");
+			throw new UpdatePizzaException(CODE_NON_TROUVE);
 		}
 		pizzas.put(codePizza, updatePizza);
 
@@ -106,7 +108,7 @@ public class PizzaDaoImpl implements IPizzaDao, Serializable {
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
 		if (!pizzas.containsKey(codePizza)) {
-			throw new DeletePizzaException("code non trouvé!");
+			throw new DeletePizzaException(CODE_NON_TROUVE);
 		}
 		pizzas.remove(codePizza);
 		Pizza.setNbPizzas(Pizza.getNbPizzas() - 1);
@@ -115,19 +117,19 @@ public class PizzaDaoImpl implements IPizzaDao, Serializable {
 
 	@Override
 	public void importPizzas(List<Pizza> pizzas, int i) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 
 	}
 
 	@Override
 	public Set<Pizza> findPizzasByCode(List<String> codes) throws DaoException {
-		throw new DaoException("méthode non implémentée");
+		throw new DaoException(METHODE_NON_IMPLEMENTEE);
 	}
 
 	@Override
 	public Pizza findPizzaByCode(String code) throws DaoException {
 		if (!pizzas.containsKey(code)) {
-			throw new DeletePizzaException("code non trouvé!");
+			throw new DeletePizzaException(CODE_NON_TROUVE);
 		}
 		return pizzas.get(code);
 	}
