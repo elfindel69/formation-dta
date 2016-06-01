@@ -67,7 +67,7 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 				batchInsertPizza.insertPizzas(t);
 			} catch (DataAccessException e) {
 				LOG.log(Level.SEVERE, e.getMessage(), e);
-				throw e;
+				//throw e;
 			}
 		});
 	}
