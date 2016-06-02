@@ -15,6 +15,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.pizza.batch.BatchInsertPizza;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 

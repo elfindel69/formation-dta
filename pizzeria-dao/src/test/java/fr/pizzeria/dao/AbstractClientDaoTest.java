@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.pizzeria.config.SpringJpaConfig;
-import fr.pizzeria.dao.client.IClientDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Client;
 

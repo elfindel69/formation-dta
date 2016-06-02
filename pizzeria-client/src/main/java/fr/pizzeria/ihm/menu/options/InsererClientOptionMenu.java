@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import fr.pizzeria.dao.client.IClientDao;
+import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.model.Client;

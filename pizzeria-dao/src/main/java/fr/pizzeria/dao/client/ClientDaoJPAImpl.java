@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 
+import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Client;
 

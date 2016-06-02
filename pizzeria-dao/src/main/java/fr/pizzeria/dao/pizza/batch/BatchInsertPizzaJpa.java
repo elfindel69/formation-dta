@@ -1,4 +1,4 @@
-package fr.pizzeria.dao.pizza;
+package fr.pizzeria.dao.pizza.batch;
 
 import java.util.List;
 

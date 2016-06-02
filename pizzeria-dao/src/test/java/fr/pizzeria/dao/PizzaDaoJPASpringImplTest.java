@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
 import fr.pizzeria.config.SpringJpaConfig;
-import fr.pizzeria.dao.pizza.IPizzaDao;
 
 @ContextConfiguration(classes=SpringJpaConfig.class)
 public class PizzaDaoJPASpringImplTest extends AbstractPizzaDaoTest{

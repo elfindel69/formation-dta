@@ -14,6 +14,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 @Repository

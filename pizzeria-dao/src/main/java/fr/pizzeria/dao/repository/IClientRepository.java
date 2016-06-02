@@ -1,4 +1,4 @@
-package fr.pizzeria.dao.client;
+package fr.pizzeria.dao.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

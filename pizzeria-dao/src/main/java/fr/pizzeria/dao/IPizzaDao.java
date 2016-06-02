@@ -1,8 +1,9 @@
-package fr.pizzeria.dao.pizza;
+package fr.pizzeria.dao;
 
 import java.util.List;
 import java.util.Set;
 
+import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 

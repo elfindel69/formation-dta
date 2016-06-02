@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.pizzeria.dao.IClientDao;
+import fr.pizzeria.dao.repository.IClientRepository;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Client;
 

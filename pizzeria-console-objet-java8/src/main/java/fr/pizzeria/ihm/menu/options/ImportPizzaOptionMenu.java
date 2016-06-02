@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import org.springframework.dao.DataAccessException;
 
-import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoFilesImpl;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
