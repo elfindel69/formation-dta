@@ -10,3 +10,7 @@ INSERT INTO `pizza` (`id`, `categorie`, `code`, `nom`, `prix`, `url_image`) VALU
 (9, 'VIANDE', 'REI', 'reine', '11.40', NULL),
 (10, 'POISSON', 'SAM', 'La saumonetta', '14.00', NULL),
 (11, 'SANS_VIANDE', 'VEG', 'vegan', '10.00', NULL);
+
+INSERT INTO `client` (`id`, `email`, `nom`, `mot_de_passe`, `prenom`) VALUES
+(1, 'toto@toto.fr', 'Titi', 'toto', 'Toto'),
+(2, 'joe@dalton.fr', 'Dalton', 'joe', 'Joe');

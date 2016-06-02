@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.client;
 
 import java.util.List;
 
@@ -40,27 +40,41 @@ public class ClientDaoJPAImpl implements IClientDao {
 	}
 
 	@Override
-	public void updateClient(String codeClient, Client updateClient) throws DaoException {
+	public void updateClient(int codeClient, Client updateClient) throws DaoException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void deleteClient(String codeClient) throws DaoException {
+	public void deleteClient(int codeClient) throws DaoException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Client connect(Client newClient) {
+	public Client connect(String email, String password) {
 		EntityManager em = entityFacto.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		Client c = em
 				.createQuery("select c from Client c where c.email = :email and c.password = :password", Client.class)
-				.setParameter("email", newClient.getEmail()).setParameter("password", newClient.getPassword())
+				.setParameter("email", email).setParameter("password", password)
 				.getSingleResult();
 		et.commit();
+		em.close();
+		return c;
+	}
+
+	@Override
+	public Client findByNom(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Client findOne(int i) {
+		EntityManager em = entityFacto.createEntityManager();
+		Client c = em.find(Client.class, i);
 		em.close();
 		return c;
 	}

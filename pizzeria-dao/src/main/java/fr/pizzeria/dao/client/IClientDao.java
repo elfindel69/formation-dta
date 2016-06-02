@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.client;
 
 import java.util.List;
 
@@ -24,22 +24,28 @@ public interface IClientDao {
 	void saveClient(Client newPizza) throws DaoException;
 
 	/**
-	 * MAJ d'une pizza
+	 * MAJ d'un client
 	 * 
-	 * @param codePizza
-	 *            code de la Pizza à MAJ
-	 * @param updatePizza
-	 *            pizza modifiée
+	 * @param idClient
+	 *          id du Client à MAJ
+	 * @param updateClient
+	 *            client modifié
 	 */
-	void updateClient(String codeClient, Client updateClient) throws DaoException;
+	void updateClient(int idClient, Client updateClient) throws DaoException;
 
 	/**
-	 * Suppression d'une pizza
+	 * Suppression d'un client
 	 * 
 	 * @param codePizza
-	 *            code de la Pizza à supprimer
+	 *            id du Client à supprimer
 	 */
-	void deleteClient(String codeClient) throws DaoException;
+	void deleteClient(int idClient) throws DaoException;
 
-	Client connect(Client newClient);
+	Client connect(String email, String password);
+
+	fr.pizzeria.model.Client findByNom(String string);
+
+	Client findOne(int i);
+
+	
 }

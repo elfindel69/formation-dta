@@ -8,3 +8,12 @@ CREATE TABLE `pizza` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_uwl42bkm53vnwm0ncklemrij` (`code`)
 );
+
+CREATE TABLE IF NOT EXISTS `client` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `mot_de_passe` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);

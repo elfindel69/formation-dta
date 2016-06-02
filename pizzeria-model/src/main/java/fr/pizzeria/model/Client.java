@@ -26,8 +26,16 @@ public class Client {
 	@Column(name="mot_de_passe",nullable = false)
 	private String password;
 
-	public Client() {
+	public Client(String prenom, String nom, String email, String password) {
 		super();
+		this.prenom = prenom;
+		this.nom = nom;
+		this.email = email;
+		this.password = password;
+	}
+
+	public Client() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

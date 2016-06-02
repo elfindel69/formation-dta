@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import fr.pizzeria.dao.IClientDao;
+import fr.pizzeria.dao.client.IClientDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.factory.IDaoFactory;
 import fr.pizzeria.ihm.menu.ConnectionMenu;
@@ -42,13 +42,13 @@ public class ConnecterClientOptionMenu extends AbstractOptionMenu {
 	}
 
 	private Client saisieCredentials(Scanner sc, IClientDao clientDao) {
-		Client newClient = new Client();
+		
 		System.out.println(MENU_MSG_SAISIE_EMAIL);
-		newClient.setEmail(sc.next());
+		String email = sc.next();
 		System.out.println(MENU_MSG_SAISIE_PASSWORD);
-		newClient.setPassword(DigestUtils.md5Hex(sc.next()));
+		String password = DigestUtils.md5Hex(sc.next());
 
-		return clientDao.connect(newClient);
+		return clientDao.connect(email,password);
 	}
 
 }
