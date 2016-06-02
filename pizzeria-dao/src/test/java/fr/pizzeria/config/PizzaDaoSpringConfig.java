@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.config;
 
 import javax.sql.DataSource;
 
@@ -12,9 +12,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("fr.pizzeria")
+@ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
-public class PizzaDaoSpringTest {
+public class PizzaDaoSpringConfig {
 
 	@Bean
 	public DataSource dataSource(){

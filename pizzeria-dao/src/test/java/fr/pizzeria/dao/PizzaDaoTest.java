@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import fr.pizzeria.config.PizzaDaoSpringConfig;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.CategoriePizza;
@@ -19,7 +20,7 @@ import fr.pizzeria.model.Pizza;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = PizzaDaoSpringTest.class)
+@ContextConfiguration(classes = PizzaDaoSpringConfig.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class PizzaDaoTest {
 

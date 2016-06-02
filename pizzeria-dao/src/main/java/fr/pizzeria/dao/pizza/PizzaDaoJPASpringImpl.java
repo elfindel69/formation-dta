@@ -13,12 +13,16 @@ import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Pizza;
 
+@Repository
+@Lazy
 public class PizzaDaoJPASpringImpl implements IPizzaDao {
 
 	private static final String PIZZA_LIST_PIZZAS = "pizza.listPizzas";
@@ -30,11 +34,6 @@ public class PizzaDaoJPASpringImpl implements IPizzaDao {
 
 	@Autowired
 	private BatchInsertPizzaJpa batchInsertPizza;
-
-	@Autowired
-	public PizzaDaoJPASpringImpl() {
-		super();
-	}
 
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
