@@ -20,7 +20,7 @@ import fr.pizzeria.model.Pizza;
 
 @Repository
 @Lazy
-@Transactional(rollbackFor = DaoException.class)
+@Transactional
 public class PizzaDaoJDBCImpl implements IPizzaDao {
 
 	private JdbcTemplate jdbcTemplate;
@@ -67,8 +67,8 @@ public class PizzaDaoJDBCImpl implements IPizzaDao {
 				batchInsertPizza.insertPizzas(t);
 			} catch (DataAccessException e) {
 				LOG.log(Level.SEVERE, e.getMessage(), e);
-				//throw e;
-			}
+				throw e;
+			} 
 		});
 	}
 
