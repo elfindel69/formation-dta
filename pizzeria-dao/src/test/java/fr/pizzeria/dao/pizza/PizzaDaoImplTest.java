@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.pizza;
 
 import static org.junit.Assert.fail;
 
@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.CategoriePizza;

@@ -14,3 +14,7 @@ INSERT INTO `pizza` (`id`, `categorie`, `code`, `nom`, `prix`, `url_image`) VALU
 INSERT INTO `client` (`id`, `email`, `nom`, `mot_de_passe`, `prenom`) VALUES
 (1, 'toto@toto.fr', 'Titi', 'toto', 'Toto'),
 (2, 'joe@dalton.fr', 'Dalton', 'joe', 'Joe');
+
+INSERT INTO `livreur` (`id`, `nom`, `prenom`) VALUES
+(1, 'Malfoy', 'Draco'),
+(2, 'Simpson', 'Bart');

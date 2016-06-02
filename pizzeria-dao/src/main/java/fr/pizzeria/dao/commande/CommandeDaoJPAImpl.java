@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.commande;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import fr.pizzeria.dao.ICommandeDao;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;

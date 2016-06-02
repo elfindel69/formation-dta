@@ -17,3 +17,10 @@ CREATE TABLE IF NOT EXISTS `client` (
   `prenom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE IF NOT EXISTS `livreur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);

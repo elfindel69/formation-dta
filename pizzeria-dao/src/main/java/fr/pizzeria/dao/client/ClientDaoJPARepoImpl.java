@@ -52,11 +52,13 @@ public class ClientDaoJPARepoImpl implements IClientDao {
 		return clientRepo.findByEmailAndPassword(email, password);
 	}
 
+	@Override
 	public Client findByNom(String nom) {
 	
 		return clientRepo.findByNom(nom);
 	}
-
+	
+	@Override
 	public Client findOne(int i) {
 		return clientRepo.findOne(i);
 	}

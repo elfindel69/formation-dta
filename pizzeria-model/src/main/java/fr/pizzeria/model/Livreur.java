@@ -27,6 +27,13 @@ public class Livreur {
 	
 	
 
+	public Livreur(String prenom, String nom) {
+		this.prenom = prenom;
+		this.nom = nom;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Livreur [prenom=" + prenom + ", nom=" + nom + "]";
