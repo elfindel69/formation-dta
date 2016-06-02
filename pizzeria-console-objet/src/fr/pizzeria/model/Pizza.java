@@ -57,13 +57,9 @@ public class Pizza{
 						sb += uppercase?valeurDuChamp.toString().toUpperCase():valeurDuChamp.toString() + " ";
 					}
 					
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
+				} catch (IllegalArgumentException|IllegalAccessException e) {
 					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				} 
 			}
 		}
 		return sb.toString();

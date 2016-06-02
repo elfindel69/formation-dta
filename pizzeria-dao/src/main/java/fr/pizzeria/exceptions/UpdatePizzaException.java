@@ -2,28 +2,25 @@ package fr.pizzeria.exceptions;
 
 public class UpdatePizzaException extends DaoException {
 
-	public UpdatePizzaException() {
-		// TODO Auto-generated constructor stub
-	}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public UpdatePizzaException(String arg0) {
 		super(arg0);
-		// TODO Auto-generated constructor stub
 	}
 
 	public UpdatePizzaException(Throwable arg0) {
 		super(arg0);
-		// TODO Auto-generated constructor stub
 	}
 
 	public UpdatePizzaException(String arg0, Throwable arg1) {
 		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
 	}
 
 	public UpdatePizzaException(String arg0, Throwable arg1, boolean arg2, boolean arg3) {
 		super(arg0, arg1, arg2, arg3);
-		// TODO Auto-generated constructor stub
 	}
 
 }
