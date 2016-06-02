@@ -77,7 +77,7 @@ public class PizzaDaoTest {
             fail("une exception aurait dû être lancée");
         } catch (DataAccessException e) {
         	List<Pizza> pizzasBdd = pizzaDao.findAllPizzas();
-        	assertEquals(NB_INITIAL_PIZZA+4, pizzasBdd.size());    
+        	assertEquals(NB_INITIAL_PIZZA+3, pizzasBdd.size());    
         }
 
     }
