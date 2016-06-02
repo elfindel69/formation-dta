@@ -38,8 +38,7 @@ public class PizzaDaoJPASpringImpl implements IPizzaDao {
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 		TypedQuery<Pizza> query = em.createNamedQuery(PIZZA_LIST_PIZZAS, Pizza.class);
-		List<Pizza> pizzas = query.getResultList();
-		return pizzas;
+		return query.getResultList();
 	}
 
 	@Override
@@ -97,7 +96,6 @@ public class PizzaDaoJPASpringImpl implements IPizzaDao {
 
 	@Override
 	public Pizza findPizzaByCode(String code) throws DaoException {
-
 		return em.createNamedQuery(PIZZA_BY_CODE, Pizza.class).setParameter("code", code).getSingleResult();
 	}
 

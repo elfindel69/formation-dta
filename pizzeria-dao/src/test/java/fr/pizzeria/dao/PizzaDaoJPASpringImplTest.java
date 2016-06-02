@@ -8,7 +8,7 @@ import fr.pizzeria.config.SpringJpaConfig;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 
 @ContextConfiguration(classes=SpringJpaConfig.class)
-public class PizzaDaoJPASpringImplTest extends PizzaDaoTest{
+public class PizzaDaoJPASpringImplTest extends AbstractPizzaDaoTest{
 	@Autowired
 	public void setPizzaDao(@Qualifier("pizzaDaoJPASpringImpl") IPizzaDao pizzaDao) {
 		this.pizzaDao = pizzaDao;

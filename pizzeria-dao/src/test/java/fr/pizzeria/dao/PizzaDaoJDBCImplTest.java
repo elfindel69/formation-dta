@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.pizzeria.dao.pizza.IPizzaDao;
 
 @Transactional
-public class PizzaDaoJDBCImplTest extends PizzaDaoTest {
+public class PizzaDaoJDBCImplTest extends AbstractPizzaDaoTest {
 	@Autowired
 	public void setPizzaDao(@Qualifier("pizzaDaoJDBCImpl") IPizzaDao pizzaDao) {
 		this.pizzaDao = pizzaDao;

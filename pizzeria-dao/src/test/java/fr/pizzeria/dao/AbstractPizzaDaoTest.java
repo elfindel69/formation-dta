@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PizzaDaoSpringConfig.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class PizzaDaoTest {
+public class AbstractPizzaDaoTest {
 
     private static final int NB_INITIAL_PIZZA = 11;
 
