@@ -22,7 +22,7 @@ import fr.pizzeria.factory.DaoFactoryGenericImpl;
 import fr.pizzeria.factory.IDaoFactory;
 
 @Configuration
-@ComponentScan({"fr.pizzeria.ihm","fr.pizzeria.dao"})
+@ComponentScan({"fr.pizzeria.ihm","fr.pizzeria.dao","fr.pizzeria.aspects"})
 @EnableJpaRepositories("fr.pizzeria.dao.repository")
 @EnableAspectJAutoProxy
 @EnableTransactionManagement

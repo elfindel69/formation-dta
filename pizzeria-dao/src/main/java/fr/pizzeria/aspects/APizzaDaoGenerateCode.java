@@ -1,4 +1,4 @@
-package fr.pizzeria.dao.aspects;
+package fr.pizzeria.aspects;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
