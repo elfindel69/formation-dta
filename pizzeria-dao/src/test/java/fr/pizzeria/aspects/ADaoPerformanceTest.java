@@ -1,29 +1,31 @@
-package fr.pizzeria.dao.pizza;
+package fr.pizzeria.aspects;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.pizzeria.config.SpringJpaConfig;
-import fr.pizzeria.dao.AbstractPizzaDaoTest;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.repository.IPerformanceRepository;
 import fr.pizzeria.exceptions.DaoException;
 import fr.pizzeria.model.Performance;
 import fr.pizzeria.model.Pizza;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ContextConfiguration(classes = SpringJpaConfig.class)
-public class APizzaDaoJPASpringTest extends AbstractPizzaDaoTest {
+public class ADaoPerformanceTest {
 	@Autowired
-	public void setPizzaDao(@Qualifier("pizzaDaoJPARepoImpl") IPizzaDao pizzaDao) {
-		this.pizzaDao = pizzaDao;
-	}
+	@Qualifier("pizzaDaoJPARepoImpl")
+	IPizzaDao pizzaDao;
 
 	@Autowired
 	IPerformanceRepository perfRepo;
