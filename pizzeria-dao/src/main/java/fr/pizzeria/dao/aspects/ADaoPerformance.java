@@ -21,7 +21,7 @@ public class ADaoPerformance {
 	@Autowired
 	IPerformanceRepository perfRepo;
 
-	@Around("execution(* fr.pizzeria.dao.*.*(..))")
+	@Around("execution(* fr.pizzeria.dao.I*.*(..))")
 	@Transactional
 	public Object profilerCreate(ProceedingJoinPoint pjp) throws Throwable {
 		java.util.Date date = new java.util.Date();
@@ -33,10 +33,9 @@ public class ADaoPerformance {
 		long stopTime = System.currentTimeMillis();
 		
 		java.sql.Timestamp dateAfter = new java.sql.Timestamp(date.getTime());
-		LOG.log(Level.INFO, dateAfter.toString() + " " + pjp.getSignature().toString());
 		
 		Performance saved = perfRepo.save(new Performance(pjp.getSignature().toString(), dateBefore, stopTime - startTime));
-		LOG.log(Level.INFO, saved.toString());
+		LOG.log(Level.INFO, "date: "+dateAfter.toString() + " service: " + saved.getService()+" execution: "+saved.getExecution());
 		return result;
 	}
 }
