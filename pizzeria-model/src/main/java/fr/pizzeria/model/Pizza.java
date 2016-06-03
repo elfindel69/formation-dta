@@ -37,7 +37,7 @@ public class Pizza {
 	private Integer id;
 
 	@ToString
-	@Column(name = "code", length = 3, nullable = false, unique = true)
+	@Column(name = "code", length = 3, unique = true)
 	private String code;
 
 	@ToString

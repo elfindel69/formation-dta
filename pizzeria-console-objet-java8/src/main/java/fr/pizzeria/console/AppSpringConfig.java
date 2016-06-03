@@ -2,18 +2,18 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -22,23 +22,19 @@ import fr.pizzeria.factory.DaoFactoryGenericImpl;
 import fr.pizzeria.factory.IDaoFactory;
 
 @Configuration
-@ComponentScan("fr.pizzeria")
+@ComponentScan({"fr.pizzeria.ihm","fr.pizzeria.dao"})
+@EnableJpaRepositories("fr.pizzeria.dao.repository")
+@EnableAspectJAutoProxy
 @EnableTransactionManagement
-
-public class AppConfig {
-
-	private String url;
-	private String user;
-	private String password;
-
+public class AppSpringConfig {
 	@Bean
 	Scanner sc() {
 		return new Scanner(System.in);
 	}
 
 	@Bean
-	public PlatformTransactionManager txManager() {
-		return new DataSourceTransactionManager(dataSource(url, user, password));
+	public PlatformTransactionManager transactionManager() {
+		return new JpaTransactionManager();
 	}
 
 	@Bean
@@ -49,8 +45,6 @@ public class AppConfig {
 
 	}
 
-	
-	
 	@Bean
 	public PropertyPlaceholderConfigurer props() {
 		PropertyPlaceholderConfigurer co = new PropertyPlaceholderConfigurer();
@@ -59,13 +53,15 @@ public class AppConfig {
 	}
 
 	@Bean
-	EntityManagerFactory entityFacto() {
-		return Persistence.createEntityManagerFactory("pizzeria-console");
+	LocalEntityManagerFactoryBean entityManagerFactory() {
+		LocalEntityManagerFactoryBean v = new LocalEntityManagerFactoryBean();
+		v.setPersistenceUnitName("pizzeria-console");
+		return v;
+
 	}
 
 	@Bean
-	IDaoFactory daoFactory(@Qualifier("pizzaDaoJDBCImpl") IPizzaDao pizzaDao) {
-		return new DaoFactoryGenericImpl(pizzaDao,null,null);
+	IDaoFactory daoFactory(@Qualifier("pizzaDaoJPARepoImpl") IPizzaDao pizzaDao) {
+		return new DaoFactoryGenericImpl(pizzaDao, null, null);
 	}
-
 }
