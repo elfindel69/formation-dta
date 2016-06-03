@@ -24,3 +24,11 @@ CREATE TABLE IF NOT EXISTS `livreur` (
   `prenom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE IF NOT EXISTS `performance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` varchar(255) NOT NULL,
+  `date_mesure` timestamp NOT NULL,
+   `execution` float NOT NULL,
+  PRIMARY KEY (`id`)
+);

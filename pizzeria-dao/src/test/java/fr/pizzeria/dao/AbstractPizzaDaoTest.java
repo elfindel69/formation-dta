@@ -23,12 +23,12 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AbstractPizzaDaoTest {
 
-    private static final int NB_INITIAL_PIZZA = 11;
+    protected static final int NB_INITIAL_PIZZA = 11;
 
     protected IPizzaDao pizzaDao;
 
     @Test
-    public void testfindAllPizzas() throws DaoException {
+    public void testFindAllPizzas() throws DaoException {
         List<Pizza> pizzas = pizzaDao.findAllPizzas();
         assertEquals(NB_INITIAL_PIZZA, pizzas.size());
     }
