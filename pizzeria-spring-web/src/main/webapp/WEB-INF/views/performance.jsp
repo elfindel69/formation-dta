@@ -16,6 +16,7 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 </head>
 <body>
 	<h1>Liste Performance</h1>
@@ -25,6 +26,7 @@
 <c:url var="deleteall_url"  value="/mvc/performance/deleteall" />
 <c:url var="delete_url"  value="/mvc/performance/delete" />
 <form action="${deleteall_url}" method="post">
+<sec:csrfInput />
     <button type="submit">Tout supprimer</button>
 </form>
 	<table class="table table-striped">
@@ -45,6 +47,7 @@
 				<td><c:out value='${p.execution}' /></td>
 				<td>
                 <form:form action="${delete_url}" method="post">
+                <sec:csrfInput />
                     <input type="hidden" name="id" value="${p.id}">
                     <button type="submit">Supprimer</button>
                 </form:form>
