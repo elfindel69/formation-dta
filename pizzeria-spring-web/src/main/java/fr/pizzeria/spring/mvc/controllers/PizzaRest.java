@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import fr.pizzeria.model.Pizza;
 
 @RestController
 @RequestMapping(path = "/pizzas")
+@Secured({"ROLE_USER","ROLE_ADMIN"})
 public class PizzaRest {
 	@Autowired
 	IPizzaDao pizzaDao;
