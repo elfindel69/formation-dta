@@ -8,11 +8,9 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -23,7 +21,6 @@ import fr.pizzeria.model.Pizza;
 @RequestMapping(path = "/pizzas")
 public class PizzaRest {
 	@Autowired
-	@Qualifier("pizzaDaoImpl")
 	IPizzaDao pizzaDao;
 
 	private static final Logger LOG = Logger.getLogger(PizzaRest.class.toString());
@@ -41,7 +38,7 @@ public class PizzaRest {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody Pizza save(@RequestBody Pizza newPizza, HttpServletResponse response) {
+	public Pizza save(@RequestBody Pizza newPizza, HttpServletResponse response) {
 		try {
 			pizzaDao.savePizza(newPizza);
 			response.setStatus(201);

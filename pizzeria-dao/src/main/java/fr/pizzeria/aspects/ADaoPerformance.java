@@ -21,7 +21,7 @@ public class ADaoPerformance {
 	@Autowired
 	IPerformanceRepository perfRepo;
 
-	@Around("execution(* fr.pizzeria.dao.I*Dao.*(..))")
+	@Around("execution(* fr.pizzeria.dao.IPizzaDao.*(..))")
 	@Transactional
 	public Object profilerCreate(ProceedingJoinPoint pjp) throws Throwable {
 		java.util.Date date = new java.util.Date();

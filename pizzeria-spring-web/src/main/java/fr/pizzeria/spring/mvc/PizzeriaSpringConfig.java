@@ -15,9 +15,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoImpl;
+
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "fr.pizzeria.spring.mvc.controllers", "fr.pizzeria.dao","fr.pizzeria.aspects"})
+@ComponentScan({ "fr.pizzeria.spring.mvc.controllers","fr.pizzeria.aspects"})
 @EnableJpaRepositories("fr.pizzeria.dao.repository")
 @EnableAspectJAutoProxy
 public class PizzeriaSpringConfig {
@@ -34,11 +37,16 @@ public class PizzeriaSpringConfig {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+	
+	@Bean 
+	public IPizzaDao pizzaDao(){
+		return new PizzaDaoImpl();
+	}
 
 	@Bean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean v = new LocalContainerEntityManagerFactoryBean();
-		v.setPersistenceUnitName("pizzeria-console");
+		v.setPersistenceUnitName("pizzeria-db");
 		return v;
 
 	}
