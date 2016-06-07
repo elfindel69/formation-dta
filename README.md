@@ -34,6 +34,7 @@ Le menu affiché
 ```
 
 Les sources sont dans le répertoire [pizzeria-console-objet](pizzeria-console-objet)
+
 ## pizzeria-console
 Cette application applique une **approche orientée objet de la programmation**.
 
@@ -49,5 +50,5 @@ Le menu affiché
 4. Quitter
 ```
 
-Les sources sont dans le répertoire [pizzeria-console](pizzeria-console)
+Les sources sont dans le répertoire [pizzeria-console](pizzeria-console-objet-java8)
 
